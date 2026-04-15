@@ -74,5 +74,8 @@ curl "http://localhost:4000/range?a=0&b=10"
 ---
 
 ### References
-Pacheco, Dotti, Pedone — Strengthening Atomic Multicast for Partitioned State Machine Replication
-Skeen, D. — Nonblocking Commit Protocols
+- Leandro Pacheco, Fernando Dotti, Fernando Pedone.
+  *Strengthening Atomic Multicast for Partitioned State Machine Replication*
+
+- D. Skeen.
+  *Nonblocking Commit Protocols*
