@@ -19,15 +19,14 @@ The system is composed of:
   - its own ordering state (planned)
 
 - **KV Store**
-  - `put(k, v)` → writes to a single partition
-  - `range(a, b)` → reads across multiple partitions
+  - `put(k, v)` -> writes to a single partition
+  - `range(a, b)` -> reads across multiple partitions
 
 - **(Planned) Skeen Protocol**
   - timestamp agreement across partitions
   - hold-back queues
   - ordered delivery
 
----
 ## Setup & Run
 
 1. Setup (only once)
@@ -42,7 +41,6 @@ go run . -id=0   # runs on :4000
 go run . -id=1   # runs on :4001
 ```
 
----
 ## How to test
 
 Since we don't have a client yet we're using cURL in localhost as such:
