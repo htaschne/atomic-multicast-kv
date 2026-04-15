@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"slices"
 	"sync/atomic"
 )
@@ -91,6 +92,7 @@ func NewSkeen(id PartitionID) *Skeen {
 }
 
 func (s *Skeen) deliver(req Request) (any, error) {
+	log.Printf("[P%d] DELIVER id=%s type=%s", s.id, req.ID, req.Type)
 	switch req.Type {
 	case OpPut:
 		put(req.Put.Key, req.Put.Value)
@@ -105,11 +107,14 @@ func (s *Skeen) deliver(req Request) (any, error) {
 }
 
 func (s *Skeen) Submit(req Request) (any, error) {
+	log.Printf("[P%d] SUBMIT id=%s type=%s dst=%v", s.id, req.ID, req.Type, req.Dst)
 	if err := req.Validate(); err != nil {
+		log.Printf("[P%d] INVALID id=%s err=%v", s.id, req.ID, err)
 		return nil, err
 	}
 
 	if !slices.Contains(req.Dst, s.id) {
+		log.Printf("[P%d] REJECT id=%s not in dst=%v", s.id, req.ID, req.Dst)
 		return nil, fmt.Errorf("partition %d is not in destination set", s.id)
 	}
 

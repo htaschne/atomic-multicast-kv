@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	"log"
 	"net/http"
 	"strconv"
-	"time"
 )
 
 var (
@@ -38,8 +38,11 @@ func putHandler(w http.ResponseWriter, r *http.Request) {
 		},
 	}
 
+	log.Printf("[P%d] put request id=%s key=%d value=%d dst=%v", *id, req.ID, reqBody.Key, reqBody.Value, req.Dst)
+
 	_, err = skeenSvc.Submit(req)
 	if err != nil {
+		log.Printf("[P%d] error processing put request id=%s: %v", *id, req.ID, err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -77,17 +80,19 @@ func rangeHandler(w http.ResponseWriter, r *http.Request) {
 	req := Request{
 		ID:   newRequestID(PartitionID(*id)),
 		Type: OpRange,
-		Dst: destinationsForRange(start, end),
+		Dst:  destinationsForRange(start, end),
 		Range: &RangePayload{
 			Start: start,
 			End:   end,
 		},
 	}
 
-	fmt.Printf("range request dst: %v\n", req.Dst)
+	log.Printf("[P%d] range request id=%s dst=%v start=%d end=%d", *id, req.ID, req.Dst, start, end)
 	result, err := skeenSvc.Submit(req)
 	if err != nil {
+		log.Printf("[P%d] error processing range request id=%s: %v", *id, req.ID, err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
@@ -100,8 +105,7 @@ func main() {
 
 	port := 4000 + *id
 
-	fmt.Printf("[%s][P%d] Starting server on port %d\n",
-		time.Now().Format(time.RFC850), *id, port)
+	log.Printf("[P%d] starting server on port %d", *id, port)
 
 	http.HandleFunc("/put", putHandler)
 	http.HandleFunc("/range", rangeHandler)
