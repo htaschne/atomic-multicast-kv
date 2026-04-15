@@ -14,12 +14,12 @@ func put(key, value int) {
 	storage[key] = value
 }
 
-func getRange(a, b int) map[int]int {
+func getRange(start, end int) map[int]int {
 	mu.Lock()
 	defer mu.Unlock()
 
 	res := make(map[int]int)
-	for i := a; i <= b; i++ {
+	for i := start; i <= end; i++ {
 		if value, ok := storage[i]; ok {
 			res[i] = value
 		}
