@@ -1,0 +1,130 @@
+{
+  "info": {
+    "name": "Atomic Multicast KV Store",
+    "_postman_id": "8d0e2b1c-6c8a-4c3e-9f5d-atomic-multicast-kv",
+    "description": "Requests for testing the local partitioned KV store.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost"
+    }
+  ],
+  "item": [
+    {
+      "name": "PUT P0",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"key\": 0,\n  \"value\": 42\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}:4000/put",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "port": "4000",
+          "path": [
+            "put"
+          ]
+        },
+        "description": "Writes key 0 -> 42 to partition P0."
+      },
+      "response": []
+    },
+    {
+      "name": "PUT P1",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"key\": 1,\n  \"value\": 99\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}:4001/put",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "port": "4001",
+          "path": [
+            "put"
+          ]
+        },
+        "description": "Writes key 1 -> 99 to partition P1."
+      },
+      "response": []
+    },
+    {
+      "name": "RANGE P0",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}:4000/range?start=0&end=10",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "port": "4000",
+          "path": [
+            "range"
+          ],
+          "query": [
+            {
+              "key": "start",
+              "value": "0"
+            },
+            {
+              "key": "end",
+              "value": "10"
+            }
+          ]
+        },
+        "description": "Queries range [0,10] through partition P0."
+      },
+      "response": []
+    },
+    {
+      "name": "RANGE P1",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}:4001/range?start=0&end=10",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "port": "4001",
+          "path": [
+            "range"
+          ],
+          "query": [
+            {
+              "key": "start",
+              "value": "0"
+            },
+            {
+              "key": "end",
+              "value": "10"
+            }
+          ]
+        },
+        "description": "Queries range [0,10] through partition P1."
+      },
+      "response": []
+    }
+  ]
+}
