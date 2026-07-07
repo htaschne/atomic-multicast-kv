@@ -1,0 +1,2460 @@
+2026/07/07 16:07:00 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:07:00 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:07:00 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:07:00 [P1] DELIVER id=m1 type=RANGE
+2026/07/07 16:07:00 [P0] DELIVER id=m1 type=RANGE
+2026/07/07 16:07:00 [P2] DELIVER id=m2 type=RANGE
+2026/07/07 16:07:00 [P1] DELIVER id=m2 type=RANGE
+2026/07/07 16:07:00 [P2] DELIVER id=m3 type=RANGE
+2026/07/07 16:07:00 [P0] DELIVER id=m3 type=RANGE
+2026/07/07 16:07:00 [P2] DELIVER id=m-prime type=RANGE
+2026/07/07 16:07:00 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:07:00 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:07:00 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:07:00 [P0] SUBMIT id=put-key-0 type=PUT dst=[0]
+2026/07/07 16:07:00 [P0] DELIVER id=put-key-0 type=PUT
+2026/07/07 16:07:00 [P0] SUBMIT id=put-key-1 type=PUT dst=[1]
+2026/07/07 16:07:00 [P1] DELIVER id=put-key-1 type=PUT
+2026/07/07 16:07:00 [P0] SUBMIT id=range type=RANGE dst=[0 1]
+2026/07/07 16:07:00 [P0] DELIVER id=range type=RANGE
+2026/07/07 16:07:00 [P1] DELIVER id=range type=RANGE
+2026/07/07 16:07:00 [P0] SUBMIT id=put-five-a type=PUT dst=[0]
+2026/07/07 16:07:00 [P0] DELIVER id=put-five-a type=PUT
+2026/07/07 16:07:00 [P0] SUBMIT id=put-five-b type=PUT dst=[1]
+2026/07/07 16:07:00 [P1] DELIVER id=put-five-b type=PUT
+2026/07/07 16:07:00 [P0] SUBMIT id=put-five-c type=PUT dst=[2]
+2026/07/07 16:07:00 [P2] DELIVER id=put-five-c type=PUT
+2026/07/07 16:07:00 [P0] SUBMIT id=put-five-d type=PUT dst=[3]
+2026/07/07 16:07:00 [P3] DELIVER id=put-five-d type=PUT
+2026/07/07 16:07:00 [P0] SUBMIT id=put-five-e type=PUT dst=[4]
+2026/07/07 16:07:00 [P4] DELIVER id=put-five-e type=PUT
+2026/07/07 16:07:00 [P0] SUBMIT id=range-all-five type=RANGE dst=[0 1 2 3 4]
+2026/07/07 16:07:00 [P3] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:07:00 [P0] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:07:00 [P1] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:07:00 [P2] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:07:00 [P4] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:07:00 [P0] SUBMIT id=range-0-1 type=RANGE dst=[0 1]
+2026/07/07 16:07:00 [P1] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:07:00 [P0] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:07:00 [P0] SUBMIT id=range-2-3 type=RANGE dst=[2 3]
+2026/07/07 16:07:00 [P2] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:07:00 [P3] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:07:00 [P0] SUBMIT id=first type=RANGE dst=[0 1]
+2026/07/07 16:07:00 [P0] DELIVER id=first type=RANGE
+2026/07/07 16:07:00 [P1] DELIVER id=first type=RANGE
+2026/07/07 16:07:00 [P0] SUBMIT id=second type=RANGE dst=[1 2]
+2026/07/07 16:07:00 [P1] DELIVER id=second type=RANGE
+2026/07/07 16:07:00 [P2] DELIVER id=second type=RANGE
+2026/07/07 16:07:00 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:07:00 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:07:00 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:07:00 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:07:00 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:07:00 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:07:00 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:07:00 [P1] DELIVER id=m type=RANGE
+goos: darwin
+goarch: arm64
+pkg: skeen-kv
+cpu: Apple M4
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=1-10         	   10000	    136922 ns/op	    2208 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=2-10         	   10000	    289725 ns/op	    5048 B/op	      54 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=1-10     	   10000	    137207 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=2-10     	   10000	    350191 ns/op	    7217 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=1-10         	   10000	    137601 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=2-10         	   10000	    292261 ns/op	    5040 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=3-10         	   10000	    487444 ns/op	    8080 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=1-10     	   10000	    138428 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=2-10     	   10000	    349499 ns/op	    7212 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=3-10     	   10000	    606874 ns/op	   12310 B/op	     105 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=1-10         	   10000	    139510 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=2-10         	   10000	    295437 ns/op	    5038 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=3-10         	   10000	    488044 ns/op	    8077 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=5-10         	   10000	    753035 ns/op	   16209 B/op	     110 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=1-10     	   10000	    140821 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=2-10     	   10000	    349554 ns/op	    7198 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=3-10     	   10000	    608717 ns/op	   12291 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=5-10     	   10000	   1198011 ns/op	   26325 B/op	     176 allocs/op
+BenchmarkOriginalSinglePartitionPut-10                               	   10000	    141289 ns/op	    2112 B/op	      29 allocs/op
+BenchmarkStrengthenedSinglePartitionPut-10                           	   10000	    143231 ns/op	    2256 B/op	      30 allocs/op
+PASS
+ok  	skeen-kv	72.214s
+2026/07/07 16:08:13 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:08:13 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:08:13 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:08:13 [P1] DELIVER id=m1 type=RANGE
+2026/07/07 16:08:13 [P0] DELIVER id=m1 type=RANGE
+2026/07/07 16:08:13 [P2] DELIVER id=m2 type=RANGE
+2026/07/07 16:08:13 [P1] DELIVER id=m2 type=RANGE
+2026/07/07 16:08:13 [P2] DELIVER id=m3 type=RANGE
+2026/07/07 16:08:13 [P0] DELIVER id=m3 type=RANGE
+2026/07/07 16:08:13 [P2] DELIVER id=m-prime type=RANGE
+2026/07/07 16:08:13 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:08:13 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:08:13 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:08:13 [P0] SUBMIT id=put-key-0 type=PUT dst=[0]
+2026/07/07 16:08:13 [P0] DELIVER id=put-key-0 type=PUT
+2026/07/07 16:08:13 [P0] SUBMIT id=put-key-1 type=PUT dst=[1]
+2026/07/07 16:08:13 [P1] DELIVER id=put-key-1 type=PUT
+2026/07/07 16:08:13 [P0] SUBMIT id=range type=RANGE dst=[0 1]
+2026/07/07 16:08:13 [P0] DELIVER id=range type=RANGE
+2026/07/07 16:08:13 [P1] DELIVER id=range type=RANGE
+2026/07/07 16:08:13 [P0] SUBMIT id=put-five-a type=PUT dst=[0]
+2026/07/07 16:08:13 [P0] DELIVER id=put-five-a type=PUT
+2026/07/07 16:08:13 [P0] SUBMIT id=put-five-b type=PUT dst=[1]
+2026/07/07 16:08:13 [P1] DELIVER id=put-five-b type=PUT
+2026/07/07 16:08:13 [P0] SUBMIT id=put-five-c type=PUT dst=[2]
+2026/07/07 16:08:13 [P2] DELIVER id=put-five-c type=PUT
+2026/07/07 16:08:13 [P0] SUBMIT id=put-five-d type=PUT dst=[3]
+2026/07/07 16:08:13 [P3] DELIVER id=put-five-d type=PUT
+2026/07/07 16:08:13 [P0] SUBMIT id=put-five-e type=PUT dst=[4]
+2026/07/07 16:08:13 [P4] DELIVER id=put-five-e type=PUT
+2026/07/07 16:08:13 [P0] SUBMIT id=range-all-five type=RANGE dst=[0 1 2 3 4]
+2026/07/07 16:08:13 [P2] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:08:13 [P0] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:08:13 [P1] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:08:13 [P3] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:08:13 [P4] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:08:13 [P0] SUBMIT id=range-0-1 type=RANGE dst=[0 1]
+2026/07/07 16:08:13 [P1] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:08:13 [P0] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:08:13 [P0] SUBMIT id=range-2-3 type=RANGE dst=[2 3]
+2026/07/07 16:08:13 [P2] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:08:13 [P3] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:08:13 [P0] SUBMIT id=first type=RANGE dst=[0 1]
+2026/07/07 16:08:13 [P0] DELIVER id=first type=RANGE
+2026/07/07 16:08:13 [P1] DELIVER id=first type=RANGE
+2026/07/07 16:08:13 [P0] SUBMIT id=second type=RANGE dst=[1 2]
+2026/07/07 16:08:13 [P1] DELIVER id=second type=RANGE
+2026/07/07 16:08:13 [P2] DELIVER id=second type=RANGE
+2026/07/07 16:08:13 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:08:13 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:08:13 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:08:13 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:08:13 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:08:13 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:08:13 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:08:13 [P1] DELIVER id=m type=RANGE
+goos: darwin
+goarch: arm64
+pkg: skeen-kv
+cpu: Apple M4
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=1-10         	   10000	    144532 ns/op	    2209 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=2-10         	   10000	    291497 ns/op	    5035 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=1-10     	   10000	    141414 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=2-10     	   10000	    351124 ns/op	    7219 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=1-10         	   10000	    143982 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=2-10         	   10000	    296428 ns/op	    5034 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=3-10         	   10000	    489630 ns/op	    8081 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=1-10     	   10000	    140903 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=2-10     	   10000	    350702 ns/op	    7214 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=3-10     	   10000	    610346 ns/op	   12299 B/op	     105 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=1-10         	   10000	    141234 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=2-10         	   10000	    281539 ns/op	    5029 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=3-10         	   10000	    566427 ns/op	    8062 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=5-10         	   10000	   2052665 ns/op	   16102 B/op	     110 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=1-10     	   10000	    275367 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=2-10     	   10000	    736698 ns/op	    7165 B/op	      70 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=3-10     	   10000	   2210151 ns/op	   12078 B/op	     102 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=5-10     	   10000	   1258391 ns/op	   26294 B/op	     176 allocs/op
+BenchmarkOriginalSinglePartitionPut-10                               	   10000	    140787 ns/op	    2112 B/op	      29 allocs/op
+BenchmarkStrengthenedSinglePartitionPut-10                           	   10000	    140831 ns/op	    2256 B/op	      30 allocs/op
+PASS
+ok  	skeen-kv	108.480s
+2026/07/07 16:10:02 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:10:02 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:10:02 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:10:02 [P1] DELIVER id=m1 type=RANGE
+2026/07/07 16:10:02 [P0] DELIVER id=m1 type=RANGE
+2026/07/07 16:10:02 [P2] DELIVER id=m2 type=RANGE
+2026/07/07 16:10:02 [P1] DELIVER id=m2 type=RANGE
+2026/07/07 16:10:02 [P2] DELIVER id=m3 type=RANGE
+2026/07/07 16:10:02 [P0] DELIVER id=m3 type=RANGE
+2026/07/07 16:10:02 [P2] DELIVER id=m-prime type=RANGE
+2026/07/07 16:10:02 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:10:02 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:10:02 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:10:02 [P0] SUBMIT id=put-key-0 type=PUT dst=[0]
+2026/07/07 16:10:02 [P0] DELIVER id=put-key-0 type=PUT
+2026/07/07 16:10:02 [P0] SUBMIT id=put-key-1 type=PUT dst=[1]
+2026/07/07 16:10:02 [P1] DELIVER id=put-key-1 type=PUT
+2026/07/07 16:10:02 [P0] SUBMIT id=range type=RANGE dst=[0 1]
+2026/07/07 16:10:02 [P0] DELIVER id=range type=RANGE
+2026/07/07 16:10:02 [P1] DELIVER id=range type=RANGE
+2026/07/07 16:10:02 [P0] SUBMIT id=put-five-a type=PUT dst=[0]
+2026/07/07 16:10:02 [P0] DELIVER id=put-five-a type=PUT
+2026/07/07 16:10:02 [P0] SUBMIT id=put-five-b type=PUT dst=[1]
+2026/07/07 16:10:02 [P1] DELIVER id=put-five-b type=PUT
+2026/07/07 16:10:02 [P0] SUBMIT id=put-five-c type=PUT dst=[2]
+2026/07/07 16:10:02 [P2] DELIVER id=put-five-c type=PUT
+2026/07/07 16:10:02 [P0] SUBMIT id=put-five-d type=PUT dst=[3]
+2026/07/07 16:10:02 [P3] DELIVER id=put-five-d type=PUT
+2026/07/07 16:10:02 [P0] SUBMIT id=put-five-e type=PUT dst=[4]
+2026/07/07 16:10:02 [P4] DELIVER id=put-five-e type=PUT
+2026/07/07 16:10:02 [P0] SUBMIT id=range-all-five type=RANGE dst=[0 1 2 3 4]
+2026/07/07 16:10:02 [P1] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:10:02 [P0] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:10:02 [P2] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:10:02 [P3] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:10:02 [P4] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:10:02 [P0] SUBMIT id=range-0-1 type=RANGE dst=[0 1]
+2026/07/07 16:10:02 [P1] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:10:02 [P0] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:10:02 [P0] SUBMIT id=range-2-3 type=RANGE dst=[2 3]
+2026/07/07 16:10:02 [P2] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:10:02 [P3] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:10:02 [P0] SUBMIT id=first type=RANGE dst=[0 1]
+2026/07/07 16:10:02 [P0] DELIVER id=first type=RANGE
+2026/07/07 16:10:02 [P1] DELIVER id=first type=RANGE
+2026/07/07 16:10:02 [P0] SUBMIT id=second type=RANGE dst=[1 2]
+2026/07/07 16:10:02 [P1] DELIVER id=second type=RANGE
+2026/07/07 16:10:02 [P2] DELIVER id=second type=RANGE
+2026/07/07 16:10:02 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:10:02 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:10:02 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:10:02 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:10:02 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:10:02 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:10:02 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:10:02 [P1] DELIVER id=m type=RANGE
+goos: darwin
+goarch: arm64
+pkg: skeen-kv
+cpu: Apple M4
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=1-10         	   10000	    144278 ns/op	    2208 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=2-10         	   10000	    295834 ns/op	    5042 B/op	      54 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=1-10     	   10000	    141803 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=2-10     	   10000	    349697 ns/op	    7214 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=1-10         	   10000	    141528 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=2-10         	   10000	    295504 ns/op	    5042 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=3-10         	   10000	    489942 ns/op	    8083 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=1-10     	   10000	    141076 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=2-10     	   10000	    349981 ns/op	    7215 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=3-10     	   10000	    607988 ns/op	   12305 B/op	     105 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=1-10         	   10000	    141457 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=2-10         	   10000	    297135 ns/op	    5041 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=3-10         	   10000	    490572 ns/op	    8074 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=5-10         	   10000	    748495 ns/op	   16206 B/op	     110 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=1-10     	   10000	    140494 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=2-10     	   10000	    350306 ns/op	    7216 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=3-10     	   10000	    606579 ns/op	   12286 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=5-10     	   10000	   1199264 ns/op	   26317 B/op	     176 allocs/op
+BenchmarkOriginalSinglePartitionPut-10                               	   10000	    140148 ns/op	    2112 B/op	      29 allocs/op
+BenchmarkStrengthenedSinglePartitionPut-10                           	   10000	    140200 ns/op	    2256 B/op	      30 allocs/op
+PASS
+ok  	skeen-kv	72.685s
+2026/07/07 16:11:15 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:11:15 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:11:15 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:11:15 [P1] DELIVER id=m1 type=RANGE
+2026/07/07 16:11:15 [P0] DELIVER id=m1 type=RANGE
+2026/07/07 16:11:15 [P2] DELIVER id=m2 type=RANGE
+2026/07/07 16:11:15 [P1] DELIVER id=m2 type=RANGE
+2026/07/07 16:11:15 [P2] DELIVER id=m3 type=RANGE
+2026/07/07 16:11:15 [P0] DELIVER id=m3 type=RANGE
+2026/07/07 16:11:15 [P2] DELIVER id=m-prime type=RANGE
+2026/07/07 16:11:15 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:11:15 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:11:15 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:11:15 [P0] SUBMIT id=put-key-0 type=PUT dst=[0]
+2026/07/07 16:11:15 [P0] DELIVER id=put-key-0 type=PUT
+2026/07/07 16:11:15 [P0] SUBMIT id=put-key-1 type=PUT dst=[1]
+2026/07/07 16:11:15 [P1] DELIVER id=put-key-1 type=PUT
+2026/07/07 16:11:15 [P0] SUBMIT id=range type=RANGE dst=[0 1]
+2026/07/07 16:11:15 [P0] DELIVER id=range type=RANGE
+2026/07/07 16:11:15 [P1] DELIVER id=range type=RANGE
+2026/07/07 16:11:15 [P0] SUBMIT id=put-five-a type=PUT dst=[0]
+2026/07/07 16:11:15 [P0] DELIVER id=put-five-a type=PUT
+2026/07/07 16:11:15 [P0] SUBMIT id=put-five-b type=PUT dst=[1]
+2026/07/07 16:11:15 [P1] DELIVER id=put-five-b type=PUT
+2026/07/07 16:11:15 [P0] SUBMIT id=put-five-c type=PUT dst=[2]
+2026/07/07 16:11:15 [P2] DELIVER id=put-five-c type=PUT
+2026/07/07 16:11:15 [P0] SUBMIT id=put-five-d type=PUT dst=[3]
+2026/07/07 16:11:15 [P3] DELIVER id=put-five-d type=PUT
+2026/07/07 16:11:15 [P0] SUBMIT id=put-five-e type=PUT dst=[4]
+2026/07/07 16:11:15 [P4] DELIVER id=put-five-e type=PUT
+2026/07/07 16:11:15 [P0] SUBMIT id=range-all-five type=RANGE dst=[0 1 2 3 4]
+2026/07/07 16:11:15 [P2] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:11:15 [P0] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:11:15 [P1] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:11:15 [P3] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:11:15 [P4] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:11:15 [P0] SUBMIT id=range-0-1 type=RANGE dst=[0 1]
+2026/07/07 16:11:15 [P0] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:11:15 [P1] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:11:15 [P0] SUBMIT id=range-2-3 type=RANGE dst=[2 3]
+2026/07/07 16:11:15 [P2] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:11:15 [P3] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:11:15 [P0] SUBMIT id=first type=RANGE dst=[0 1]
+2026/07/07 16:11:15 [P0] DELIVER id=first type=RANGE
+2026/07/07 16:11:15 [P1] DELIVER id=first type=RANGE
+2026/07/07 16:11:15 [P0] SUBMIT id=second type=RANGE dst=[1 2]
+2026/07/07 16:11:15 [P1] DELIVER id=second type=RANGE
+2026/07/07 16:11:15 [P2] DELIVER id=second type=RANGE
+2026/07/07 16:11:15 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:11:15 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:11:15 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:11:15 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:11:15 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:11:15 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:11:15 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:11:15 [P1] DELIVER id=m type=RANGE
+goos: darwin
+goarch: arm64
+pkg: skeen-kv
+cpu: Apple M4
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=1-10         	   10000	    142473 ns/op	    2208 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=2-10         	   10000	    295001 ns/op	    5047 B/op	      54 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=1-10     	   10000	    141019 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=2-10     	   10000	    348357 ns/op	    7218 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=1-10         	   10000	    138825 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=2-10         	   10000	    293576 ns/op	    5040 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=3-10         	   10000	    493085 ns/op	    8074 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=1-10     	   10000	    140638 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=2-10     	   10000	    350112 ns/op	    7212 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=3-10     	   10000	    606903 ns/op	   12298 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=1-10         	   10000	    139537 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=2-10         	   10000	    293700 ns/op	    5037 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=3-10         	   10000	    484808 ns/op	    8075 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=5-10         	   10000	    744290 ns/op	   16209 B/op	     110 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=1-10     	   10000	    139305 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=2-10     	   10000	    349404 ns/op	    7215 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=3-10     	   10000	    605886 ns/op	   12286 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=5-10     	   10000	   1194986 ns/op	   26311 B/op	     176 allocs/op
+BenchmarkOriginalSinglePartitionPut-10                               	   10000	    139646 ns/op	    2112 B/op	      29 allocs/op
+BenchmarkStrengthenedSinglePartitionPut-10                           	   10000	    139720 ns/op	    2256 B/op	      30 allocs/op
+PASS
+ok  	skeen-kv	72.338s
+2026/07/07 16:12:27 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:12:27 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:12:27 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:12:27 [P1] DELIVER id=m1 type=RANGE
+2026/07/07 16:12:27 [P0] DELIVER id=m1 type=RANGE
+2026/07/07 16:12:27 [P2] DELIVER id=m2 type=RANGE
+2026/07/07 16:12:27 [P1] DELIVER id=m2 type=RANGE
+2026/07/07 16:12:27 [P2] DELIVER id=m3 type=RANGE
+2026/07/07 16:12:27 [P0] DELIVER id=m3 type=RANGE
+2026/07/07 16:12:27 [P2] DELIVER id=m-prime type=RANGE
+2026/07/07 16:12:27 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:12:27 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:12:27 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:12:27 [P0] SUBMIT id=put-key-0 type=PUT dst=[0]
+2026/07/07 16:12:27 [P0] DELIVER id=put-key-0 type=PUT
+2026/07/07 16:12:27 [P0] SUBMIT id=put-key-1 type=PUT dst=[1]
+2026/07/07 16:12:27 [P1] DELIVER id=put-key-1 type=PUT
+2026/07/07 16:12:27 [P0] SUBMIT id=range type=RANGE dst=[0 1]
+2026/07/07 16:12:27 [P0] DELIVER id=range type=RANGE
+2026/07/07 16:12:27 [P1] DELIVER id=range type=RANGE
+2026/07/07 16:12:27 [P0] SUBMIT id=put-five-a type=PUT dst=[0]
+2026/07/07 16:12:27 [P0] DELIVER id=put-five-a type=PUT
+2026/07/07 16:12:27 [P0] SUBMIT id=put-five-b type=PUT dst=[1]
+2026/07/07 16:12:27 [P1] DELIVER id=put-five-b type=PUT
+2026/07/07 16:12:27 [P0] SUBMIT id=put-five-c type=PUT dst=[2]
+2026/07/07 16:12:27 [P2] DELIVER id=put-five-c type=PUT
+2026/07/07 16:12:27 [P0] SUBMIT id=put-five-d type=PUT dst=[3]
+2026/07/07 16:12:27 [P3] DELIVER id=put-five-d type=PUT
+2026/07/07 16:12:27 [P0] SUBMIT id=put-five-e type=PUT dst=[4]
+2026/07/07 16:12:27 [P4] DELIVER id=put-five-e type=PUT
+2026/07/07 16:12:27 [P0] SUBMIT id=range-all-five type=RANGE dst=[0 1 2 3 4]
+2026/07/07 16:12:27 [P3] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:12:27 [P0] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:12:27 [P1] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:12:27 [P2] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:12:27 [P4] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:12:27 [P0] SUBMIT id=range-0-1 type=RANGE dst=[0 1]
+2026/07/07 16:12:27 [P1] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:12:27 [P0] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:12:27 [P0] SUBMIT id=range-2-3 type=RANGE dst=[2 3]
+2026/07/07 16:12:27 [P2] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:12:27 [P3] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:12:27 [P0] SUBMIT id=first type=RANGE dst=[0 1]
+2026/07/07 16:12:27 [P1] DELIVER id=first type=RANGE
+2026/07/07 16:12:27 [P0] DELIVER id=first type=RANGE
+2026/07/07 16:12:27 [P0] SUBMIT id=second type=RANGE dst=[1 2]
+2026/07/07 16:12:27 [P1] DELIVER id=second type=RANGE
+2026/07/07 16:12:27 [P2] DELIVER id=second type=RANGE
+2026/07/07 16:12:27 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:12:27 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:12:27 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:12:27 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:12:27 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:12:27 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:12:27 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:12:27 [P1] DELIVER id=m type=RANGE
+goos: darwin
+goarch: arm64
+pkg: skeen-kv
+cpu: Apple M4
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=1-10         	   10000	    141315 ns/op	    2209 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=2-10         	   10000	    294539 ns/op	    5048 B/op	      54 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=1-10     	   10000	    140514 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=2-10     	   10000	    349419 ns/op	    7216 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=1-10         	   10000	    139566 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=2-10         	   10000	    294770 ns/op	    5042 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=3-10         	   10000	    486818 ns/op	    8079 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=1-10     	   10000	    140141 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=2-10     	   10000	    349689 ns/op	    7212 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=3-10     	   10000	    604459 ns/op	   12299 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=1-10         	   10000	    140425 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=2-10         	   10000	    293671 ns/op	    5037 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=3-10         	   10000	    486545 ns/op	    8074 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=5-10         	   10000	    747912 ns/op	   16212 B/op	     110 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=1-10     	   10000	    140098 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=2-10     	   10000	    349513 ns/op	    7214 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=3-10     	   10000	    609791 ns/op	   12300 B/op	     105 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=5-10     	   10000	   1195406 ns/op	   26316 B/op	     176 allocs/op
+BenchmarkOriginalSinglePartitionPut-10                               	   10000	    140500 ns/op	    2112 B/op	      29 allocs/op
+BenchmarkStrengthenedSinglePartitionPut-10                           	   10000	    140074 ns/op	    2256 B/op	      30 allocs/op
+PASS
+ok  	skeen-kv	72.404s
+2026/07/07 16:13:40 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:13:40 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:13:40 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:13:40 [P1] DELIVER id=m1 type=RANGE
+2026/07/07 16:13:40 [P0] DELIVER id=m1 type=RANGE
+2026/07/07 16:13:40 [P2] DELIVER id=m2 type=RANGE
+2026/07/07 16:13:40 [P1] DELIVER id=m2 type=RANGE
+2026/07/07 16:13:40 [P2] DELIVER id=m3 type=RANGE
+2026/07/07 16:13:40 [P0] DELIVER id=m3 type=RANGE
+2026/07/07 16:13:40 [P2] DELIVER id=m-prime type=RANGE
+2026/07/07 16:13:40 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:13:40 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:13:40 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:13:40 [P0] SUBMIT id=put-key-0 type=PUT dst=[0]
+2026/07/07 16:13:40 [P0] DELIVER id=put-key-0 type=PUT
+2026/07/07 16:13:40 [P0] SUBMIT id=put-key-1 type=PUT dst=[1]
+2026/07/07 16:13:40 [P1] DELIVER id=put-key-1 type=PUT
+2026/07/07 16:13:40 [P0] SUBMIT id=range type=RANGE dst=[0 1]
+2026/07/07 16:13:40 [P0] DELIVER id=range type=RANGE
+2026/07/07 16:13:40 [P1] DELIVER id=range type=RANGE
+2026/07/07 16:13:40 [P0] SUBMIT id=put-five-a type=PUT dst=[0]
+2026/07/07 16:13:40 [P0] DELIVER id=put-five-a type=PUT
+2026/07/07 16:13:40 [P0] SUBMIT id=put-five-b type=PUT dst=[1]
+2026/07/07 16:13:40 [P1] DELIVER id=put-five-b type=PUT
+2026/07/07 16:13:40 [P0] SUBMIT id=put-five-c type=PUT dst=[2]
+2026/07/07 16:13:40 [P2] DELIVER id=put-five-c type=PUT
+2026/07/07 16:13:40 [P0] SUBMIT id=put-five-d type=PUT dst=[3]
+2026/07/07 16:13:40 [P3] DELIVER id=put-five-d type=PUT
+2026/07/07 16:13:40 [P0] SUBMIT id=put-five-e type=PUT dst=[4]
+2026/07/07 16:13:40 [P4] DELIVER id=put-five-e type=PUT
+2026/07/07 16:13:40 [P0] SUBMIT id=range-all-five type=RANGE dst=[0 1 2 3 4]
+2026/07/07 16:13:40 [P3] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:13:40 [P0] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:13:40 [P1] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:13:40 [P2] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:13:40 [P4] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:13:40 [P0] SUBMIT id=range-0-1 type=RANGE dst=[0 1]
+2026/07/07 16:13:40 [P0] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:13:40 [P1] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:13:40 [P0] SUBMIT id=range-2-3 type=RANGE dst=[2 3]
+2026/07/07 16:13:40 [P3] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:13:40 [P2] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:13:40 [P0] SUBMIT id=first type=RANGE dst=[0 1]
+2026/07/07 16:13:40 [P0] DELIVER id=first type=RANGE
+2026/07/07 16:13:40 [P1] DELIVER id=first type=RANGE
+2026/07/07 16:13:40 [P0] SUBMIT id=second type=RANGE dst=[1 2]
+2026/07/07 16:13:40 [P1] DELIVER id=second type=RANGE
+2026/07/07 16:13:40 [P2] DELIVER id=second type=RANGE
+2026/07/07 16:13:40 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:13:40 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:13:40 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:13:40 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:13:40 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:13:40 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:13:40 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:13:40 [P1] DELIVER id=m type=RANGE
+goos: darwin
+goarch: arm64
+pkg: skeen-kv
+cpu: Apple M4
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=1-10         	   10000	    142374 ns/op	    2209 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=2-10         	   10000	    294073 ns/op	    5048 B/op	      54 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=1-10     	   10000	    139302 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=2-10     	   10000	    348621 ns/op	    7219 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=1-10         	   10000	    140018 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=2-10         	   10000	    294351 ns/op	    5037 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=3-10         	   10000	    487840 ns/op	    8076 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=1-10     	   10000	    139591 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=2-10     	   10000	    349311 ns/op	    7217 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=3-10     	   10000	    610707 ns/op	   12310 B/op	     105 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=1-10         	   10000	    139892 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=2-10         	   10000	    295323 ns/op	    5038 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=3-10         	   10000	    488353 ns/op	    8077 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=5-10         	   10000	    751808 ns/op	   16207 B/op	     110 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=1-10     	   10000	    140314 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=2-10     	   10000	    350294 ns/op	    7212 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=3-10     	   10000	    607387 ns/op	   12298 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=5-10     	   10000	   1193990 ns/op	   26317 B/op	     176 allocs/op
+BenchmarkOriginalSinglePartitionPut-10                               	   10000	    140460 ns/op	    2112 B/op	      29 allocs/op
+BenchmarkStrengthenedSinglePartitionPut-10                           	   10000	    140091 ns/op	    2256 B/op	      30 allocs/op
+PASS
+ok  	skeen-kv	72.488s
+2026/07/07 16:14:53 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:14:53 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:14:53 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:14:53 [P1] DELIVER id=m1 type=RANGE
+2026/07/07 16:14:53 [P0] DELIVER id=m1 type=RANGE
+2026/07/07 16:14:53 [P2] DELIVER id=m2 type=RANGE
+2026/07/07 16:14:53 [P1] DELIVER id=m2 type=RANGE
+2026/07/07 16:14:53 [P2] DELIVER id=m3 type=RANGE
+2026/07/07 16:14:53 [P0] DELIVER id=m3 type=RANGE
+2026/07/07 16:14:53 [P2] DELIVER id=m-prime type=RANGE
+2026/07/07 16:14:53 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:14:53 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:14:53 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:14:53 [P0] SUBMIT id=put-key-0 type=PUT dst=[0]
+2026/07/07 16:14:53 [P0] DELIVER id=put-key-0 type=PUT
+2026/07/07 16:14:53 [P0] SUBMIT id=put-key-1 type=PUT dst=[1]
+2026/07/07 16:14:53 [P1] DELIVER id=put-key-1 type=PUT
+2026/07/07 16:14:53 [P0] SUBMIT id=range type=RANGE dst=[0 1]
+2026/07/07 16:14:53 [P0] DELIVER id=range type=RANGE
+2026/07/07 16:14:53 [P1] DELIVER id=range type=RANGE
+2026/07/07 16:14:53 [P0] SUBMIT id=put-five-a type=PUT dst=[0]
+2026/07/07 16:14:53 [P0] DELIVER id=put-five-a type=PUT
+2026/07/07 16:14:53 [P0] SUBMIT id=put-five-b type=PUT dst=[1]
+2026/07/07 16:14:53 [P1] DELIVER id=put-five-b type=PUT
+2026/07/07 16:14:53 [P0] SUBMIT id=put-five-c type=PUT dst=[2]
+2026/07/07 16:14:53 [P2] DELIVER id=put-five-c type=PUT
+2026/07/07 16:14:53 [P0] SUBMIT id=put-five-d type=PUT dst=[3]
+2026/07/07 16:14:53 [P3] DELIVER id=put-five-d type=PUT
+2026/07/07 16:14:53 [P0] SUBMIT id=put-five-e type=PUT dst=[4]
+2026/07/07 16:14:53 [P4] DELIVER id=put-five-e type=PUT
+2026/07/07 16:14:53 [P0] SUBMIT id=range-all-five type=RANGE dst=[0 1 2 3 4]
+2026/07/07 16:14:53 [P2] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:14:53 [P0] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:14:53 [P1] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:14:53 [P3] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:14:53 [P4] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:14:53 [P0] SUBMIT id=range-0-1 type=RANGE dst=[0 1]
+2026/07/07 16:14:53 [P0] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:14:53 [P1] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:14:53 [P0] SUBMIT id=range-2-3 type=RANGE dst=[2 3]
+2026/07/07 16:14:53 [P2] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:14:53 [P3] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:14:53 [P0] SUBMIT id=first type=RANGE dst=[0 1]
+2026/07/07 16:14:53 [P0] DELIVER id=first type=RANGE
+2026/07/07 16:14:53 [P1] DELIVER id=first type=RANGE
+2026/07/07 16:14:53 [P0] SUBMIT id=second type=RANGE dst=[1 2]
+2026/07/07 16:14:53 [P1] DELIVER id=second type=RANGE
+2026/07/07 16:14:53 [P2] DELIVER id=second type=RANGE
+2026/07/07 16:14:53 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:14:53 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:14:53 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:14:53 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:14:53 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:14:53 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:14:53 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:14:53 [P1] DELIVER id=m type=RANGE
+goos: darwin
+goarch: arm64
+pkg: skeen-kv
+cpu: Apple M4
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=1-10         	   10000	    142633 ns/op	    2208 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=2-10         	   10000	    296424 ns/op	    5046 B/op	      54 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=1-10     	   10000	    140713 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=2-10     	   10000	    350397 ns/op	    7215 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=1-10         	   10000	    139543 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=2-10         	   10000	    295375 ns/op	    5043 B/op	      54 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=3-10         	   10000	    488918 ns/op	    8087 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=1-10     	   10000	    140271 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=2-10     	   10000	    349566 ns/op	    7216 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=3-10     	   10000	    609488 ns/op	   12299 B/op	     105 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=1-10         	   10000	    140411 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=2-10         	   10000	    296968 ns/op	    5041 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=3-10         	   10000	    491948 ns/op	    8074 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=5-10         	   10000	    752263 ns/op	   16210 B/op	     110 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=1-10     	   10000	    139561 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=2-10     	   10000	    349704 ns/op	    7217 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=3-10     	   10000	    608376 ns/op	   12295 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=5-10     	   10000	   1195555 ns/op	   26319 B/op	     176 allocs/op
+BenchmarkOriginalSinglePartitionPut-10                               	   10000	    140565 ns/op	    2112 B/op	      29 allocs/op
+BenchmarkStrengthenedSinglePartitionPut-10                           	   10000	    140074 ns/op	    2256 B/op	      30 allocs/op
+PASS
+ok  	skeen-kv	72.936s
+2026/07/07 16:16:06 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:16:06 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:16:06 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:16:06 [P1] DELIVER id=m1 type=RANGE
+2026/07/07 16:16:06 [P0] DELIVER id=m1 type=RANGE
+2026/07/07 16:16:06 [P2] DELIVER id=m2 type=RANGE
+2026/07/07 16:16:06 [P1] DELIVER id=m2 type=RANGE
+2026/07/07 16:16:06 [P2] DELIVER id=m3 type=RANGE
+2026/07/07 16:16:06 [P0] DELIVER id=m3 type=RANGE
+2026/07/07 16:16:06 [P2] DELIVER id=m-prime type=RANGE
+2026/07/07 16:16:06 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:16:06 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:16:06 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:16:06 [P0] SUBMIT id=put-key-0 type=PUT dst=[0]
+2026/07/07 16:16:06 [P0] DELIVER id=put-key-0 type=PUT
+2026/07/07 16:16:06 [P0] SUBMIT id=put-key-1 type=PUT dst=[1]
+2026/07/07 16:16:06 [P1] DELIVER id=put-key-1 type=PUT
+2026/07/07 16:16:06 [P0] SUBMIT id=range type=RANGE dst=[0 1]
+2026/07/07 16:16:06 [P0] DELIVER id=range type=RANGE
+2026/07/07 16:16:06 [P1] DELIVER id=range type=RANGE
+2026/07/07 16:16:06 [P0] SUBMIT id=put-five-a type=PUT dst=[0]
+2026/07/07 16:16:06 [P0] DELIVER id=put-five-a type=PUT
+2026/07/07 16:16:06 [P0] SUBMIT id=put-five-b type=PUT dst=[1]
+2026/07/07 16:16:06 [P1] DELIVER id=put-five-b type=PUT
+2026/07/07 16:16:06 [P0] SUBMIT id=put-five-c type=PUT dst=[2]
+2026/07/07 16:16:06 [P2] DELIVER id=put-five-c type=PUT
+2026/07/07 16:16:06 [P0] SUBMIT id=put-five-d type=PUT dst=[3]
+2026/07/07 16:16:06 [P3] DELIVER id=put-five-d type=PUT
+2026/07/07 16:16:06 [P0] SUBMIT id=put-five-e type=PUT dst=[4]
+2026/07/07 16:16:06 [P4] DELIVER id=put-five-e type=PUT
+2026/07/07 16:16:06 [P0] SUBMIT id=range-all-five type=RANGE dst=[0 1 2 3 4]
+2026/07/07 16:16:06 [P0] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:16:06 [P1] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:16:06 [P2] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:16:06 [P3] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:16:06 [P4] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:16:06 [P0] SUBMIT id=range-0-1 type=RANGE dst=[0 1]
+2026/07/07 16:16:06 [P0] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:16:06 [P1] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:16:06 [P0] SUBMIT id=range-2-3 type=RANGE dst=[2 3]
+2026/07/07 16:16:06 [P2] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:16:06 [P3] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:16:06 [P0] SUBMIT id=first type=RANGE dst=[0 1]
+2026/07/07 16:16:06 [P0] DELIVER id=first type=RANGE
+2026/07/07 16:16:06 [P1] DELIVER id=first type=RANGE
+2026/07/07 16:16:06 [P0] SUBMIT id=second type=RANGE dst=[1 2]
+2026/07/07 16:16:06 [P1] DELIVER id=second type=RANGE
+2026/07/07 16:16:06 [P2] DELIVER id=second type=RANGE
+2026/07/07 16:16:06 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:16:06 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:16:06 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:16:06 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:16:06 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:16:06 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:16:06 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:16:06 [P1] DELIVER id=m type=RANGE
+goos: darwin
+goarch: arm64
+pkg: skeen-kv
+cpu: Apple M4
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=1-10         	   10000	    141997 ns/op	    2209 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=2-10         	   10000	    294611 ns/op	    5047 B/op	      54 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=1-10     	   10000	    140087 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=2-10     	   10000	    351542 ns/op	    7217 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=1-10         	   10000	    140868 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=2-10         	   10000	    293674 ns/op	    5040 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=3-10         	   10000	    485799 ns/op	    8082 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=1-10     	   10000	    138921 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=2-10     	   10000	    348174 ns/op	    7216 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=3-10     	   10000	    606946 ns/op	   12294 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=1-10         	   10000	    140086 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=2-10         	   10000	    295468 ns/op	    5040 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=3-10         	   10000	    488312 ns/op	    8075 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=5-10         	   10000	    749135 ns/op	   16206 B/op	     110 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=1-10     	   10000	    140740 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=2-10     	   10000	    350156 ns/op	    7216 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=3-10     	   10000	    604781 ns/op	   12291 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=5-10     	   10000	   1194881 ns/op	   26324 B/op	     176 allocs/op
+BenchmarkOriginalSinglePartitionPut-10                               	   10000	    139429 ns/op	    2112 B/op	      29 allocs/op
+BenchmarkStrengthenedSinglePartitionPut-10                           	   10000	    139893 ns/op	    2256 B/op	      30 allocs/op
+PASS
+ok  	skeen-kv	72.411s
+2026/07/07 16:17:18 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:17:18 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:17:18 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:17:18 [P1] DELIVER id=m1 type=RANGE
+2026/07/07 16:17:18 [P0] DELIVER id=m1 type=RANGE
+2026/07/07 16:17:18 [P2] DELIVER id=m2 type=RANGE
+2026/07/07 16:17:18 [P1] DELIVER id=m2 type=RANGE
+2026/07/07 16:17:18 [P2] DELIVER id=m3 type=RANGE
+2026/07/07 16:17:18 [P0] DELIVER id=m3 type=RANGE
+2026/07/07 16:17:18 [P2] DELIVER id=m-prime type=RANGE
+2026/07/07 16:17:18 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:17:18 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:17:18 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:17:18 [P0] SUBMIT id=put-key-0 type=PUT dst=[0]
+2026/07/07 16:17:18 [P0] DELIVER id=put-key-0 type=PUT
+2026/07/07 16:17:18 [P0] SUBMIT id=put-key-1 type=PUT dst=[1]
+2026/07/07 16:17:18 [P1] DELIVER id=put-key-1 type=PUT
+2026/07/07 16:17:18 [P0] SUBMIT id=range type=RANGE dst=[0 1]
+2026/07/07 16:17:18 [P0] DELIVER id=range type=RANGE
+2026/07/07 16:17:18 [P1] DELIVER id=range type=RANGE
+2026/07/07 16:17:18 [P0] SUBMIT id=put-five-a type=PUT dst=[0]
+2026/07/07 16:17:18 [P0] DELIVER id=put-five-a type=PUT
+2026/07/07 16:17:18 [P0] SUBMIT id=put-five-b type=PUT dst=[1]
+2026/07/07 16:17:18 [P1] DELIVER id=put-five-b type=PUT
+2026/07/07 16:17:18 [P0] SUBMIT id=put-five-c type=PUT dst=[2]
+2026/07/07 16:17:18 [P2] DELIVER id=put-five-c type=PUT
+2026/07/07 16:17:18 [P0] SUBMIT id=put-five-d type=PUT dst=[3]
+2026/07/07 16:17:18 [P3] DELIVER id=put-five-d type=PUT
+2026/07/07 16:17:18 [P0] SUBMIT id=put-five-e type=PUT dst=[4]
+2026/07/07 16:17:18 [P4] DELIVER id=put-five-e type=PUT
+2026/07/07 16:17:18 [P0] SUBMIT id=range-all-five type=RANGE dst=[0 1 2 3 4]
+2026/07/07 16:17:18 [P0] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:17:18 [P1] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:17:18 [P2] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:17:18 [P3] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:17:18 [P4] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:17:18 [P0] SUBMIT id=range-0-1 type=RANGE dst=[0 1]
+2026/07/07 16:17:18 [P1] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:17:18 [P0] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:17:18 [P0] SUBMIT id=range-2-3 type=RANGE dst=[2 3]
+2026/07/07 16:17:18 [P3] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:17:18 [P2] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:17:18 [P0] SUBMIT id=first type=RANGE dst=[0 1]
+2026/07/07 16:17:18 [P0] DELIVER id=first type=RANGE
+2026/07/07 16:17:18 [P1] DELIVER id=first type=RANGE
+2026/07/07 16:17:18 [P0] SUBMIT id=second type=RANGE dst=[1 2]
+2026/07/07 16:17:18 [P1] DELIVER id=second type=RANGE
+2026/07/07 16:17:18 [P2] DELIVER id=second type=RANGE
+2026/07/07 16:17:18 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:17:18 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:17:18 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:17:18 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:17:18 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:17:18 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:17:18 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:17:18 [P1] DELIVER id=m type=RANGE
+goos: darwin
+goarch: arm64
+pkg: skeen-kv
+cpu: Apple M4
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=1-10         	   10000	    141568 ns/op	    2208 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=2-10         	   10000	    294236 ns/op	    5048 B/op	      54 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=1-10     	   10000	    139626 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=2-10     	   10000	    349135 ns/op	    7218 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=1-10         	   10000	    139774 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=2-10         	   10000	    295450 ns/op	    5041 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=3-10         	   10000	    488728 ns/op	    8079 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=1-10     	   10000	    140687 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=2-10     	   10000	    349915 ns/op	    7212 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=3-10     	   10000	    608906 ns/op	   12298 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=1-10         	   10000	    140697 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=2-10         	   10000	    295607 ns/op	    5038 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=3-10         	   10000	    489124 ns/op	    8077 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=5-10         	   10000	    749947 ns/op	   16207 B/op	     110 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=1-10     	   10000	    140944 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=2-10     	   10000	    350854 ns/op	    7213 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=3-10     	   10000	    608841 ns/op	   12289 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=5-10     	   10000	   1199344 ns/op	   26337 B/op	     176 allocs/op
+BenchmarkOriginalSinglePartitionPut-10                               	   10000	    140022 ns/op	    2112 B/op	      29 allocs/op
+BenchmarkStrengthenedSinglePartitionPut-10                           	   10000	    138604 ns/op	    2256 B/op	      30 allocs/op
+PASS
+ok  	skeen-kv	72.558s
+2026/07/07 16:18:31 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:18:31 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:18:31 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:18:31 [P1] DELIVER id=m1 type=RANGE
+2026/07/07 16:18:31 [P0] DELIVER id=m1 type=RANGE
+2026/07/07 16:18:31 [P2] DELIVER id=m2 type=RANGE
+2026/07/07 16:18:31 [P1] DELIVER id=m2 type=RANGE
+2026/07/07 16:18:31 [P2] DELIVER id=m3 type=RANGE
+2026/07/07 16:18:31 [P0] DELIVER id=m3 type=RANGE
+2026/07/07 16:18:31 [P2] DELIVER id=m-prime type=RANGE
+2026/07/07 16:18:31 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:18:31 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:18:31 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:18:31 [P0] SUBMIT id=put-key-0 type=PUT dst=[0]
+2026/07/07 16:18:31 [P0] DELIVER id=put-key-0 type=PUT
+2026/07/07 16:18:31 [P0] SUBMIT id=put-key-1 type=PUT dst=[1]
+2026/07/07 16:18:31 [P1] DELIVER id=put-key-1 type=PUT
+2026/07/07 16:18:31 [P0] SUBMIT id=range type=RANGE dst=[0 1]
+2026/07/07 16:18:31 [P0] DELIVER id=range type=RANGE
+2026/07/07 16:18:31 [P1] DELIVER id=range type=RANGE
+2026/07/07 16:18:31 [P0] SUBMIT id=put-five-a type=PUT dst=[0]
+2026/07/07 16:18:31 [P0] DELIVER id=put-five-a type=PUT
+2026/07/07 16:18:31 [P0] SUBMIT id=put-five-b type=PUT dst=[1]
+2026/07/07 16:18:31 [P1] DELIVER id=put-five-b type=PUT
+2026/07/07 16:18:31 [P0] SUBMIT id=put-five-c type=PUT dst=[2]
+2026/07/07 16:18:31 [P2] DELIVER id=put-five-c type=PUT
+2026/07/07 16:18:31 [P0] SUBMIT id=put-five-d type=PUT dst=[3]
+2026/07/07 16:18:31 [P3] DELIVER id=put-five-d type=PUT
+2026/07/07 16:18:31 [P0] SUBMIT id=put-five-e type=PUT dst=[4]
+2026/07/07 16:18:31 [P4] DELIVER id=put-five-e type=PUT
+2026/07/07 16:18:31 [P0] SUBMIT id=range-all-five type=RANGE dst=[0 1 2 3 4]
+2026/07/07 16:18:31 [P0] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:18:31 [P1] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:18:31 [P2] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:18:31 [P3] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:18:31 [P4] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:18:31 [P0] SUBMIT id=range-0-1 type=RANGE dst=[0 1]
+2026/07/07 16:18:31 [P0] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:18:31 [P1] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:18:31 [P0] SUBMIT id=range-2-3 type=RANGE dst=[2 3]
+2026/07/07 16:18:31 [P2] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:18:31 [P3] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:18:31 [P0] SUBMIT id=first type=RANGE dst=[0 1]
+2026/07/07 16:18:31 [P0] DELIVER id=first type=RANGE
+2026/07/07 16:18:31 [P1] DELIVER id=first type=RANGE
+2026/07/07 16:18:31 [P0] SUBMIT id=second type=RANGE dst=[1 2]
+2026/07/07 16:18:31 [P1] DELIVER id=second type=RANGE
+2026/07/07 16:18:31 [P2] DELIVER id=second type=RANGE
+2026/07/07 16:18:31 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:18:31 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:18:31 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:18:31 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:18:31 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:18:31 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:18:31 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:18:31 [P1] DELIVER id=m type=RANGE
+goos: darwin
+goarch: arm64
+pkg: skeen-kv
+cpu: Apple M4
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=1-10         	   10000	    141462 ns/op	    2208 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=2-10         	   10000	    295069 ns/op	    5043 B/op	      54 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=1-10     	   10000	    140271 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=2-10     	   10000	    349267 ns/op	    7214 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=1-10         	   10000	    139618 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=2-10         	   10000	    293499 ns/op	    5044 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=3-10         	   10000	    486912 ns/op	    8081 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=1-10     	   10000	    139744 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=2-10     	   10000	    348512 ns/op	    7214 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=3-10     	   10000	    606098 ns/op	   12300 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=1-10         	   10000	    139442 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=2-10         	   10000	    294059 ns/op	    5041 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=3-10         	   10000	    487525 ns/op	    8071 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=5-10         	   10000	    750868 ns/op	   16201 B/op	     110 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=1-10     	   10000	    140097 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=2-10     	   10000	    349350 ns/op	    7214 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=3-10     	   10000	    606636 ns/op	   12293 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=5-10     	   10000	   1197848 ns/op	   26319 B/op	     176 allocs/op
+BenchmarkOriginalSinglePartitionPut-10                               	   10000	    141746 ns/op	    2112 B/op	      29 allocs/op
+BenchmarkStrengthenedSinglePartitionPut-10                           	   10000	    139976 ns/op	    2256 B/op	      30 allocs/op
+PASS
+ok  	skeen-kv	72.422s
+2026/07/07 16:19:44 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:19:44 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:19:44 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:19:44 [P1] DELIVER id=m1 type=RANGE
+2026/07/07 16:19:44 [P0] DELIVER id=m1 type=RANGE
+2026/07/07 16:19:44 [P2] DELIVER id=m2 type=RANGE
+2026/07/07 16:19:44 [P1] DELIVER id=m2 type=RANGE
+2026/07/07 16:19:44 [P2] DELIVER id=m3 type=RANGE
+2026/07/07 16:19:44 [P0] DELIVER id=m3 type=RANGE
+2026/07/07 16:19:44 [P2] DELIVER id=m-prime type=RANGE
+2026/07/07 16:19:44 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:19:44 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:19:44 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:19:44 [P0] SUBMIT id=put-key-0 type=PUT dst=[0]
+2026/07/07 16:19:44 [P0] DELIVER id=put-key-0 type=PUT
+2026/07/07 16:19:44 [P0] SUBMIT id=put-key-1 type=PUT dst=[1]
+2026/07/07 16:19:44 [P1] DELIVER id=put-key-1 type=PUT
+2026/07/07 16:19:44 [P0] SUBMIT id=range type=RANGE dst=[0 1]
+2026/07/07 16:19:44 [P0] DELIVER id=range type=RANGE
+2026/07/07 16:19:44 [P1] DELIVER id=range type=RANGE
+2026/07/07 16:19:44 [P0] SUBMIT id=put-five-a type=PUT dst=[0]
+2026/07/07 16:19:44 [P0] DELIVER id=put-five-a type=PUT
+2026/07/07 16:19:44 [P0] SUBMIT id=put-five-b type=PUT dst=[1]
+2026/07/07 16:19:44 [P1] DELIVER id=put-five-b type=PUT
+2026/07/07 16:19:44 [P0] SUBMIT id=put-five-c type=PUT dst=[2]
+2026/07/07 16:19:44 [P2] DELIVER id=put-five-c type=PUT
+2026/07/07 16:19:44 [P0] SUBMIT id=put-five-d type=PUT dst=[3]
+2026/07/07 16:19:44 [P3] DELIVER id=put-five-d type=PUT
+2026/07/07 16:19:44 [P0] SUBMIT id=put-five-e type=PUT dst=[4]
+2026/07/07 16:19:44 [P4] DELIVER id=put-five-e type=PUT
+2026/07/07 16:19:44 [P0] SUBMIT id=range-all-five type=RANGE dst=[0 1 2 3 4]
+2026/07/07 16:19:44 [P0] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:19:44 [P1] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:19:44 [P2] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:19:44 [P3] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:19:44 [P4] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:19:44 [P0] SUBMIT id=range-0-1 type=RANGE dst=[0 1]
+2026/07/07 16:19:44 [P0] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:19:44 [P1] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:19:44 [P0] SUBMIT id=range-2-3 type=RANGE dst=[2 3]
+2026/07/07 16:19:44 [P2] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:19:44 [P3] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:19:44 [P0] SUBMIT id=first type=RANGE dst=[0 1]
+2026/07/07 16:19:44 [P0] DELIVER id=first type=RANGE
+2026/07/07 16:19:44 [P1] DELIVER id=first type=RANGE
+2026/07/07 16:19:44 [P0] SUBMIT id=second type=RANGE dst=[1 2]
+2026/07/07 16:19:44 [P1] DELIVER id=second type=RANGE
+2026/07/07 16:19:44 [P2] DELIVER id=second type=RANGE
+2026/07/07 16:19:44 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:19:44 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:19:44 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:19:44 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:19:44 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:19:44 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:19:44 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:19:44 [P1] DELIVER id=m type=RANGE
+goos: darwin
+goarch: arm64
+pkg: skeen-kv
+cpu: Apple M4
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=1-10         	   10000	    141657 ns/op	    2208 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=2-10         	   10000	    292696 ns/op	    5045 B/op	      54 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=1-10     	   10000	    138915 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=2-10     	   10000	    349679 ns/op	    7218 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=1-10         	   10000	    139727 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=2-10         	   10000	    294333 ns/op	    5038 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=3-10         	   10000	    485917 ns/op	    8085 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=1-10     	   10000	    140333 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=2-10     	   10000	    347978 ns/op	    7213 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=3-10     	   10000	    605689 ns/op	   12292 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=1-10         	   10000	    139583 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=2-10         	   10000	    293512 ns/op	    5039 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=3-10         	   10000	    486015 ns/op	    8073 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=5-10         	   10000	    748201 ns/op	   16211 B/op	     110 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=1-10     	   10000	    140856 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=2-10     	   10000	    349349 ns/op	    7211 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=3-10     	   10000	    607814 ns/op	   12284 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=5-10     	   10000	   1193975 ns/op	   26317 B/op	     176 allocs/op
+BenchmarkOriginalSinglePartitionPut-10                               	   10000	    139720 ns/op	    2112 B/op	      29 allocs/op
+BenchmarkStrengthenedSinglePartitionPut-10                           	   10000	    140255 ns/op	    2256 B/op	      30 allocs/op
+PASS
+ok  	skeen-kv	72.311s
+2026/07/07 16:20:56 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:20:56 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:20:56 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:20:56 [P1] DELIVER id=m1 type=RANGE
+2026/07/07 16:20:56 [P0] DELIVER id=m1 type=RANGE
+2026/07/07 16:20:56 [P2] DELIVER id=m2 type=RANGE
+2026/07/07 16:20:56 [P1] DELIVER id=m2 type=RANGE
+2026/07/07 16:20:56 [P2] DELIVER id=m3 type=RANGE
+2026/07/07 16:20:56 [P0] DELIVER id=m3 type=RANGE
+2026/07/07 16:20:56 [P2] DELIVER id=m-prime type=RANGE
+2026/07/07 16:20:56 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:20:56 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:20:56 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:20:56 [P0] SUBMIT id=put-key-0 type=PUT dst=[0]
+2026/07/07 16:20:56 [P0] DELIVER id=put-key-0 type=PUT
+2026/07/07 16:20:56 [P0] SUBMIT id=put-key-1 type=PUT dst=[1]
+2026/07/07 16:20:56 [P1] DELIVER id=put-key-1 type=PUT
+2026/07/07 16:20:56 [P0] SUBMIT id=range type=RANGE dst=[0 1]
+2026/07/07 16:20:56 [P0] DELIVER id=range type=RANGE
+2026/07/07 16:20:56 [P1] DELIVER id=range type=RANGE
+2026/07/07 16:20:56 [P0] SUBMIT id=put-five-a type=PUT dst=[0]
+2026/07/07 16:20:56 [P0] DELIVER id=put-five-a type=PUT
+2026/07/07 16:20:56 [P0] SUBMIT id=put-five-b type=PUT dst=[1]
+2026/07/07 16:20:56 [P1] DELIVER id=put-five-b type=PUT
+2026/07/07 16:20:56 [P0] SUBMIT id=put-five-c type=PUT dst=[2]
+2026/07/07 16:20:56 [P2] DELIVER id=put-five-c type=PUT
+2026/07/07 16:20:56 [P0] SUBMIT id=put-five-d type=PUT dst=[3]
+2026/07/07 16:20:56 [P3] DELIVER id=put-five-d type=PUT
+2026/07/07 16:20:56 [P0] SUBMIT id=put-five-e type=PUT dst=[4]
+2026/07/07 16:20:56 [P4] DELIVER id=put-five-e type=PUT
+2026/07/07 16:20:56 [P0] SUBMIT id=range-all-five type=RANGE dst=[0 1 2 3 4]
+2026/07/07 16:20:56 [P3] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:20:56 [P0] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:20:56 [P1] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:20:56 [P2] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:20:56 [P4] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:20:56 [P0] SUBMIT id=range-0-1 type=RANGE dst=[0 1]
+2026/07/07 16:20:56 [P1] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:20:56 [P0] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:20:56 [P0] SUBMIT id=range-2-3 type=RANGE dst=[2 3]
+2026/07/07 16:20:56 [P2] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:20:56 [P3] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:20:56 [P0] SUBMIT id=first type=RANGE dst=[0 1]
+2026/07/07 16:20:56 [P0] DELIVER id=first type=RANGE
+2026/07/07 16:20:56 [P1] DELIVER id=first type=RANGE
+2026/07/07 16:20:56 [P0] SUBMIT id=second type=RANGE dst=[1 2]
+2026/07/07 16:20:56 [P1] DELIVER id=second type=RANGE
+2026/07/07 16:20:56 [P2] DELIVER id=second type=RANGE
+2026/07/07 16:20:56 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:20:56 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:20:56 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:20:56 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:20:56 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:20:56 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:20:56 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:20:56 [P1] DELIVER id=m type=RANGE
+goos: darwin
+goarch: arm64
+pkg: skeen-kv
+cpu: Apple M4
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=1-10         	   10000	    141416 ns/op	    2208 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=2-10         	   10000	    293357 ns/op	    5047 B/op	      54 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=1-10     	   10000	    140127 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=2-10     	   10000	    350631 ns/op	    7213 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=1-10         	   10000	    139566 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=2-10         	   10000	    292969 ns/op	    5040 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=3-10         	   10000	    487388 ns/op	    8079 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=1-10     	   10000	    139347 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=2-10     	   10000	    348100 ns/op	    7214 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=3-10     	   10000	    606272 ns/op	   12305 B/op	     105 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=1-10         	   10000	    140493 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=2-10         	   10000	    292340 ns/op	    5039 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=3-10         	   10000	    485612 ns/op	    8073 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=5-10         	   10000	    745244 ns/op	   16208 B/op	     110 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=1-10     	   10000	    138590 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=2-10     	   10000	    347642 ns/op	    7215 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=3-10     	   10000	    604343 ns/op	   12296 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=5-10     	   10000	   1194986 ns/op	   26306 B/op	     176 allocs/op
+BenchmarkOriginalSinglePartitionPut-10                               	   10000	    139264 ns/op	    2112 B/op	      29 allocs/op
+BenchmarkStrengthenedSinglePartitionPut-10                           	   10000	    140220 ns/op	    2256 B/op	      30 allocs/op
+PASS
+ok  	skeen-kv	72.233s
+2026/07/07 16:22:09 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:22:09 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:22:09 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:22:09 [P1] DELIVER id=m1 type=RANGE
+2026/07/07 16:22:09 [P0] DELIVER id=m1 type=RANGE
+2026/07/07 16:22:09 [P2] DELIVER id=m2 type=RANGE
+2026/07/07 16:22:09 [P1] DELIVER id=m2 type=RANGE
+2026/07/07 16:22:09 [P2] DELIVER id=m3 type=RANGE
+2026/07/07 16:22:09 [P0] DELIVER id=m3 type=RANGE
+2026/07/07 16:22:09 [P2] DELIVER id=m-prime type=RANGE
+2026/07/07 16:22:09 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:22:09 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:22:09 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:22:09 [P0] SUBMIT id=put-key-0 type=PUT dst=[0]
+2026/07/07 16:22:09 [P0] DELIVER id=put-key-0 type=PUT
+2026/07/07 16:22:09 [P0] SUBMIT id=put-key-1 type=PUT dst=[1]
+2026/07/07 16:22:09 [P1] DELIVER id=put-key-1 type=PUT
+2026/07/07 16:22:09 [P0] SUBMIT id=range type=RANGE dst=[0 1]
+2026/07/07 16:22:09 [P0] DELIVER id=range type=RANGE
+2026/07/07 16:22:09 [P1] DELIVER id=range type=RANGE
+2026/07/07 16:22:09 [P0] SUBMIT id=put-five-a type=PUT dst=[0]
+2026/07/07 16:22:09 [P0] DELIVER id=put-five-a type=PUT
+2026/07/07 16:22:09 [P0] SUBMIT id=put-five-b type=PUT dst=[1]
+2026/07/07 16:22:09 [P1] DELIVER id=put-five-b type=PUT
+2026/07/07 16:22:09 [P0] SUBMIT id=put-five-c type=PUT dst=[2]
+2026/07/07 16:22:09 [P2] DELIVER id=put-five-c type=PUT
+2026/07/07 16:22:09 [P0] SUBMIT id=put-five-d type=PUT dst=[3]
+2026/07/07 16:22:09 [P3] DELIVER id=put-five-d type=PUT
+2026/07/07 16:22:09 [P0] SUBMIT id=put-five-e type=PUT dst=[4]
+2026/07/07 16:22:09 [P4] DELIVER id=put-five-e type=PUT
+2026/07/07 16:22:09 [P0] SUBMIT id=range-all-five type=RANGE dst=[0 1 2 3 4]
+2026/07/07 16:22:09 [P3] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:22:09 [P0] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:22:09 [P1] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:22:09 [P2] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:22:09 [P4] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:22:09 [P0] SUBMIT id=range-0-1 type=RANGE dst=[0 1]
+2026/07/07 16:22:09 [P0] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:22:09 [P1] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:22:09 [P0] SUBMIT id=range-2-3 type=RANGE dst=[2 3]
+2026/07/07 16:22:09 [P2] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:22:09 [P3] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:22:09 [P0] SUBMIT id=first type=RANGE dst=[0 1]
+2026/07/07 16:22:09 [P1] DELIVER id=first type=RANGE
+2026/07/07 16:22:09 [P0] DELIVER id=first type=RANGE
+2026/07/07 16:22:09 [P0] SUBMIT id=second type=RANGE dst=[1 2]
+2026/07/07 16:22:09 [P1] DELIVER id=second type=RANGE
+2026/07/07 16:22:09 [P2] DELIVER id=second type=RANGE
+2026/07/07 16:22:09 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:22:09 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:22:09 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:22:09 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:22:09 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:22:09 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:22:09 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:22:09 [P1] DELIVER id=m type=RANGE
+goos: darwin
+goarch: arm64
+pkg: skeen-kv
+cpu: Apple M4
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=1-10         	   10000	    141128 ns/op	    2208 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=2-10         	   10000	    294744 ns/op	    5051 B/op	      54 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=1-10     	   10000	    140456 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=2-10     	   10000	    349631 ns/op	    7214 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=1-10         	   10000	    141242 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=2-10         	   10000	    349222 ns/op	    5041 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=3-10         	   10000	    486856 ns/op	    8062 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=1-10     	   10000	    140304 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=2-10     	   10000	    348599 ns/op	    7210 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=3-10     	   10000	    612882 ns/op	   12285 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=1-10         	   10000	    139574 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=2-10         	   10000	    294058 ns/op	    5038 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=3-10         	   10000	    486511 ns/op	    8071 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=5-10         	   10000	    747612 ns/op	   16204 B/op	     110 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=1-10     	   10000	    139933 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=2-10     	   10000	    349847 ns/op	    7215 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=3-10     	   10000	    607546 ns/op	   12290 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=5-10     	   10000	   1203237 ns/op	   26300 B/op	     176 allocs/op
+BenchmarkOriginalSinglePartitionPut-10                               	   10000	    139829 ns/op	    2112 B/op	      29 allocs/op
+BenchmarkStrengthenedSinglePartitionPut-10                           	   10000	    140061 ns/op	    2256 B/op	      30 allocs/op
+PASS
+ok  	skeen-kv	73.085s
+2026/07/07 16:23:22 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:23:22 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:23:22 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:23:22 [P1] DELIVER id=m1 type=RANGE
+2026/07/07 16:23:22 [P0] DELIVER id=m1 type=RANGE
+2026/07/07 16:23:22 [P2] DELIVER id=m2 type=RANGE
+2026/07/07 16:23:22 [P1] DELIVER id=m2 type=RANGE
+2026/07/07 16:23:22 [P2] DELIVER id=m3 type=RANGE
+2026/07/07 16:23:22 [P0] DELIVER id=m3 type=RANGE
+2026/07/07 16:23:22 [P2] DELIVER id=m-prime type=RANGE
+2026/07/07 16:23:22 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:23:22 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:23:22 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:23:22 [P0] SUBMIT id=put-key-0 type=PUT dst=[0]
+2026/07/07 16:23:22 [P0] DELIVER id=put-key-0 type=PUT
+2026/07/07 16:23:22 [P0] SUBMIT id=put-key-1 type=PUT dst=[1]
+2026/07/07 16:23:22 [P1] DELIVER id=put-key-1 type=PUT
+2026/07/07 16:23:22 [P0] SUBMIT id=range type=RANGE dst=[0 1]
+2026/07/07 16:23:22 [P0] DELIVER id=range type=RANGE
+2026/07/07 16:23:22 [P1] DELIVER id=range type=RANGE
+2026/07/07 16:23:22 [P0] SUBMIT id=put-five-a type=PUT dst=[0]
+2026/07/07 16:23:22 [P0] DELIVER id=put-five-a type=PUT
+2026/07/07 16:23:22 [P0] SUBMIT id=put-five-b type=PUT dst=[1]
+2026/07/07 16:23:22 [P1] DELIVER id=put-five-b type=PUT
+2026/07/07 16:23:22 [P0] SUBMIT id=put-five-c type=PUT dst=[2]
+2026/07/07 16:23:22 [P2] DELIVER id=put-five-c type=PUT
+2026/07/07 16:23:22 [P0] SUBMIT id=put-five-d type=PUT dst=[3]
+2026/07/07 16:23:22 [P3] DELIVER id=put-five-d type=PUT
+2026/07/07 16:23:22 [P0] SUBMIT id=put-five-e type=PUT dst=[4]
+2026/07/07 16:23:22 [P4] DELIVER id=put-five-e type=PUT
+2026/07/07 16:23:22 [P0] SUBMIT id=range-all-five type=RANGE dst=[0 1 2 3 4]
+2026/07/07 16:23:22 [P0] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:23:22 [P1] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:23:22 [P2] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:23:22 [P3] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:23:22 [P4] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:23:22 [P0] SUBMIT id=range-0-1 type=RANGE dst=[0 1]
+2026/07/07 16:23:22 [P0] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:23:22 [P1] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:23:22 [P0] SUBMIT id=range-2-3 type=RANGE dst=[2 3]
+2026/07/07 16:23:22 [P2] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:23:22 [P3] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:23:22 [P0] SUBMIT id=first type=RANGE dst=[0 1]
+2026/07/07 16:23:22 [P0] DELIVER id=first type=RANGE
+2026/07/07 16:23:22 [P1] DELIVER id=first type=RANGE
+2026/07/07 16:23:22 [P0] SUBMIT id=second type=RANGE dst=[1 2]
+2026/07/07 16:23:22 [P1] DELIVER id=second type=RANGE
+2026/07/07 16:23:22 [P2] DELIVER id=second type=RANGE
+2026/07/07 16:23:22 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:23:22 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:23:22 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:23:22 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:23:22 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:23:22 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:23:22 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:23:22 [P1] DELIVER id=m type=RANGE
+goos: darwin
+goarch: arm64
+pkg: skeen-kv
+cpu: Apple M4
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=1-10         	   10000	    141870 ns/op	    2209 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=2-10         	   10000	    292790 ns/op	    5045 B/op	      54 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=1-10     	   10000	    139525 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=2-10     	   10000	    348898 ns/op	    7215 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=1-10         	   10000	    140839 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=2-10         	   10000	    292947 ns/op	    5040 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=3-10         	   10000	    488595 ns/op	    8077 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=1-10     	   10000	    139113 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=2-10     	   10000	    349778 ns/op	    7219 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=3-10     	   10000	    606344 ns/op	   12299 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=1-10         	   10000	    139051 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=2-10         	   10000	    293218 ns/op	    5040 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=3-10         	   10000	    487299 ns/op	    8074 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=5-10         	   10000	    748200 ns/op	   16208 B/op	     110 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=1-10     	   10000	    140496 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=2-10     	   10000	    350409 ns/op	    7215 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=3-10     	   10000	    605373 ns/op	   12298 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=5-10     	   10000	   1197792 ns/op	   26313 B/op	     176 allocs/op
+BenchmarkOriginalSinglePartitionPut-10                               	   10000	    140994 ns/op	    2112 B/op	      29 allocs/op
+BenchmarkStrengthenedSinglePartitionPut-10                           	   10000	    140324 ns/op	    2256 B/op	      30 allocs/op
+PASS
+ok  	skeen-kv	72.376s
+2026/07/07 16:24:34 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:24:34 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:24:34 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:24:34 [P1] DELIVER id=m1 type=RANGE
+2026/07/07 16:24:34 [P0] DELIVER id=m1 type=RANGE
+2026/07/07 16:24:34 [P2] DELIVER id=m2 type=RANGE
+2026/07/07 16:24:34 [P1] DELIVER id=m2 type=RANGE
+2026/07/07 16:24:34 [P2] DELIVER id=m3 type=RANGE
+2026/07/07 16:24:34 [P0] DELIVER id=m3 type=RANGE
+2026/07/07 16:24:34 [P2] DELIVER id=m-prime type=RANGE
+2026/07/07 16:24:34 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:24:34 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:24:34 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:24:34 [P0] SUBMIT id=put-key-0 type=PUT dst=[0]
+2026/07/07 16:24:34 [P0] DELIVER id=put-key-0 type=PUT
+2026/07/07 16:24:34 [P0] SUBMIT id=put-key-1 type=PUT dst=[1]
+2026/07/07 16:24:34 [P1] DELIVER id=put-key-1 type=PUT
+2026/07/07 16:24:34 [P0] SUBMIT id=range type=RANGE dst=[0 1]
+2026/07/07 16:24:34 [P0] DELIVER id=range type=RANGE
+2026/07/07 16:24:34 [P1] DELIVER id=range type=RANGE
+2026/07/07 16:24:34 [P0] SUBMIT id=put-five-a type=PUT dst=[0]
+2026/07/07 16:24:34 [P0] DELIVER id=put-five-a type=PUT
+2026/07/07 16:24:34 [P0] SUBMIT id=put-five-b type=PUT dst=[1]
+2026/07/07 16:24:34 [P1] DELIVER id=put-five-b type=PUT
+2026/07/07 16:24:34 [P0] SUBMIT id=put-five-c type=PUT dst=[2]
+2026/07/07 16:24:34 [P2] DELIVER id=put-five-c type=PUT
+2026/07/07 16:24:34 [P0] SUBMIT id=put-five-d type=PUT dst=[3]
+2026/07/07 16:24:34 [P3] DELIVER id=put-five-d type=PUT
+2026/07/07 16:24:34 [P0] SUBMIT id=put-five-e type=PUT dst=[4]
+2026/07/07 16:24:34 [P4] DELIVER id=put-five-e type=PUT
+2026/07/07 16:24:34 [P0] SUBMIT id=range-all-five type=RANGE dst=[0 1 2 3 4]
+2026/07/07 16:24:34 [P3] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:24:34 [P0] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:24:34 [P1] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:24:34 [P2] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:24:34 [P4] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:24:34 [P0] SUBMIT id=range-0-1 type=RANGE dst=[0 1]
+2026/07/07 16:24:34 [P0] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:24:34 [P1] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:24:34 [P0] SUBMIT id=range-2-3 type=RANGE dst=[2 3]
+2026/07/07 16:24:34 [P2] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:24:34 [P3] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:24:34 [P0] SUBMIT id=first type=RANGE dst=[0 1]
+2026/07/07 16:24:34 [P0] DELIVER id=first type=RANGE
+2026/07/07 16:24:34 [P1] DELIVER id=first type=RANGE
+2026/07/07 16:24:34 [P0] SUBMIT id=second type=RANGE dst=[1 2]
+2026/07/07 16:24:34 [P1] DELIVER id=second type=RANGE
+2026/07/07 16:24:34 [P2] DELIVER id=second type=RANGE
+2026/07/07 16:24:34 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:24:34 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:24:34 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:24:34 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:24:34 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:24:34 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:24:34 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:24:34 [P1] DELIVER id=m type=RANGE
+goos: darwin
+goarch: arm64
+pkg: skeen-kv
+cpu: Apple M4
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=1-10         	   10000	    141336 ns/op	    2209 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=2-10         	   10000	    292852 ns/op	    5046 B/op	      54 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=1-10     	   10000	    139175 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=2-10     	   10000	    349859 ns/op	    7217 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=1-10         	   10000	    139950 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=2-10         	   10000	    293145 ns/op	    5043 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=3-10         	   10000	    486902 ns/op	    8078 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=1-10     	   10000	    139559 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=2-10     	   10000	    348985 ns/op	    7214 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=3-10     	   10000	    606325 ns/op	   12294 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=1-10         	   10000	    140119 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=2-10         	   10000	    294325 ns/op	    5037 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=3-10         	   10000	    486774 ns/op	    8072 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=5-10         	   10000	    747235 ns/op	   16204 B/op	     110 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=1-10     	   10000	    140574 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=2-10     	   10000	    348095 ns/op	    7216 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=3-10     	   10000	    606767 ns/op	   12300 B/op	     105 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=5-10     	   10000	   1197015 ns/op	   26311 B/op	     176 allocs/op
+BenchmarkOriginalSinglePartitionPut-10                               	   10000	    141358 ns/op	    2112 B/op	      29 allocs/op
+BenchmarkStrengthenedSinglePartitionPut-10                           	   10000	    141712 ns/op	    2256 B/op	      30 allocs/op
+PASS
+ok  	skeen-kv	72.364s
+2026/07/07 16:25:47 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:25:47 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:25:47 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:25:47 [P1] DELIVER id=m1 type=RANGE
+2026/07/07 16:25:47 [P0] DELIVER id=m1 type=RANGE
+2026/07/07 16:25:47 [P2] DELIVER id=m2 type=RANGE
+2026/07/07 16:25:47 [P1] DELIVER id=m2 type=RANGE
+2026/07/07 16:25:47 [P2] DELIVER id=m3 type=RANGE
+2026/07/07 16:25:47 [P0] DELIVER id=m3 type=RANGE
+2026/07/07 16:25:47 [P2] DELIVER id=m-prime type=RANGE
+2026/07/07 16:25:47 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:25:47 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:25:47 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:25:47 [P0] SUBMIT id=put-key-0 type=PUT dst=[0]
+2026/07/07 16:25:47 [P0] DELIVER id=put-key-0 type=PUT
+2026/07/07 16:25:47 [P0] SUBMIT id=put-key-1 type=PUT dst=[1]
+2026/07/07 16:25:47 [P1] DELIVER id=put-key-1 type=PUT
+2026/07/07 16:25:47 [P0] SUBMIT id=range type=RANGE dst=[0 1]
+2026/07/07 16:25:47 [P0] DELIVER id=range type=RANGE
+2026/07/07 16:25:47 [P1] DELIVER id=range type=RANGE
+2026/07/07 16:25:47 [P0] SUBMIT id=put-five-a type=PUT dst=[0]
+2026/07/07 16:25:47 [P0] DELIVER id=put-five-a type=PUT
+2026/07/07 16:25:47 [P0] SUBMIT id=put-five-b type=PUT dst=[1]
+2026/07/07 16:25:47 [P1] DELIVER id=put-five-b type=PUT
+2026/07/07 16:25:47 [P0] SUBMIT id=put-five-c type=PUT dst=[2]
+2026/07/07 16:25:47 [P2] DELIVER id=put-five-c type=PUT
+2026/07/07 16:25:47 [P0] SUBMIT id=put-five-d type=PUT dst=[3]
+2026/07/07 16:25:47 [P3] DELIVER id=put-five-d type=PUT
+2026/07/07 16:25:47 [P0] SUBMIT id=put-five-e type=PUT dst=[4]
+2026/07/07 16:25:47 [P4] DELIVER id=put-five-e type=PUT
+2026/07/07 16:25:47 [P0] SUBMIT id=range-all-five type=RANGE dst=[0 1 2 3 4]
+2026/07/07 16:25:47 [P3] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:25:47 [P0] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:25:47 [P1] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:25:47 [P2] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:25:47 [P4] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:25:47 [P0] SUBMIT id=range-0-1 type=RANGE dst=[0 1]
+2026/07/07 16:25:47 [P1] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:25:47 [P0] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:25:47 [P0] SUBMIT id=range-2-3 type=RANGE dst=[2 3]
+2026/07/07 16:25:47 [P2] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:25:47 [P3] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:25:47 [P0] SUBMIT id=first type=RANGE dst=[0 1]
+2026/07/07 16:25:47 [P0] DELIVER id=first type=RANGE
+2026/07/07 16:25:47 [P1] DELIVER id=first type=RANGE
+2026/07/07 16:25:47 [P0] SUBMIT id=second type=RANGE dst=[1 2]
+2026/07/07 16:25:47 [P1] DELIVER id=second type=RANGE
+2026/07/07 16:25:47 [P2] DELIVER id=second type=RANGE
+2026/07/07 16:25:47 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:25:47 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:25:47 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:25:47 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:25:47 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:25:47 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:25:47 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:25:47 [P1] DELIVER id=m type=RANGE
+goos: darwin
+goarch: arm64
+pkg: skeen-kv
+cpu: Apple M4
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=1-10         	   10000	    141547 ns/op	    2209 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=2-10         	   10000	    294159 ns/op	    5048 B/op	      54 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=1-10     	   10000	    140350 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=2-10     	   10000	    349189 ns/op	    7209 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=1-10         	   10000	    140018 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=2-10         	   10000	    293909 ns/op	    5039 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=3-10         	   10000	    487899 ns/op	    8078 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=1-10     	   10000	    139176 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=2-10     	   10000	    348426 ns/op	    7216 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=3-10     	   10000	    603676 ns/op	   12299 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=1-10         	   10000	    139961 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=2-10         	   10000	    294569 ns/op	    5037 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=3-10         	   10000	    491534 ns/op	    8072 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=5-10         	   10000	    745738 ns/op	   16208 B/op	     110 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=1-10     	   10000	    139876 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=2-10     	   10000	    349417 ns/op	    7214 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=3-10     	   10000	    605371 ns/op	   12289 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=5-10     	   10000	   1196724 ns/op	   26318 B/op	     176 allocs/op
+BenchmarkOriginalSinglePartitionPut-10                               	   10000	    140395 ns/op	    2112 B/op	      29 allocs/op
+BenchmarkStrengthenedSinglePartitionPut-10                           	   10000	    141271 ns/op	    2256 B/op	      30 allocs/op
+PASS
+ok  	skeen-kv	72.372s
+2026/07/07 16:27:00 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:27:00 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:27:00 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:27:00 [P1] DELIVER id=m1 type=RANGE
+2026/07/07 16:27:00 [P0] DELIVER id=m1 type=RANGE
+2026/07/07 16:27:00 [P2] DELIVER id=m2 type=RANGE
+2026/07/07 16:27:00 [P1] DELIVER id=m2 type=RANGE
+2026/07/07 16:27:00 [P2] DELIVER id=m3 type=RANGE
+2026/07/07 16:27:00 [P0] DELIVER id=m3 type=RANGE
+2026/07/07 16:27:00 [P2] DELIVER id=m-prime type=RANGE
+2026/07/07 16:27:00 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:27:00 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:27:00 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:27:00 [P0] SUBMIT id=put-key-0 type=PUT dst=[0]
+2026/07/07 16:27:00 [P0] DELIVER id=put-key-0 type=PUT
+2026/07/07 16:27:00 [P0] SUBMIT id=put-key-1 type=PUT dst=[1]
+2026/07/07 16:27:00 [P1] DELIVER id=put-key-1 type=PUT
+2026/07/07 16:27:00 [P0] SUBMIT id=range type=RANGE dst=[0 1]
+2026/07/07 16:27:00 [P0] DELIVER id=range type=RANGE
+2026/07/07 16:27:00 [P1] DELIVER id=range type=RANGE
+2026/07/07 16:27:00 [P0] SUBMIT id=put-five-a type=PUT dst=[0]
+2026/07/07 16:27:00 [P0] DELIVER id=put-five-a type=PUT
+2026/07/07 16:27:00 [P0] SUBMIT id=put-five-b type=PUT dst=[1]
+2026/07/07 16:27:00 [P1] DELIVER id=put-five-b type=PUT
+2026/07/07 16:27:00 [P0] SUBMIT id=put-five-c type=PUT dst=[2]
+2026/07/07 16:27:00 [P2] DELIVER id=put-five-c type=PUT
+2026/07/07 16:27:00 [P0] SUBMIT id=put-five-d type=PUT dst=[3]
+2026/07/07 16:27:00 [P3] DELIVER id=put-five-d type=PUT
+2026/07/07 16:27:00 [P0] SUBMIT id=put-five-e type=PUT dst=[4]
+2026/07/07 16:27:00 [P4] DELIVER id=put-five-e type=PUT
+2026/07/07 16:27:00 [P0] SUBMIT id=range-all-five type=RANGE dst=[0 1 2 3 4]
+2026/07/07 16:27:00 [P0] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:27:00 [P1] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:27:00 [P2] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:27:00 [P3] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:27:00 [P4] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:27:00 [P0] SUBMIT id=range-0-1 type=RANGE dst=[0 1]
+2026/07/07 16:27:00 [P1] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:27:00 [P0] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:27:00 [P0] SUBMIT id=range-2-3 type=RANGE dst=[2 3]
+2026/07/07 16:27:00 [P2] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:27:00 [P3] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:27:00 [P0] SUBMIT id=first type=RANGE dst=[0 1]
+2026/07/07 16:27:00 [P0] DELIVER id=first type=RANGE
+2026/07/07 16:27:00 [P1] DELIVER id=first type=RANGE
+2026/07/07 16:27:00 [P0] SUBMIT id=second type=RANGE dst=[1 2]
+2026/07/07 16:27:00 [P1] DELIVER id=second type=RANGE
+2026/07/07 16:27:00 [P2] DELIVER id=second type=RANGE
+2026/07/07 16:27:00 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:27:00 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:27:00 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:27:00 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:27:00 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:27:00 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:27:00 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:27:00 [P1] DELIVER id=m type=RANGE
+goos: darwin
+goarch: arm64
+pkg: skeen-kv
+cpu: Apple M4
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=1-10         	   10000	    141742 ns/op	    2208 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=2-10         	   10000	    294649 ns/op	    5047 B/op	      54 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=1-10     	   10000	    140502 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=2-10     	   10000	    349946 ns/op	    7216 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=1-10         	   10000	    139875 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=2-10         	   10000	    294777 ns/op	    5042 B/op	      54 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=3-10         	   10000	    487108 ns/op	    8079 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=1-10     	   10000	    139917 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=2-10     	   10000	    350973 ns/op	    7212 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=3-10     	   10000	    608510 ns/op	   12305 B/op	     105 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=1-10         	   10000	    140814 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=2-10         	   10000	    295052 ns/op	    5036 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=3-10         	   10000	    487753 ns/op	    8077 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=5-10         	   10000	    798593 ns/op	   16204 B/op	     110 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=1-10     	   10000	    139665 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=2-10     	   10000	    351040 ns/op	    7216 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=3-10     	   10000	    609846 ns/op	   12301 B/op	     105 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=5-10     	   10000	   1201080 ns/op	   26332 B/op	     176 allocs/op
+BenchmarkOriginalSinglePartitionPut-10                               	   10000	    140309 ns/op	    2112 B/op	      29 allocs/op
+BenchmarkStrengthenedSinglePartitionPut-10                           	   10000	    140411 ns/op	    2256 B/op	      30 allocs/op
+PASS
+ok  	skeen-kv	73.080s
+2026/07/07 16:28:13 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:28:13 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:28:13 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:28:13 [P1] DELIVER id=m1 type=RANGE
+2026/07/07 16:28:13 [P0] DELIVER id=m1 type=RANGE
+2026/07/07 16:28:13 [P2] DELIVER id=m2 type=RANGE
+2026/07/07 16:28:13 [P1] DELIVER id=m2 type=RANGE
+2026/07/07 16:28:13 [P2] DELIVER id=m3 type=RANGE
+2026/07/07 16:28:13 [P0] DELIVER id=m3 type=RANGE
+2026/07/07 16:28:13 [P2] DELIVER id=m-prime type=RANGE
+2026/07/07 16:28:13 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:28:13 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:28:13 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:28:13 [P0] SUBMIT id=put-key-0 type=PUT dst=[0]
+2026/07/07 16:28:13 [P0] DELIVER id=put-key-0 type=PUT
+2026/07/07 16:28:13 [P0] SUBMIT id=put-key-1 type=PUT dst=[1]
+2026/07/07 16:28:13 [P1] DELIVER id=put-key-1 type=PUT
+2026/07/07 16:28:13 [P0] SUBMIT id=range type=RANGE dst=[0 1]
+2026/07/07 16:28:13 [P0] DELIVER id=range type=RANGE
+2026/07/07 16:28:13 [P1] DELIVER id=range type=RANGE
+2026/07/07 16:28:13 [P0] SUBMIT id=put-five-a type=PUT dst=[0]
+2026/07/07 16:28:13 [P0] DELIVER id=put-five-a type=PUT
+2026/07/07 16:28:13 [P0] SUBMIT id=put-five-b type=PUT dst=[1]
+2026/07/07 16:28:13 [P1] DELIVER id=put-five-b type=PUT
+2026/07/07 16:28:13 [P0] SUBMIT id=put-five-c type=PUT dst=[2]
+2026/07/07 16:28:13 [P2] DELIVER id=put-five-c type=PUT
+2026/07/07 16:28:13 [P0] SUBMIT id=put-five-d type=PUT dst=[3]
+2026/07/07 16:28:13 [P3] DELIVER id=put-five-d type=PUT
+2026/07/07 16:28:13 [P0] SUBMIT id=put-five-e type=PUT dst=[4]
+2026/07/07 16:28:13 [P4] DELIVER id=put-five-e type=PUT
+2026/07/07 16:28:13 [P0] SUBMIT id=range-all-five type=RANGE dst=[0 1 2 3 4]
+2026/07/07 16:28:13 [P3] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:28:13 [P0] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:28:13 [P1] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:28:13 [P2] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:28:13 [P4] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:28:13 [P0] SUBMIT id=range-0-1 type=RANGE dst=[0 1]
+2026/07/07 16:28:13 [P0] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:28:13 [P1] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:28:13 [P0] SUBMIT id=range-2-3 type=RANGE dst=[2 3]
+2026/07/07 16:28:13 [P2] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:28:13 [P3] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:28:13 [P0] SUBMIT id=first type=RANGE dst=[0 1]
+2026/07/07 16:28:13 [P0] DELIVER id=first type=RANGE
+2026/07/07 16:28:13 [P1] DELIVER id=first type=RANGE
+2026/07/07 16:28:13 [P0] SUBMIT id=second type=RANGE dst=[1 2]
+2026/07/07 16:28:13 [P1] DELIVER id=second type=RANGE
+2026/07/07 16:28:13 [P2] DELIVER id=second type=RANGE
+2026/07/07 16:28:13 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:28:13 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:28:13 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:28:13 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:28:13 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:28:13 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:28:13 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:28:13 [P1] DELIVER id=m type=RANGE
+goos: darwin
+goarch: arm64
+pkg: skeen-kv
+cpu: Apple M4
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=1-10         	   10000	    141563 ns/op	    2208 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=2-10         	   10000	    293389 ns/op	    5048 B/op	      54 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=1-10     	   10000	    140717 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=2-10     	   10000	    350015 ns/op	    7217 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=1-10         	   10000	    140516 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=2-10         	   10000	    295032 ns/op	    5044 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=3-10         	   10000	    466304 ns/op	    8078 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=1-10     	   10000	    140449 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=2-10     	   10000	    350033 ns/op	    7217 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=3-10     	   10000	    606245 ns/op	   12298 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=1-10         	   10000	    140168 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=2-10         	   10000	    294979 ns/op	    5039 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=3-10         	   10000	    487694 ns/op	    8073 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=5-10         	   10000	    749704 ns/op	   16206 B/op	     110 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=1-10     	   10000	    140725 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=2-10     	   10000	    349774 ns/op	    7213 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=3-10     	   10000	    606880 ns/op	   12298 B/op	     105 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=5-10     	   10000	   1198964 ns/op	   26338 B/op	     176 allocs/op
+BenchmarkOriginalSinglePartitionPut-10                               	   10000	    140467 ns/op	    2112 B/op	      29 allocs/op
+BenchmarkStrengthenedSinglePartitionPut-10                           	   10000	    140562 ns/op	    2256 B/op	      30 allocs/op
+PASS
+ok  	skeen-kv	72.346s
+2026/07/07 16:29:25 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:29:25 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:29:25 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:29:25 [P1] DELIVER id=m1 type=RANGE
+2026/07/07 16:29:25 [P0] DELIVER id=m1 type=RANGE
+2026/07/07 16:29:25 [P2] DELIVER id=m2 type=RANGE
+2026/07/07 16:29:25 [P1] DELIVER id=m2 type=RANGE
+2026/07/07 16:29:25 [P2] DELIVER id=m3 type=RANGE
+2026/07/07 16:29:25 [P0] DELIVER id=m3 type=RANGE
+2026/07/07 16:29:25 [P2] DELIVER id=m-prime type=RANGE
+2026/07/07 16:29:25 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:29:25 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:29:25 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:29:25 [P0] SUBMIT id=put-key-0 type=PUT dst=[0]
+2026/07/07 16:29:25 [P0] DELIVER id=put-key-0 type=PUT
+2026/07/07 16:29:25 [P0] SUBMIT id=put-key-1 type=PUT dst=[1]
+2026/07/07 16:29:25 [P1] DELIVER id=put-key-1 type=PUT
+2026/07/07 16:29:25 [P0] SUBMIT id=range type=RANGE dst=[0 1]
+2026/07/07 16:29:25 [P0] DELIVER id=range type=RANGE
+2026/07/07 16:29:25 [P1] DELIVER id=range type=RANGE
+2026/07/07 16:29:25 [P0] SUBMIT id=put-five-a type=PUT dst=[0]
+2026/07/07 16:29:25 [P0] DELIVER id=put-five-a type=PUT
+2026/07/07 16:29:25 [P0] SUBMIT id=put-five-b type=PUT dst=[1]
+2026/07/07 16:29:25 [P1] DELIVER id=put-five-b type=PUT
+2026/07/07 16:29:25 [P0] SUBMIT id=put-five-c type=PUT dst=[2]
+2026/07/07 16:29:25 [P2] DELIVER id=put-five-c type=PUT
+2026/07/07 16:29:25 [P0] SUBMIT id=put-five-d type=PUT dst=[3]
+2026/07/07 16:29:25 [P3] DELIVER id=put-five-d type=PUT
+2026/07/07 16:29:25 [P0] SUBMIT id=put-five-e type=PUT dst=[4]
+2026/07/07 16:29:25 [P4] DELIVER id=put-five-e type=PUT
+2026/07/07 16:29:25 [P0] SUBMIT id=range-all-five type=RANGE dst=[0 1 2 3 4]
+2026/07/07 16:29:25 [P2] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:29:25 [P0] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:29:25 [P1] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:29:25 [P3] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:29:25 [P4] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:29:25 [P0] SUBMIT id=range-0-1 type=RANGE dst=[0 1]
+2026/07/07 16:29:25 [P1] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:29:25 [P0] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:29:25 [P0] SUBMIT id=range-2-3 type=RANGE dst=[2 3]
+2026/07/07 16:29:25 [P2] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:29:25 [P3] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:29:25 [P0] SUBMIT id=first type=RANGE dst=[0 1]
+2026/07/07 16:29:25 [P0] DELIVER id=first type=RANGE
+2026/07/07 16:29:25 [P1] DELIVER id=first type=RANGE
+2026/07/07 16:29:25 [P0] SUBMIT id=second type=RANGE dst=[1 2]
+2026/07/07 16:29:25 [P1] DELIVER id=second type=RANGE
+2026/07/07 16:29:25 [P2] DELIVER id=second type=RANGE
+2026/07/07 16:29:25 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:29:25 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:29:25 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:29:25 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:29:25 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:29:25 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:29:25 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:29:25 [P1] DELIVER id=m type=RANGE
+goos: darwin
+goarch: arm64
+pkg: skeen-kv
+cpu: Apple M4
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=1-10         	   10000	    142732 ns/op	    2209 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=2-10         	   10000	    294750 ns/op	    5048 B/op	      54 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=1-10     	   10000	    141281 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=2-10     	   10000	    348925 ns/op	    7213 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=1-10         	   10000	    139891 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=2-10         	   10000	    294243 ns/op	    5040 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=3-10         	   10000	    487632 ns/op	    8082 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=1-10     	   10000	    140762 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=2-10     	   10000	    351267 ns/op	    7215 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=3-10     	   10000	    605140 ns/op	   12303 B/op	     105 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=1-10         	   10000	    139909 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=2-10         	   10000	    291789 ns/op	    5039 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=3-10         	   10000	    487833 ns/op	    8076 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=5-10         	   10000	    751208 ns/op	   16206 B/op	     110 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=1-10     	   10000	    139498 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=2-10     	   10000	    349054 ns/op	    7217 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=3-10     	   10000	    606306 ns/op	   12293 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=5-10     	   10000	   1193952 ns/op	   26327 B/op	     176 allocs/op
+BenchmarkOriginalSinglePartitionPut-10                               	   10000	    141664 ns/op	    2112 B/op	      29 allocs/op
+BenchmarkStrengthenedSinglePartitionPut-10                           	   10000	    141608 ns/op	    2256 B/op	      30 allocs/op
+PASS
+ok  	skeen-kv	72.443s
+2026/07/07 16:30:38 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:30:38 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:30:38 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:30:38 [P1] DELIVER id=m1 type=RANGE
+2026/07/07 16:30:38 [P0] DELIVER id=m1 type=RANGE
+2026/07/07 16:30:38 [P2] DELIVER id=m2 type=RANGE
+2026/07/07 16:30:38 [P1] DELIVER id=m2 type=RANGE
+2026/07/07 16:30:38 [P2] DELIVER id=m3 type=RANGE
+2026/07/07 16:30:38 [P0] DELIVER id=m3 type=RANGE
+2026/07/07 16:30:38 [P2] DELIVER id=m-prime type=RANGE
+2026/07/07 16:30:38 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:30:38 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:30:38 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:30:38 [P0] SUBMIT id=put-key-0 type=PUT dst=[0]
+2026/07/07 16:30:38 [P0] DELIVER id=put-key-0 type=PUT
+2026/07/07 16:30:38 [P0] SUBMIT id=put-key-1 type=PUT dst=[1]
+2026/07/07 16:30:38 [P1] DELIVER id=put-key-1 type=PUT
+2026/07/07 16:30:38 [P0] SUBMIT id=range type=RANGE dst=[0 1]
+2026/07/07 16:30:38 [P0] DELIVER id=range type=RANGE
+2026/07/07 16:30:38 [P1] DELIVER id=range type=RANGE
+2026/07/07 16:30:38 [P0] SUBMIT id=put-five-a type=PUT dst=[0]
+2026/07/07 16:30:38 [P0] DELIVER id=put-five-a type=PUT
+2026/07/07 16:30:38 [P0] SUBMIT id=put-five-b type=PUT dst=[1]
+2026/07/07 16:30:38 [P1] DELIVER id=put-five-b type=PUT
+2026/07/07 16:30:38 [P0] SUBMIT id=put-five-c type=PUT dst=[2]
+2026/07/07 16:30:38 [P2] DELIVER id=put-five-c type=PUT
+2026/07/07 16:30:38 [P0] SUBMIT id=put-five-d type=PUT dst=[3]
+2026/07/07 16:30:38 [P3] DELIVER id=put-five-d type=PUT
+2026/07/07 16:30:38 [P0] SUBMIT id=put-five-e type=PUT dst=[4]
+2026/07/07 16:30:38 [P4] DELIVER id=put-five-e type=PUT
+2026/07/07 16:30:38 [P0] SUBMIT id=range-all-five type=RANGE dst=[0 1 2 3 4]
+2026/07/07 16:30:38 [P3] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:30:38 [P0] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:30:38 [P1] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:30:38 [P2] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:30:38 [P4] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:30:38 [P0] SUBMIT id=range-0-1 type=RANGE dst=[0 1]
+2026/07/07 16:30:38 [P0] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:30:38 [P1] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:30:38 [P0] SUBMIT id=range-2-3 type=RANGE dst=[2 3]
+2026/07/07 16:30:38 [P2] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:30:38 [P3] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:30:38 [P0] SUBMIT id=first type=RANGE dst=[0 1]
+2026/07/07 16:30:38 [P0] DELIVER id=first type=RANGE
+2026/07/07 16:30:38 [P1] DELIVER id=first type=RANGE
+2026/07/07 16:30:38 [P0] SUBMIT id=second type=RANGE dst=[1 2]
+2026/07/07 16:30:38 [P1] DELIVER id=second type=RANGE
+2026/07/07 16:30:38 [P2] DELIVER id=second type=RANGE
+2026/07/07 16:30:38 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:30:38 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:30:38 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:30:38 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:30:38 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:30:38 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:30:38 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:30:38 [P1] DELIVER id=m type=RANGE
+goos: darwin
+goarch: arm64
+pkg: skeen-kv
+cpu: Apple M4
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=1-10         	   10000	    142033 ns/op	    2209 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=2-10         	   10000	    293237 ns/op	    5048 B/op	      54 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=1-10     	   10000	    139697 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=2-10     	   10000	    348620 ns/op	    7218 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=1-10         	   10000	    139152 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=2-10         	   10000	    292614 ns/op	    5040 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=3-10         	   10000	    488781 ns/op	    8074 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=1-10     	   10000	    140331 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=2-10     	   10000	    349202 ns/op	    7215 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=3-10     	   10000	    606822 ns/op	   12296 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=1-10         	   10000	    139650 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=2-10         	   10000	    293348 ns/op	    5038 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=3-10         	   10000	    487363 ns/op	    8074 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=5-10         	   10000	    743987 ns/op	   16204 B/op	     110 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=1-10     	   10000	    139582 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=2-10     	   10000	    349451 ns/op	    7211 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=3-10     	   10000	    608159 ns/op	   12284 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=5-10     	   10000	   1191877 ns/op	   26317 B/op	     176 allocs/op
+BenchmarkOriginalSinglePartitionPut-10                               	   10000	    140142 ns/op	    2112 B/op	      29 allocs/op
+BenchmarkStrengthenedSinglePartitionPut-10                           	   10000	    140640 ns/op	    2256 B/op	      30 allocs/op
+PASS
+ok  	skeen-kv	72.283s
+2026/07/07 16:31:50 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:31:50 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:31:50 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:31:50 [P1] DELIVER id=m1 type=RANGE
+2026/07/07 16:31:50 [P0] DELIVER id=m1 type=RANGE
+2026/07/07 16:31:50 [P2] DELIVER id=m2 type=RANGE
+2026/07/07 16:31:50 [P1] DELIVER id=m2 type=RANGE
+2026/07/07 16:31:50 [P2] DELIVER id=m3 type=RANGE
+2026/07/07 16:31:50 [P0] DELIVER id=m3 type=RANGE
+2026/07/07 16:31:50 [P2] DELIVER id=m-prime type=RANGE
+2026/07/07 16:31:50 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:31:50 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:31:50 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:31:50 [P0] SUBMIT id=put-key-0 type=PUT dst=[0]
+2026/07/07 16:31:50 [P0] DELIVER id=put-key-0 type=PUT
+2026/07/07 16:31:50 [P0] SUBMIT id=put-key-1 type=PUT dst=[1]
+2026/07/07 16:31:50 [P1] DELIVER id=put-key-1 type=PUT
+2026/07/07 16:31:50 [P0] SUBMIT id=range type=RANGE dst=[0 1]
+2026/07/07 16:31:50 [P0] DELIVER id=range type=RANGE
+2026/07/07 16:31:50 [P1] DELIVER id=range type=RANGE
+2026/07/07 16:31:50 [P0] SUBMIT id=put-five-a type=PUT dst=[0]
+2026/07/07 16:31:50 [P0] DELIVER id=put-five-a type=PUT
+2026/07/07 16:31:50 [P0] SUBMIT id=put-five-b type=PUT dst=[1]
+2026/07/07 16:31:50 [P1] DELIVER id=put-five-b type=PUT
+2026/07/07 16:31:50 [P0] SUBMIT id=put-five-c type=PUT dst=[2]
+2026/07/07 16:31:50 [P2] DELIVER id=put-five-c type=PUT
+2026/07/07 16:31:50 [P0] SUBMIT id=put-five-d type=PUT dst=[3]
+2026/07/07 16:31:50 [P3] DELIVER id=put-five-d type=PUT
+2026/07/07 16:31:50 [P0] SUBMIT id=put-five-e type=PUT dst=[4]
+2026/07/07 16:31:50 [P4] DELIVER id=put-five-e type=PUT
+2026/07/07 16:31:50 [P0] SUBMIT id=range-all-five type=RANGE dst=[0 1 2 3 4]
+2026/07/07 16:31:50 [P0] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:31:50 [P1] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:31:50 [P2] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:31:50 [P3] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:31:50 [P4] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:31:50 [P0] SUBMIT id=range-0-1 type=RANGE dst=[0 1]
+2026/07/07 16:31:50 [P1] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:31:50 [P0] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:31:50 [P0] SUBMIT id=range-2-3 type=RANGE dst=[2 3]
+2026/07/07 16:31:50 [P2] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:31:50 [P3] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:31:50 [P0] SUBMIT id=first type=RANGE dst=[0 1]
+2026/07/07 16:31:50 [P0] DELIVER id=first type=RANGE
+2026/07/07 16:31:50 [P1] DELIVER id=first type=RANGE
+2026/07/07 16:31:50 [P0] SUBMIT id=second type=RANGE dst=[1 2]
+2026/07/07 16:31:50 [P1] DELIVER id=second type=RANGE
+2026/07/07 16:31:50 [P2] DELIVER id=second type=RANGE
+2026/07/07 16:31:50 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:31:50 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:31:50 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:31:50 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:31:50 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:31:50 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:31:50 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:31:50 [P1] DELIVER id=m type=RANGE
+goos: darwin
+goarch: arm64
+pkg: skeen-kv
+cpu: Apple M4
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=1-10         	   10000	    141518 ns/op	    2208 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=2-10         	   10000	    293116 ns/op	    5050 B/op	      54 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=1-10     	   10000	    139473 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=2-10     	   10000	    348128 ns/op	    7217 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=1-10         	   10000	    139294 ns/op	    2208 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=2-10         	   10000	    292853 ns/op	    5040 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=3-10         	   10000	    488378 ns/op	    8084 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=1-10     	   10000	    140907 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=2-10     	   10000	    348876 ns/op	    7213 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=3-10     	   10000	    605102 ns/op	   12295 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=1-10         	   10000	    139615 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=2-10         	   10000	    293356 ns/op	    5040 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=3-10         	   10000	    488155 ns/op	    8074 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=5-10         	   10000	    750900 ns/op	   16204 B/op	     110 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=1-10     	   10000	    139248 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=2-10     	   10000	    349184 ns/op	    7215 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=3-10     	   10000	    645358 ns/op	   12280 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=5-10     	   10000	   1200569 ns/op	   26326 B/op	     176 allocs/op
+BenchmarkOriginalSinglePartitionPut-10                               	   10000	    139925 ns/op	    2112 B/op	      29 allocs/op
+BenchmarkStrengthenedSinglePartitionPut-10                           	   10000	    139727 ns/op	    2256 B/op	      30 allocs/op
+PASS
+ok  	skeen-kv	72.775s
+2026/07/07 16:33:03 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:33:03 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:33:03 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:33:03 [P1] DELIVER id=m1 type=RANGE
+2026/07/07 16:33:03 [P0] DELIVER id=m1 type=RANGE
+2026/07/07 16:33:03 [P2] DELIVER id=m2 type=RANGE
+2026/07/07 16:33:03 [P1] DELIVER id=m2 type=RANGE
+2026/07/07 16:33:03 [P2] DELIVER id=m3 type=RANGE
+2026/07/07 16:33:03 [P0] DELIVER id=m3 type=RANGE
+2026/07/07 16:33:03 [P2] DELIVER id=m-prime type=RANGE
+2026/07/07 16:33:03 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:33:03 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:33:03 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:33:03 [P0] SUBMIT id=put-key-0 type=PUT dst=[0]
+2026/07/07 16:33:03 [P0] DELIVER id=put-key-0 type=PUT
+2026/07/07 16:33:03 [P0] SUBMIT id=put-key-1 type=PUT dst=[1]
+2026/07/07 16:33:03 [P1] DELIVER id=put-key-1 type=PUT
+2026/07/07 16:33:03 [P0] SUBMIT id=range type=RANGE dst=[0 1]
+2026/07/07 16:33:03 [P0] DELIVER id=range type=RANGE
+2026/07/07 16:33:03 [P1] DELIVER id=range type=RANGE
+2026/07/07 16:33:03 [P0] SUBMIT id=put-five-a type=PUT dst=[0]
+2026/07/07 16:33:03 [P0] DELIVER id=put-five-a type=PUT
+2026/07/07 16:33:03 [P0] SUBMIT id=put-five-b type=PUT dst=[1]
+2026/07/07 16:33:03 [P1] DELIVER id=put-five-b type=PUT
+2026/07/07 16:33:03 [P0] SUBMIT id=put-five-c type=PUT dst=[2]
+2026/07/07 16:33:03 [P2] DELIVER id=put-five-c type=PUT
+2026/07/07 16:33:03 [P0] SUBMIT id=put-five-d type=PUT dst=[3]
+2026/07/07 16:33:03 [P3] DELIVER id=put-five-d type=PUT
+2026/07/07 16:33:03 [P0] SUBMIT id=put-five-e type=PUT dst=[4]
+2026/07/07 16:33:03 [P4] DELIVER id=put-five-e type=PUT
+2026/07/07 16:33:03 [P0] SUBMIT id=range-all-five type=RANGE dst=[0 1 2 3 4]
+2026/07/07 16:33:03 [P3] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:33:03 [P0] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:33:03 [P1] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:33:03 [P2] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:33:03 [P4] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:33:03 [P0] SUBMIT id=range-0-1 type=RANGE dst=[0 1]
+2026/07/07 16:33:03 [P0] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:33:03 [P1] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:33:03 [P0] SUBMIT id=range-2-3 type=RANGE dst=[2 3]
+2026/07/07 16:33:03 [P2] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:33:03 [P3] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:33:03 [P0] SUBMIT id=first type=RANGE dst=[0 1]
+2026/07/07 16:33:03 [P0] DELIVER id=first type=RANGE
+2026/07/07 16:33:03 [P1] DELIVER id=first type=RANGE
+2026/07/07 16:33:03 [P0] SUBMIT id=second type=RANGE dst=[1 2]
+2026/07/07 16:33:03 [P2] DELIVER id=second type=RANGE
+2026/07/07 16:33:03 [P1] DELIVER id=second type=RANGE
+2026/07/07 16:33:03 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:33:03 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:33:03 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:33:03 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:33:03 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:33:03 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:33:03 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:33:03 [P1] DELIVER id=m type=RANGE
+goos: darwin
+goarch: arm64
+pkg: skeen-kv
+cpu: Apple M4
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=1-10         	   10000	    142714 ns/op	    2209 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=2-10         	   10000	    294820 ns/op	    5048 B/op	      54 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=1-10     	   10000	    141037 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=2-10     	   10000	    348285 ns/op	    7217 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=1-10         	   10000	    139450 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=2-10         	   10000	    294749 ns/op	    5040 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=3-10         	   10000	    489063 ns/op	    8079 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=1-10     	   10000	    140396 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=2-10     	   10000	    350583 ns/op	    7216 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=3-10     	   10000	    608281 ns/op	   12297 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=1-10         	   10000	    138941 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=2-10         	   10000	    293359 ns/op	    5038 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=3-10         	   10000	    488805 ns/op	    8066 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=5-10         	   10000	    746726 ns/op	   16209 B/op	     110 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=1-10     	   10000	    138942 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=2-10     	   10000	    348752 ns/op	    7216 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=3-10     	   10000	    607153 ns/op	   12296 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=5-10     	   10000	   1197473 ns/op	   26303 B/op	     176 allocs/op
+BenchmarkOriginalSinglePartitionPut-10                               	   10000	    141449 ns/op	    2112 B/op	      29 allocs/op
+BenchmarkStrengthenedSinglePartitionPut-10                           	   10000	    141439 ns/op	    2256 B/op	      30 allocs/op
+PASS
+ok  	skeen-kv	72.475s
+2026/07/07 16:34:16 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:34:16 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:34:16 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:34:16 [P1] DELIVER id=m1 type=RANGE
+2026/07/07 16:34:16 [P0] DELIVER id=m1 type=RANGE
+2026/07/07 16:34:16 [P2] DELIVER id=m2 type=RANGE
+2026/07/07 16:34:16 [P1] DELIVER id=m2 type=RANGE
+2026/07/07 16:34:16 [P2] DELIVER id=m3 type=RANGE
+2026/07/07 16:34:16 [P0] DELIVER id=m3 type=RANGE
+2026/07/07 16:34:16 [P2] DELIVER id=m-prime type=RANGE
+2026/07/07 16:34:16 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:34:16 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:34:16 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:34:16 [P0] SUBMIT id=put-key-0 type=PUT dst=[0]
+2026/07/07 16:34:16 [P0] DELIVER id=put-key-0 type=PUT
+2026/07/07 16:34:16 [P0] SUBMIT id=put-key-1 type=PUT dst=[1]
+2026/07/07 16:34:16 [P1] DELIVER id=put-key-1 type=PUT
+2026/07/07 16:34:16 [P0] SUBMIT id=range type=RANGE dst=[0 1]
+2026/07/07 16:34:16 [P0] DELIVER id=range type=RANGE
+2026/07/07 16:34:16 [P1] DELIVER id=range type=RANGE
+2026/07/07 16:34:16 [P0] SUBMIT id=put-five-a type=PUT dst=[0]
+2026/07/07 16:34:16 [P0] DELIVER id=put-five-a type=PUT
+2026/07/07 16:34:16 [P0] SUBMIT id=put-five-b type=PUT dst=[1]
+2026/07/07 16:34:16 [P1] DELIVER id=put-five-b type=PUT
+2026/07/07 16:34:16 [P0] SUBMIT id=put-five-c type=PUT dst=[2]
+2026/07/07 16:34:16 [P2] DELIVER id=put-five-c type=PUT
+2026/07/07 16:34:16 [P0] SUBMIT id=put-five-d type=PUT dst=[3]
+2026/07/07 16:34:16 [P3] DELIVER id=put-five-d type=PUT
+2026/07/07 16:34:16 [P0] SUBMIT id=put-five-e type=PUT dst=[4]
+2026/07/07 16:34:16 [P4] DELIVER id=put-five-e type=PUT
+2026/07/07 16:34:16 [P0] SUBMIT id=range-all-five type=RANGE dst=[0 1 2 3 4]
+2026/07/07 16:34:16 [P0] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:34:16 [P1] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:34:16 [P2] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:34:16 [P3] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:34:16 [P4] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:34:16 [P0] SUBMIT id=range-0-1 type=RANGE dst=[0 1]
+2026/07/07 16:34:16 [P0] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:34:16 [P1] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:34:16 [P0] SUBMIT id=range-2-3 type=RANGE dst=[2 3]
+2026/07/07 16:34:16 [P2] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:34:16 [P3] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:34:16 [P0] SUBMIT id=first type=RANGE dst=[0 1]
+2026/07/07 16:34:16 [P0] DELIVER id=first type=RANGE
+2026/07/07 16:34:16 [P1] DELIVER id=first type=RANGE
+2026/07/07 16:34:16 [P0] SUBMIT id=second type=RANGE dst=[1 2]
+2026/07/07 16:34:16 [P1] DELIVER id=second type=RANGE
+2026/07/07 16:34:16 [P2] DELIVER id=second type=RANGE
+2026/07/07 16:34:16 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:34:16 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:34:16 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:34:16 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:34:16 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:34:16 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:34:16 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:34:16 [P1] DELIVER id=m type=RANGE
+goos: darwin
+goarch: arm64
+pkg: skeen-kv
+cpu: Apple M4
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=1-10         	   10000	    142350 ns/op	    2209 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=2-10         	   10000	    294804 ns/op	    5049 B/op	      54 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=1-10     	   10000	    141618 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=2-10     	   10000	    350308 ns/op	    7214 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=1-10         	   10000	    141146 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=2-10         	   10000	    294996 ns/op	    5042 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=3-10         	   10000	    488527 ns/op	    8075 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=1-10     	   10000	    139639 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=2-10     	   10000	    347440 ns/op	    7214 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=3-10     	   10000	    605056 ns/op	   12296 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=1-10         	   10000	    139509 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=2-10         	   10000	    294184 ns/op	    5038 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=3-10         	   10000	    489570 ns/op	    8076 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=5-10         	   10000	    749068 ns/op	   16206 B/op	     110 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=1-10     	   10000	    140642 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=2-10     	   10000	    351935 ns/op	    7214 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=3-10     	   10000	    608492 ns/op	   12292 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=5-10     	   10000	   1195015 ns/op	   26327 B/op	     176 allocs/op
+BenchmarkOriginalSinglePartitionPut-10                               	   10000	    140562 ns/op	    2112 B/op	      29 allocs/op
+BenchmarkStrengthenedSinglePartitionPut-10                           	   10000	    140072 ns/op	    2256 B/op	      30 allocs/op
+PASS
+ok  	skeen-kv	72.514s
+2026/07/07 16:35:29 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:35:29 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:35:29 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:35:29 [P1] DELIVER id=m1 type=RANGE
+2026/07/07 16:35:29 [P0] DELIVER id=m1 type=RANGE
+2026/07/07 16:35:29 [P2] DELIVER id=m2 type=RANGE
+2026/07/07 16:35:29 [P1] DELIVER id=m2 type=RANGE
+2026/07/07 16:35:29 [P2] DELIVER id=m3 type=RANGE
+2026/07/07 16:35:29 [P0] DELIVER id=m3 type=RANGE
+2026/07/07 16:35:29 [P2] DELIVER id=m-prime type=RANGE
+2026/07/07 16:35:29 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:35:29 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:35:29 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:35:29 [P0] SUBMIT id=put-key-0 type=PUT dst=[0]
+2026/07/07 16:35:29 [P0] DELIVER id=put-key-0 type=PUT
+2026/07/07 16:35:29 [P0] SUBMIT id=put-key-1 type=PUT dst=[1]
+2026/07/07 16:35:29 [P1] DELIVER id=put-key-1 type=PUT
+2026/07/07 16:35:29 [P0] SUBMIT id=range type=RANGE dst=[0 1]
+2026/07/07 16:35:29 [P0] DELIVER id=range type=RANGE
+2026/07/07 16:35:29 [P1] DELIVER id=range type=RANGE
+2026/07/07 16:35:29 [P0] SUBMIT id=put-five-a type=PUT dst=[0]
+2026/07/07 16:35:29 [P0] DELIVER id=put-five-a type=PUT
+2026/07/07 16:35:29 [P0] SUBMIT id=put-five-b type=PUT dst=[1]
+2026/07/07 16:35:29 [P1] DELIVER id=put-five-b type=PUT
+2026/07/07 16:35:29 [P0] SUBMIT id=put-five-c type=PUT dst=[2]
+2026/07/07 16:35:29 [P2] DELIVER id=put-five-c type=PUT
+2026/07/07 16:35:29 [P0] SUBMIT id=put-five-d type=PUT dst=[3]
+2026/07/07 16:35:29 [P3] DELIVER id=put-five-d type=PUT
+2026/07/07 16:35:29 [P0] SUBMIT id=put-five-e type=PUT dst=[4]
+2026/07/07 16:35:29 [P4] DELIVER id=put-five-e type=PUT
+2026/07/07 16:35:29 [P0] SUBMIT id=range-all-five type=RANGE dst=[0 1 2 3 4]
+2026/07/07 16:35:29 [P0] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:35:29 [P1] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:35:29 [P2] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:35:29 [P3] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:35:29 [P4] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:35:29 [P0] SUBMIT id=range-0-1 type=RANGE dst=[0 1]
+2026/07/07 16:35:29 [P1] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:35:29 [P0] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:35:29 [P0] SUBMIT id=range-2-3 type=RANGE dst=[2 3]
+2026/07/07 16:35:29 [P2] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:35:29 [P3] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:35:29 [P0] SUBMIT id=first type=RANGE dst=[0 1]
+2026/07/07 16:35:29 [P0] DELIVER id=first type=RANGE
+2026/07/07 16:35:29 [P1] DELIVER id=first type=RANGE
+2026/07/07 16:35:29 [P0] SUBMIT id=second type=RANGE dst=[1 2]
+2026/07/07 16:35:29 [P1] DELIVER id=second type=RANGE
+2026/07/07 16:35:29 [P2] DELIVER id=second type=RANGE
+2026/07/07 16:35:29 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:35:29 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:35:29 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:35:29 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:35:29 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:35:29 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:35:29 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:35:29 [P1] DELIVER id=m type=RANGE
+goos: darwin
+goarch: arm64
+pkg: skeen-kv
+cpu: Apple M4
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=1-10         	   10000	    141875 ns/op	    2208 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=2-10         	   10000	    294316 ns/op	    5046 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=1-10     	   10000	    139206 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=2-10     	   10000	    348416 ns/op	    7214 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=1-10         	   10000	    139644 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=2-10         	   10000	    292428 ns/op	    5040 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=3-10         	   10000	    486732 ns/op	    8083 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=1-10     	   10000	    140394 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=2-10     	   10000	    350343 ns/op	    7214 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=3-10     	   10000	    605833 ns/op	   12307 B/op	     105 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=1-10         	   10000	    139013 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=2-10         	   10000	    293194 ns/op	    5038 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=3-10         	   10000	    487708 ns/op	    8073 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=5-10         	   10000	    749524 ns/op	   16202 B/op	     110 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=1-10     	   10000	    140831 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=2-10     	   10000	    348854 ns/op	    7215 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=3-10     	   10000	    604375 ns/op	   12295 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=5-10     	   10000	   1193669 ns/op	   26312 B/op	     176 allocs/op
+BenchmarkOriginalSinglePartitionPut-10                               	   10000	    140566 ns/op	    2112 B/op	      29 allocs/op
+BenchmarkStrengthenedSinglePartitionPut-10                           	   10000	    140450 ns/op	    2256 B/op	      30 allocs/op
+PASS
+ok  	skeen-kv	72.313s
+2026/07/07 16:36:41 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:36:41 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:36:41 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:36:41 [P1] DELIVER id=m1 type=RANGE
+2026/07/07 16:36:41 [P0] DELIVER id=m1 type=RANGE
+2026/07/07 16:36:41 [P2] DELIVER id=m2 type=RANGE
+2026/07/07 16:36:41 [P1] DELIVER id=m2 type=RANGE
+2026/07/07 16:36:41 [P2] DELIVER id=m3 type=RANGE
+2026/07/07 16:36:41 [P0] DELIVER id=m3 type=RANGE
+2026/07/07 16:36:41 [P2] DELIVER id=m-prime type=RANGE
+2026/07/07 16:36:41 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:36:41 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:36:41 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:36:41 [P0] SUBMIT id=put-key-0 type=PUT dst=[0]
+2026/07/07 16:36:41 [P0] DELIVER id=put-key-0 type=PUT
+2026/07/07 16:36:41 [P0] SUBMIT id=put-key-1 type=PUT dst=[1]
+2026/07/07 16:36:41 [P1] DELIVER id=put-key-1 type=PUT
+2026/07/07 16:36:41 [P0] SUBMIT id=range type=RANGE dst=[0 1]
+2026/07/07 16:36:41 [P0] DELIVER id=range type=RANGE
+2026/07/07 16:36:41 [P1] DELIVER id=range type=RANGE
+2026/07/07 16:36:41 [P0] SUBMIT id=put-five-a type=PUT dst=[0]
+2026/07/07 16:36:41 [P0] DELIVER id=put-five-a type=PUT
+2026/07/07 16:36:41 [P0] SUBMIT id=put-five-b type=PUT dst=[1]
+2026/07/07 16:36:41 [P1] DELIVER id=put-five-b type=PUT
+2026/07/07 16:36:41 [P0] SUBMIT id=put-five-c type=PUT dst=[2]
+2026/07/07 16:36:41 [P2] DELIVER id=put-five-c type=PUT
+2026/07/07 16:36:41 [P0] SUBMIT id=put-five-d type=PUT dst=[3]
+2026/07/07 16:36:41 [P3] DELIVER id=put-five-d type=PUT
+2026/07/07 16:36:41 [P0] SUBMIT id=put-five-e type=PUT dst=[4]
+2026/07/07 16:36:41 [P4] DELIVER id=put-five-e type=PUT
+2026/07/07 16:36:41 [P0] SUBMIT id=range-all-five type=RANGE dst=[0 1 2 3 4]
+2026/07/07 16:36:41 [P3] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:36:41 [P0] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:36:41 [P1] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:36:41 [P2] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:36:41 [P4] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:36:41 [P0] SUBMIT id=range-0-1 type=RANGE dst=[0 1]
+2026/07/07 16:36:41 [P0] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:36:41 [P1] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:36:41 [P0] SUBMIT id=range-2-3 type=RANGE dst=[2 3]
+2026/07/07 16:36:41 [P2] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:36:41 [P3] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:36:41 [P0] SUBMIT id=first type=RANGE dst=[0 1]
+2026/07/07 16:36:41 [P0] DELIVER id=first type=RANGE
+2026/07/07 16:36:41 [P1] DELIVER id=first type=RANGE
+2026/07/07 16:36:41 [P0] SUBMIT id=second type=RANGE dst=[1 2]
+2026/07/07 16:36:41 [P1] DELIVER id=second type=RANGE
+2026/07/07 16:36:41 [P2] DELIVER id=second type=RANGE
+2026/07/07 16:36:41 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:36:41 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:36:41 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:36:41 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:36:41 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:36:41 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:36:41 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:36:41 [P1] DELIVER id=m type=RANGE
+goos: darwin
+goarch: arm64
+pkg: skeen-kv
+cpu: Apple M4
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=1-10         	   10000	    143217 ns/op	    2209 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=2-10         	   10000	    296259 ns/op	    5047 B/op	      54 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=1-10     	   10000	    141077 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=2-10     	   10000	    351586 ns/op	    7218 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=1-10         	   10000	    142090 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=2-10         	   10000	    294554 ns/op	    5041 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=3-10         	   10000	    487518 ns/op	    8080 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=1-10     	   10000	    141025 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=2-10     	   10000	    349177 ns/op	    7214 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=3-10     	   10000	    605384 ns/op	   12295 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=1-10         	   10000	    141279 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=2-10         	   10000	    295038 ns/op	    5039 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=3-10         	   10000	    491903 ns/op	    8075 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=5-10         	   10000	    749214 ns/op	   16205 B/op	     110 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=1-10     	   10000	    139997 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=2-10     	   10000	    349699 ns/op	    7213 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=3-10     	   10000	    604854 ns/op	   12304 B/op	     105 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=5-10     	   10000	   1195191 ns/op	   26308 B/op	     176 allocs/op
+BenchmarkOriginalSinglePartitionPut-10                               	   10000	    141767 ns/op	    2112 B/op	      29 allocs/op
+BenchmarkStrengthenedSinglePartitionPut-10                           	   10000	    140218 ns/op	    2256 B/op	      30 allocs/op
+PASS
+ok  	skeen-kv	72.564s
+2026/07/07 16:37:54 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:37:54 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:37:54 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:37:54 [P1] DELIVER id=m1 type=RANGE
+2026/07/07 16:37:54 [P0] DELIVER id=m1 type=RANGE
+2026/07/07 16:37:54 [P2] DELIVER id=m2 type=RANGE
+2026/07/07 16:37:54 [P1] DELIVER id=m2 type=RANGE
+2026/07/07 16:37:54 [P2] DELIVER id=m3 type=RANGE
+2026/07/07 16:37:54 [P0] DELIVER id=m3 type=RANGE
+2026/07/07 16:37:54 [P2] DELIVER id=m-prime type=RANGE
+2026/07/07 16:37:54 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:37:54 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:37:54 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:37:54 [P0] SUBMIT id=put-key-0 type=PUT dst=[0]
+2026/07/07 16:37:54 [P0] DELIVER id=put-key-0 type=PUT
+2026/07/07 16:37:54 [P0] SUBMIT id=put-key-1 type=PUT dst=[1]
+2026/07/07 16:37:54 [P1] DELIVER id=put-key-1 type=PUT
+2026/07/07 16:37:54 [P0] SUBMIT id=range type=RANGE dst=[0 1]
+2026/07/07 16:37:54 [P0] DELIVER id=range type=RANGE
+2026/07/07 16:37:54 [P1] DELIVER id=range type=RANGE
+2026/07/07 16:37:54 [P0] SUBMIT id=put-five-a type=PUT dst=[0]
+2026/07/07 16:37:54 [P0] DELIVER id=put-five-a type=PUT
+2026/07/07 16:37:54 [P0] SUBMIT id=put-five-b type=PUT dst=[1]
+2026/07/07 16:37:54 [P1] DELIVER id=put-five-b type=PUT
+2026/07/07 16:37:54 [P0] SUBMIT id=put-five-c type=PUT dst=[2]
+2026/07/07 16:37:54 [P2] DELIVER id=put-five-c type=PUT
+2026/07/07 16:37:54 [P0] SUBMIT id=put-five-d type=PUT dst=[3]
+2026/07/07 16:37:54 [P3] DELIVER id=put-five-d type=PUT
+2026/07/07 16:37:54 [P0] SUBMIT id=put-five-e type=PUT dst=[4]
+2026/07/07 16:37:54 [P4] DELIVER id=put-five-e type=PUT
+2026/07/07 16:37:54 [P0] SUBMIT id=range-all-five type=RANGE dst=[0 1 2 3 4]
+2026/07/07 16:37:54 [P3] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:37:54 [P0] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:37:54 [P1] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:37:54 [P2] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:37:54 [P4] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:37:54 [P0] SUBMIT id=range-0-1 type=RANGE dst=[0 1]
+2026/07/07 16:37:54 [P0] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:37:54 [P1] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:37:54 [P0] SUBMIT id=range-2-3 type=RANGE dst=[2 3]
+2026/07/07 16:37:54 [P2] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:37:54 [P3] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:37:54 [P0] SUBMIT id=first type=RANGE dst=[0 1]
+2026/07/07 16:37:54 [P0] DELIVER id=first type=RANGE
+2026/07/07 16:37:54 [P1] DELIVER id=first type=RANGE
+2026/07/07 16:37:54 [P0] SUBMIT id=second type=RANGE dst=[1 2]
+2026/07/07 16:37:54 [P1] DELIVER id=second type=RANGE
+2026/07/07 16:37:54 [P2] DELIVER id=second type=RANGE
+2026/07/07 16:37:54 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:37:54 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:37:54 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:37:54 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:37:54 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:37:54 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:37:54 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:37:54 [P1] DELIVER id=m type=RANGE
+goos: darwin
+goarch: arm64
+pkg: skeen-kv
+cpu: Apple M4
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=1-10         	   10000	    141256 ns/op	    2208 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=2-10         	   10000	    293381 ns/op	    5049 B/op	      54 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=1-10     	   10000	    139432 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=2-10     	   10000	    348509 ns/op	    7215 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=1-10         	   10000	    139537 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=2-10         	   10000	    294400 ns/op	    5039 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=3-10         	   10000	    488776 ns/op	    8078 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=1-10     	   10000	    138958 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=2-10     	   10000	    347745 ns/op	    7216 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=3-10     	   10000	    604596 ns/op	   12295 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=1-10         	   10000	    139109 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=2-10         	   10000	    293809 ns/op	    5040 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=3-10         	   10000	    490767 ns/op	    8074 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=5-10         	   10000	    747972 ns/op	   16200 B/op	     110 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=1-10     	   10000	    139507 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=2-10     	   10000	    348666 ns/op	    7207 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=3-10     	   10000	    603298 ns/op	   12287 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=5-10     	   10000	   1193475 ns/op	   26318 B/op	     176 allocs/op
+BenchmarkOriginalSinglePartitionPut-10                               	   10000	    140192 ns/op	    2112 B/op	      29 allocs/op
+BenchmarkStrengthenedSinglePartitionPut-10                           	   10000	    140718 ns/op	    2256 B/op	      30 allocs/op
+PASS
+ok  	skeen-kv	72.279s
+2026/07/07 16:39:06 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:39:06 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:39:06 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:39:06 [P1] DELIVER id=m1 type=RANGE
+2026/07/07 16:39:06 [P0] DELIVER id=m1 type=RANGE
+2026/07/07 16:39:06 [P2] DELIVER id=m2 type=RANGE
+2026/07/07 16:39:06 [P1] DELIVER id=m2 type=RANGE
+2026/07/07 16:39:06 [P2] DELIVER id=m3 type=RANGE
+2026/07/07 16:39:06 [P0] DELIVER id=m3 type=RANGE
+2026/07/07 16:39:06 [P2] DELIVER id=m-prime type=RANGE
+2026/07/07 16:39:06 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:39:06 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:39:06 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:39:06 [P0] SUBMIT id=put-key-0 type=PUT dst=[0]
+2026/07/07 16:39:06 [P0] DELIVER id=put-key-0 type=PUT
+2026/07/07 16:39:06 [P0] SUBMIT id=put-key-1 type=PUT dst=[1]
+2026/07/07 16:39:06 [P1] DELIVER id=put-key-1 type=PUT
+2026/07/07 16:39:06 [P0] SUBMIT id=range type=RANGE dst=[0 1]
+2026/07/07 16:39:06 [P0] DELIVER id=range type=RANGE
+2026/07/07 16:39:06 [P1] DELIVER id=range type=RANGE
+2026/07/07 16:39:06 [P0] SUBMIT id=put-five-a type=PUT dst=[0]
+2026/07/07 16:39:06 [P0] DELIVER id=put-five-a type=PUT
+2026/07/07 16:39:06 [P0] SUBMIT id=put-five-b type=PUT dst=[1]
+2026/07/07 16:39:06 [P1] DELIVER id=put-five-b type=PUT
+2026/07/07 16:39:06 [P0] SUBMIT id=put-five-c type=PUT dst=[2]
+2026/07/07 16:39:06 [P2] DELIVER id=put-five-c type=PUT
+2026/07/07 16:39:06 [P0] SUBMIT id=put-five-d type=PUT dst=[3]
+2026/07/07 16:39:06 [P3] DELIVER id=put-five-d type=PUT
+2026/07/07 16:39:06 [P0] SUBMIT id=put-five-e type=PUT dst=[4]
+2026/07/07 16:39:06 [P4] DELIVER id=put-five-e type=PUT
+2026/07/07 16:39:06 [P0] SUBMIT id=range-all-five type=RANGE dst=[0 1 2 3 4]
+2026/07/07 16:39:06 [P2] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:39:06 [P0] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:39:06 [P1] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:39:06 [P3] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:39:06 [P4] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:39:06 [P0] SUBMIT id=range-0-1 type=RANGE dst=[0 1]
+2026/07/07 16:39:06 [P1] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:39:06 [P0] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:39:06 [P0] SUBMIT id=range-2-3 type=RANGE dst=[2 3]
+2026/07/07 16:39:06 [P2] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:39:06 [P3] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:39:06 [P0] SUBMIT id=first type=RANGE dst=[0 1]
+2026/07/07 16:39:06 [P0] DELIVER id=first type=RANGE
+2026/07/07 16:39:06 [P1] DELIVER id=first type=RANGE
+2026/07/07 16:39:06 [P0] SUBMIT id=second type=RANGE dst=[1 2]
+2026/07/07 16:39:06 [P1] DELIVER id=second type=RANGE
+2026/07/07 16:39:06 [P2] DELIVER id=second type=RANGE
+2026/07/07 16:39:06 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:39:06 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:39:06 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:39:06 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:39:06 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:39:06 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:39:06 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:39:06 [P1] DELIVER id=m type=RANGE
+goos: darwin
+goarch: arm64
+pkg: skeen-kv
+cpu: Apple M4
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=1-10         	   10000	    142749 ns/op	    2208 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=2-10         	   10000	    295573 ns/op	    5046 B/op	      54 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=1-10     	   10000	    140727 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=2-10     	   10000	    352410 ns/op	    7216 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=1-10         	   10000	    140683 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=2-10         	   10000	    294808 ns/op	    5043 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=3-10         	   10000	    490752 ns/op	    8078 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=1-10     	   10000	    140547 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=2-10     	   10000	    349701 ns/op	    7216 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=3-10     	   10000	    608722 ns/op	   12310 B/op	     105 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=1-10         	   10000	    140664 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=2-10         	   10000	    294545 ns/op	    5038 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=3-10         	   10000	    490170 ns/op	    8073 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=5-10         	   10000	    753461 ns/op	   16212 B/op	     110 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=1-10     	   10000	    140339 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=2-10     	   10000	    350013 ns/op	    7216 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=3-10     	   10000	    610093 ns/op	   12292 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=5-10     	   10000	   1202331 ns/op	   26335 B/op	     176 allocs/op
+BenchmarkOriginalSinglePartitionPut-10                               	   10000	    141808 ns/op	    2112 B/op	      29 allocs/op
+BenchmarkStrengthenedSinglePartitionPut-10                           	   10000	    141054 ns/op	    2256 B/op	      30 allocs/op
+PASS
+ok  	skeen-kv	72.763s
+2026/07/07 16:40:19 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:40:19 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:40:19 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:40:19 [P1] DELIVER id=m1 type=RANGE
+2026/07/07 16:40:19 [P0] DELIVER id=m1 type=RANGE
+2026/07/07 16:40:19 [P2] DELIVER id=m2 type=RANGE
+2026/07/07 16:40:19 [P1] DELIVER id=m2 type=RANGE
+2026/07/07 16:40:19 [P2] DELIVER id=m3 type=RANGE
+2026/07/07 16:40:19 [P0] DELIVER id=m3 type=RANGE
+2026/07/07 16:40:19 [P2] DELIVER id=m-prime type=RANGE
+2026/07/07 16:40:19 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:40:19 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:40:19 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:40:19 [P0] SUBMIT id=put-key-0 type=PUT dst=[0]
+2026/07/07 16:40:19 [P0] DELIVER id=put-key-0 type=PUT
+2026/07/07 16:40:19 [P0] SUBMIT id=put-key-1 type=PUT dst=[1]
+2026/07/07 16:40:19 [P1] DELIVER id=put-key-1 type=PUT
+2026/07/07 16:40:19 [P0] SUBMIT id=range type=RANGE dst=[0 1]
+2026/07/07 16:40:19 [P0] DELIVER id=range type=RANGE
+2026/07/07 16:40:19 [P1] DELIVER id=range type=RANGE
+2026/07/07 16:40:19 [P0] SUBMIT id=put-five-a type=PUT dst=[0]
+2026/07/07 16:40:19 [P0] DELIVER id=put-five-a type=PUT
+2026/07/07 16:40:19 [P0] SUBMIT id=put-five-b type=PUT dst=[1]
+2026/07/07 16:40:19 [P1] DELIVER id=put-five-b type=PUT
+2026/07/07 16:40:19 [P0] SUBMIT id=put-five-c type=PUT dst=[2]
+2026/07/07 16:40:19 [P2] DELIVER id=put-five-c type=PUT
+2026/07/07 16:40:19 [P0] SUBMIT id=put-five-d type=PUT dst=[3]
+2026/07/07 16:40:19 [P3] DELIVER id=put-five-d type=PUT
+2026/07/07 16:40:19 [P0] SUBMIT id=put-five-e type=PUT dst=[4]
+2026/07/07 16:40:19 [P4] DELIVER id=put-five-e type=PUT
+2026/07/07 16:40:19 [P0] SUBMIT id=range-all-five type=RANGE dst=[0 1 2 3 4]
+2026/07/07 16:40:19 [P0] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:40:19 [P1] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:40:19 [P2] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:40:19 [P3] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:40:19 [P4] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:40:19 [P0] SUBMIT id=range-0-1 type=RANGE dst=[0 1]
+2026/07/07 16:40:19 [P0] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:40:19 [P1] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:40:19 [P0] SUBMIT id=range-2-3 type=RANGE dst=[2 3]
+2026/07/07 16:40:19 [P2] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:40:19 [P3] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:40:19 [P0] SUBMIT id=first type=RANGE dst=[0 1]
+2026/07/07 16:40:19 [P0] DELIVER id=first type=RANGE
+2026/07/07 16:40:19 [P1] DELIVER id=first type=RANGE
+2026/07/07 16:40:19 [P0] SUBMIT id=second type=RANGE dst=[1 2]
+2026/07/07 16:40:19 [P2] DELIVER id=second type=RANGE
+2026/07/07 16:40:19 [P1] DELIVER id=second type=RANGE
+2026/07/07 16:40:19 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:40:19 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:40:19 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:40:19 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:40:19 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:40:19 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:40:19 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:40:19 [P1] DELIVER id=m type=RANGE
+goos: darwin
+goarch: arm64
+pkg: skeen-kv
+cpu: Apple M4
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=1-10         	   10000	    140949 ns/op	    2208 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=2-10         	   10000	    292185 ns/op	    5051 B/op	      54 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=1-10     	   10000	    139348 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=2-10     	   10000	    348408 ns/op	    7217 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=1-10         	   10000	    139883 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=2-10         	   10000	    292705 ns/op	    5041 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=3-10         	   10000	    486252 ns/op	    8078 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=1-10     	   10000	    140307 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=2-10     	   10000	    348340 ns/op	    7215 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=3-10     	   10000	    604211 ns/op	   12301 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=1-10         	   10000	    139205 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=2-10         	   10000	    292377 ns/op	    5041 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=3-10         	   10000	    486246 ns/op	    8076 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=5-10         	   10000	    748159 ns/op	   16210 B/op	     110 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=1-10     	   10000	    140195 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=2-10     	   10000	    349178 ns/op	    7213 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=3-10     	   10000	    606624 ns/op	   12297 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=5-10     	   10000	   1192569 ns/op	   26328 B/op	     176 allocs/op
+BenchmarkOriginalSinglePartitionPut-10                               	   10000	    139816 ns/op	    2112 B/op	      29 allocs/op
+BenchmarkStrengthenedSinglePartitionPut-10                           	   10000	    140212 ns/op	    2256 B/op	      30 allocs/op
+PASS
+ok  	skeen-kv	72.228s
+2026/07/07 16:41:32 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:41:32 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:41:32 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:41:32 [P1] DELIVER id=m1 type=RANGE
+2026/07/07 16:41:32 [P0] DELIVER id=m1 type=RANGE
+2026/07/07 16:41:32 [P2] DELIVER id=m2 type=RANGE
+2026/07/07 16:41:32 [P1] DELIVER id=m2 type=RANGE
+2026/07/07 16:41:32 [P2] DELIVER id=m3 type=RANGE
+2026/07/07 16:41:32 [P0] DELIVER id=m3 type=RANGE
+2026/07/07 16:41:32 [P2] DELIVER id=m-prime type=RANGE
+2026/07/07 16:41:32 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:41:32 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:41:32 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:41:32 [P0] SUBMIT id=put-key-0 type=PUT dst=[0]
+2026/07/07 16:41:32 [P0] DELIVER id=put-key-0 type=PUT
+2026/07/07 16:41:32 [P0] SUBMIT id=put-key-1 type=PUT dst=[1]
+2026/07/07 16:41:32 [P1] DELIVER id=put-key-1 type=PUT
+2026/07/07 16:41:32 [P0] SUBMIT id=range type=RANGE dst=[0 1]
+2026/07/07 16:41:32 [P0] DELIVER id=range type=RANGE
+2026/07/07 16:41:32 [P1] DELIVER id=range type=RANGE
+2026/07/07 16:41:32 [P0] SUBMIT id=put-five-a type=PUT dst=[0]
+2026/07/07 16:41:32 [P0] DELIVER id=put-five-a type=PUT
+2026/07/07 16:41:32 [P0] SUBMIT id=put-five-b type=PUT dst=[1]
+2026/07/07 16:41:32 [P1] DELIVER id=put-five-b type=PUT
+2026/07/07 16:41:32 [P0] SUBMIT id=put-five-c type=PUT dst=[2]
+2026/07/07 16:41:32 [P2] DELIVER id=put-five-c type=PUT
+2026/07/07 16:41:32 [P0] SUBMIT id=put-five-d type=PUT dst=[3]
+2026/07/07 16:41:32 [P3] DELIVER id=put-five-d type=PUT
+2026/07/07 16:41:32 [P0] SUBMIT id=put-five-e type=PUT dst=[4]
+2026/07/07 16:41:32 [P4] DELIVER id=put-five-e type=PUT
+2026/07/07 16:41:32 [P0] SUBMIT id=range-all-five type=RANGE dst=[0 1 2 3 4]
+2026/07/07 16:41:32 [P0] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:41:32 [P1] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:41:32 [P2] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:41:32 [P3] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:41:32 [P4] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:41:32 [P0] SUBMIT id=range-0-1 type=RANGE dst=[0 1]
+2026/07/07 16:41:32 [P0] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:41:32 [P1] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:41:32 [P0] SUBMIT id=range-2-3 type=RANGE dst=[2 3]
+2026/07/07 16:41:32 [P2] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:41:32 [P3] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:41:32 [P0] SUBMIT id=first type=RANGE dst=[0 1]
+2026/07/07 16:41:32 [P0] DELIVER id=first type=RANGE
+2026/07/07 16:41:32 [P1] DELIVER id=first type=RANGE
+2026/07/07 16:41:32 [P0] SUBMIT id=second type=RANGE dst=[1 2]
+2026/07/07 16:41:32 [P1] DELIVER id=second type=RANGE
+2026/07/07 16:41:32 [P2] DELIVER id=second type=RANGE
+2026/07/07 16:41:32 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:41:32 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:41:32 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:41:32 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:41:32 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:41:32 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:41:32 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:41:32 [P1] DELIVER id=m type=RANGE
+goos: darwin
+goarch: arm64
+pkg: skeen-kv
+cpu: Apple M4
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=1-10         	   10000	    141414 ns/op	    2209 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=2-10         	   10000	    292974 ns/op	    5046 B/op	      54 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=1-10     	   10000	    138903 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=2-10     	   10000	    347689 ns/op	    7217 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=1-10         	   10000	    139273 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=2-10         	   10000	    293071 ns/op	    5040 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=3-10         	   10000	    487069 ns/op	    8078 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=1-10     	   10000	    140051 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=2-10     	   10000	    348876 ns/op	    7214 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=3-10     	   10000	    607755 ns/op	   12286 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=1-10         	   10000	    141010 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=2-10         	   10000	    293811 ns/op	    5040 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=3-10         	   10000	    489537 ns/op	    8074 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=5-10         	   10000	    749424 ns/op	   16210 B/op	     110 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=1-10     	   10000	    140009 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=2-10     	   10000	    349759 ns/op	    7215 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=3-10     	   10000	    607025 ns/op	   12301 B/op	     105 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=5-10     	   10000	   1197120 ns/op	   26320 B/op	     176 allocs/op
+BenchmarkOriginalSinglePartitionPut-10                               	   10000	    139602 ns/op	    2112 B/op	      29 allocs/op
+BenchmarkStrengthenedSinglePartitionPut-10                           	   10000	    140067 ns/op	    2256 B/op	      30 allocs/op
+PASS
+ok  	skeen-kv	72.392s
+2026/07/07 16:42:44 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:42:44 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:42:44 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:42:44 [P1] DELIVER id=m1 type=RANGE
+2026/07/07 16:42:44 [P0] DELIVER id=m1 type=RANGE
+2026/07/07 16:42:44 [P2] DELIVER id=m2 type=RANGE
+2026/07/07 16:42:44 [P1] DELIVER id=m2 type=RANGE
+2026/07/07 16:42:44 [P2] DELIVER id=m3 type=RANGE
+2026/07/07 16:42:44 [P0] DELIVER id=m3 type=RANGE
+2026/07/07 16:42:44 [P2] DELIVER id=m-prime type=RANGE
+2026/07/07 16:42:44 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:42:44 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:42:44 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:42:44 [P0] SUBMIT id=put-key-0 type=PUT dst=[0]
+2026/07/07 16:42:44 [P0] DELIVER id=put-key-0 type=PUT
+2026/07/07 16:42:44 [P0] SUBMIT id=put-key-1 type=PUT dst=[1]
+2026/07/07 16:42:44 [P1] DELIVER id=put-key-1 type=PUT
+2026/07/07 16:42:44 [P0] SUBMIT id=range type=RANGE dst=[0 1]
+2026/07/07 16:42:44 [P0] DELIVER id=range type=RANGE
+2026/07/07 16:42:44 [P1] DELIVER id=range type=RANGE
+2026/07/07 16:42:44 [P0] SUBMIT id=put-five-a type=PUT dst=[0]
+2026/07/07 16:42:44 [P0] DELIVER id=put-five-a type=PUT
+2026/07/07 16:42:44 [P0] SUBMIT id=put-five-b type=PUT dst=[1]
+2026/07/07 16:42:44 [P1] DELIVER id=put-five-b type=PUT
+2026/07/07 16:42:44 [P0] SUBMIT id=put-five-c type=PUT dst=[2]
+2026/07/07 16:42:44 [P2] DELIVER id=put-five-c type=PUT
+2026/07/07 16:42:44 [P0] SUBMIT id=put-five-d type=PUT dst=[3]
+2026/07/07 16:42:44 [P3] DELIVER id=put-five-d type=PUT
+2026/07/07 16:42:44 [P0] SUBMIT id=put-five-e type=PUT dst=[4]
+2026/07/07 16:42:44 [P4] DELIVER id=put-five-e type=PUT
+2026/07/07 16:42:44 [P0] SUBMIT id=range-all-five type=RANGE dst=[0 1 2 3 4]
+2026/07/07 16:42:44 [P0] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:42:44 [P1] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:42:44 [P2] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:42:44 [P3] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:42:44 [P4] DELIVER id=range-all-five type=RANGE
+2026/07/07 16:42:44 [P0] SUBMIT id=range-0-1 type=RANGE dst=[0 1]
+2026/07/07 16:42:44 [P1] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:42:44 [P0] DELIVER id=range-0-1 type=RANGE
+2026/07/07 16:42:44 [P0] SUBMIT id=range-2-3 type=RANGE dst=[2 3]
+2026/07/07 16:42:44 [P2] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:42:44 [P3] DELIVER id=range-2-3 type=RANGE
+2026/07/07 16:42:44 [P0] SUBMIT id=first type=RANGE dst=[0 1]
+2026/07/07 16:42:44 [P0] DELIVER id=first type=RANGE
+2026/07/07 16:42:44 [P1] DELIVER id=first type=RANGE
+2026/07/07 16:42:44 [P0] SUBMIT id=second type=RANGE dst=[1 2]
+2026/07/07 16:42:44 [P1] DELIVER id=second type=RANGE
+2026/07/07 16:42:44 [P2] DELIVER id=second type=RANGE
+2026/07/07 16:42:44 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:42:44 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:42:44 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:42:44 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:42:44 [P0] DELIVER id=m-prime type=RANGE
+2026/07/07 16:42:44 [P0] DELIVER id=m type=RANGE
+2026/07/07 16:42:44 [P1] DELIVER id=m type=RANGE
+2026/07/07 16:42:44 [P1] DELIVER id=m type=RANGE
+goos: darwin
+goarch: arm64
+pkg: skeen-kv
+cpu: Apple M4
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=1-10         	   10000	    141682 ns/op	    2208 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=original/dst=2-10         	   10000	    295524 ns/op	    5050 B/op	      54 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=1-10     	   10000	    141360 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=2/mode=strengthened/dst=2-10     	   10000	    348873 ns/op	    7215 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=1-10         	   10000	    139556 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=2-10         	   10000	    295325 ns/op	    5042 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=original/dst=3-10         	   10000	    491460 ns/op	    8077 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=1-10     	   10000	    141009 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=2-10     	   10000	    351144 ns/op	    7216 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=3/mode=strengthened/dst=3-10     	   10000	    609413 ns/op	   12308 B/op	     105 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=1-10         	   10000	    140155 ns/op	    2207 B/op	      30 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=2-10         	   10000	    295392 ns/op	    5036 B/op	      53 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=3-10         	   10000	    489011 ns/op	    8073 B/op	      72 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=original/dst=5-10         	   10000	    750440 ns/op	   16203 B/op	     110 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=1-10     	   10000	    139331 ns/op	    2352 B/op	      31 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=2-10     	   10000	    349017 ns/op	    7215 B/op	      71 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=3-10     	   10000	    609001 ns/op	   12296 B/op	     104 allocs/op
+BenchmarkSkeenDestinationOverhead/N=5/mode=strengthened/dst=5-10     	   10000	   1196096 ns/op	   26322 B/op	     176 allocs/op
+BenchmarkOriginalSinglePartitionPut-10                               	   10000	    140101 ns/op	    2112 B/op	      29 allocs/op
+BenchmarkStrengthenedSinglePartitionPut-10                           	   10000	    139517 ns/op	    2256 B/op	      30 allocs/op
+PASS
+ok  	skeen-kv	72.586s
