@@ -28,3 +28,32 @@ func TestRouting(t *testing.T) {
 		t.Fatalf("destinationsForRange(0,1)=%v, want [0 1]", got)
 	}
 }
+
+func TestRouterWithNPartitions(t *testing.T) {
+	router := MustRouter(5)
+
+	if got := router.PartitionForKey(7); got != 2 {
+		t.Fatalf("PartitionForKey(7)=%d, want 2", got)
+	}
+	if got := router.PartitionForKey(-1); got != 4 {
+		t.Fatalf("PartitionForKey(-1)=%d, want 4", got)
+	}
+	if got := router.DestinationsForPut(8); !reflect.DeepEqual(got, []PartitionID{3}) {
+		t.Fatalf("DestinationsForPut(8)=%v, want [3]", got)
+	}
+	if got := router.DestinationsForRange(0, 2); !reflect.DeepEqual(got, []PartitionID{0, 1, 2}) {
+		t.Fatalf("DestinationsForRange(0,2)=%v, want [0 1 2]", got)
+	}
+	if got := router.DestinationsForRange(0, 8); !reflect.DeepEqual(got, []PartitionID{0, 1, 2, 3, 4}) {
+		t.Fatalf("DestinationsForRange(0,8)=%v, want all partitions", got)
+	}
+	if got := router.DestinationsForRange(3, 3); !reflect.DeepEqual(got, []PartitionID{3}) {
+		t.Fatalf("DestinationsForRange(3,3)=%v, want [3]", got)
+	}
+}
+
+func TestNewRouterRejectsInvalidPartitionCount(t *testing.T) {
+	if _, err := NewRouter(0); err == nil {
+		t.Fatal("expected invalid partition count error")
+	}
+}

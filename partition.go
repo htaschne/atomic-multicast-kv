@@ -7,17 +7,17 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"os"
 	"strconv"
-	"strings"
 	"time"
 )
 
 var (
-	id       = flag.Int("id", envInt("PARTITION_ID", 0), "partition id")
-	modeFlag = flag.String("mode", envString("PROTOCOL_MODE", string(ModeOriginal)), "protocol mode: original or strengthened")
-	peersArg = flag.String("peers", envString("PEERS", "0=http://localhost:4000,1=http://localhost:4001"), "comma-separated peer map, e.g. 0=http://localhost:4000,1=http://localhost:4001")
-	skeenSvc *Skeen
+	id             = flag.Int("id", envInt("PARTITION_ID", 0), "partition id")
+	partitionCount = flag.Int("partitions", envInt("PARTITION_COUNT", DefaultPartitionCount), "total partition count")
+	modeFlag       = flag.String("mode", envString("PROTOCOL_MODE", string(ModeOriginal)), "protocol mode: original or strengthened")
+	peersArg       = flag.String("peers", envString("PEERS", defaultPeers(envInt("PARTITION_COUNT", DefaultPartitionCount), "localhost")), "comma-separated peer map, e.g. 0=http://localhost:4000,1=http://localhost:4001")
+	skeenSvc       *Skeen
+	router         Router
 )
 
 type PutRequest struct {
@@ -35,7 +35,7 @@ func putHandler(w http.ResponseWriter, r *http.Request) {
 	req := Request{
 		ID:   newRequestID(PartitionID(*id)),
 		Type: OpPut,
-		Dst:  destinationsForPut(reqBody.Key),
+		Dst:  router.DestinationsForPut(reqBody.Key),
 		Put: &PutPayload{
 			Key:   reqBody.Key,
 			Value: reqBody.Value,
@@ -85,7 +85,7 @@ func rangeHandler(w http.ResponseWriter, r *http.Request) {
 	req := Request{
 		ID:   newRequestID(PartitionID(*id)),
 		Type: OpRange,
-		Dst:  destinationsForRange(start, end),
+		Dst:  router.DestinationsForRange(start, end),
 		Range: &RangePayload{
 			Start: start,
 			End:   end,
@@ -135,49 +135,6 @@ func writeProtocolError(w http.ResponseWriter, status int, message string) {
 	json.NewEncoder(w).Encode(map[string]string{"error": message})
 }
 
-func parsePeers(raw string) (map[PartitionID]string, error) {
-	peers := make(map[PartitionID]string)
-	for _, part := range strings.Split(raw, ",") {
-		part = strings.TrimSpace(part)
-		if part == "" {
-			continue
-		}
-		keyValue := strings.SplitN(part, "=", 2)
-		if len(keyValue) != 2 {
-			return nil, fmt.Errorf("invalid peer entry %q", part)
-		}
-		idValue, err := strconv.Atoi(strings.TrimSpace(keyValue[0]))
-		if err != nil {
-			return nil, fmt.Errorf("invalid peer id %q", keyValue[0])
-		}
-		peers[PartitionID(idValue)] = strings.TrimSpace(keyValue[1])
-	}
-	if len(peers) == 0 {
-		return nil, fmt.Errorf("no peers configured")
-	}
-	return peers, nil
-}
-
-func envString(name, fallback string) string {
-	value := os.Getenv(name)
-	if value == "" {
-		return fallback
-	}
-	return value
-}
-
-func envInt(name string, fallback int) int {
-	value := os.Getenv(name)
-	if value == "" {
-		return fallback
-	}
-	n, err := strconv.Atoi(value)
-	if err != nil {
-		return fallback
-	}
-	return n
-}
-
 func main() {
 	flag.Parse()
 
@@ -189,16 +146,29 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	cfg := ClusterConfig{
+		LocalPartition: PartitionID(*id),
+		PartitionCount: *partitionCount,
+		Peers:          peers,
+		Mode:           mode,
+	}
+	if err := cfg.Validate(); err != nil {
+		log.Fatal(err)
+	}
+	router, err = NewRouter(cfg.PartitionCount)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	skeenSvc = NewSkeen(
-		PartitionID(*id),
-		WithMode(mode),
+		cfg.LocalPartition,
+		WithMode(cfg.Mode),
 		WithStore(NewKVStore()),
-		WithTransport(NewHTTPTransport(peers)),
+		WithTransport(NewHTTPTransport(cfg.Peers)),
 	)
 
-	port := 4000 + *id
-	log.Printf("[P%d] starting server on port %d mode=%s peers=%s", *id, port, mode, *peersArg)
+	port := 4000 + int(cfg.LocalPartition)
+	log.Printf("[P%d] starting server on port %d mode=%s partitions=%d peers=%s", cfg.LocalPartition, port, cfg.Mode, cfg.PartitionCount, *peersArg)
 
 	http.HandleFunc("/put", putHandler)
 	http.HandleFunc("/range", rangeHandler)
