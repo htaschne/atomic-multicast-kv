@@ -37,6 +37,16 @@ func TestRequestValidate(t *testing.T) {
 			wantErr: true,
 		},
 		{
+			name:    "duplicate destination",
+			req:     Request{ID: "r1", Type: OpRange, Dst: []PartitionID{0, 0}, Range: &RangePayload{}},
+			wantErr: true,
+		},
+		{
+			name:    "negative destination",
+			req:     Request{ID: "r1", Type: OpRange, Dst: []PartitionID{-1}, Range: &RangePayload{}},
+			wantErr: true,
+		},
+		{
 			name: "put must have one destination",
 			req: Request{
 				ID:   "r1",

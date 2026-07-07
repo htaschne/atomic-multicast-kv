@@ -50,6 +50,16 @@ func (r Request) Validate() error {
 	if len(r.Dst) == 0 {
 		return fmt.Errorf("missing destination set")
 	}
+	seenDst := make(map[PartitionID]bool, len(r.Dst))
+	for _, dst := range r.Dst {
+		if dst < 0 {
+			return fmt.Errorf("destination partition must be non-negative: %d", dst)
+		}
+		if seenDst[dst] {
+			return fmt.Errorf("duplicate destination partition: %d", dst)
+		}
+		seenDst[dst] = true
+	}
 
 	switch r.Type {
 	case OpPut:
