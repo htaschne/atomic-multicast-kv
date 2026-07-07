@@ -2,129 +2,369 @@
   "info": {
     "name": "Atomic Multicast KV Store",
     "_postman_id": "8d0e2b1c-6c8a-4c3e-9f5d-atomic-multicast-kv",
-    "description": "Requests for testing the local partitioned KV store.",
+    "description": "Manual smoke-test requests for the configurable N-partition atomic multicast KV store.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
     {
-      "key": "baseUrl",
-      "value": "http://localhost"
+      "key": "p0Url",
+      "value": "http://localhost:4000"
+    },
+    {
+      "key": "p1Url",
+      "value": "http://localhost:4001"
+    },
+    {
+      "key": "p2Url",
+      "value": "http://localhost:4002"
     }
   ],
   "item": [
     {
-      "name": "PUT P0",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n  \"key\": 0,\n  \"value\": 42\n}"
-        },
-        "url": {
-          "raw": "{{baseUrl}}:4000/put",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "port": "4000",
-          "path": [
-            "put"
-          ]
-        },
-        "description": "Writes key 0 -> 42 to partition P0."
-      },
-      "response": []
-    },
-    {
-      "name": "PUT P1",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n  \"key\": 1,\n  \"value\": 99\n}"
-        },
-        "url": {
-          "raw": "{{baseUrl}}:4001/put",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "port": "4001",
-          "path": [
-            "put"
-          ]
-        },
-        "description": "Writes key 1 -> 99 to partition P1."
-      },
-      "response": []
-    },
-    {
-      "name": "RANGE P0",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{baseUrl}}:4000/range?start=0&end=10",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "port": "4000",
-          "path": [
-            "range"
-          ],
-          "query": [
-            {
-              "key": "start",
-              "value": "0"
+      "name": "2-partition cluster",
+      "item": [
+        {
+          "name": "PUT key 0 via P0",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": 0,\n  \"value\": 42\n}"
             },
-            {
-              "key": "end",
-              "value": "10"
-            }
-          ]
+            "url": {
+              "raw": "{{p0Url}}/put",
+              "host": [
+                "{{p0Url}}"
+              ],
+              "path": [
+                "put"
+              ]
+            },
+            "description": "Writes key 0 -> 42 through partition P0. With key % 2 routing, key 0 belongs to P0."
+          },
+          "response": []
         },
-        "description": "Queries range [0,10] through partition P0."
-      },
-      "response": []
+        {
+          "name": "PUT key 1 via P1",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": 1,\n  \"value\": 99\n}"
+            },
+            "url": {
+              "raw": "{{p1Url}}/put",
+              "host": [
+                "{{p1Url}}"
+              ],
+              "path": [
+                "put"
+              ]
+            },
+            "description": "Writes key 1 -> 99 through partition P1. With key % 2 routing, key 1 belongs to P1."
+          },
+          "response": []
+        },
+        {
+          "name": "RANGE 0..10 via P0",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{p0Url}}/range?start=0&end=10",
+              "host": [
+                "{{p0Url}}"
+              ],
+              "path": [
+                "range"
+              ],
+              "query": [
+                {
+                  "key": "start",
+                  "value": "0"
+                },
+                {
+                  "key": "end",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Queries range [0,10] through partition P0. This should multicast to all destination partitions touched by the range."
+          },
+          "response": []
+        },
+        {
+          "name": "RANGE 0..10 via P1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{p1Url}}/range?start=0&end=10",
+              "host": [
+                "{{p1Url}}"
+              ],
+              "path": [
+                "range"
+              ],
+              "query": [
+                {
+                  "key": "start",
+                  "value": "0"
+                },
+                {
+                  "key": "end",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Queries range [0,10] through partition P1. Expected result should match the P0 range query."
+          },
+          "response": []
+        }
+      ]
     },
     {
-      "name": "RANGE P1",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{baseUrl}}:4001/range?start=0&end=10",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "port": "4001",
-          "path": [
-            "range"
-          ],
-          "query": [
-            {
-              "key": "start",
-              "value": "0"
+      "name": "3-partition cluster",
+      "item": [
+        {
+          "name": "PUT key 0 via P0",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": 0,\n  \"value\": 100\n}"
             },
-            {
-              "key": "end",
-              "value": "10"
-            }
-          ]
+            "url": {
+              "raw": "{{p0Url}}/put",
+              "host": [
+                "{{p0Url}}"
+              ],
+              "path": [
+                "put"
+              ]
+            },
+            "description": "Writes key 0 -> 100 through P0. With key % 3 routing, key 0 belongs to P0."
+          },
+          "response": []
         },
-        "description": "Queries range [0,10] through partition P1."
-      },
-      "response": []
+        {
+          "name": "PUT key 1 via P1",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": 1,\n  \"value\": 101\n}"
+            },
+            "url": {
+              "raw": "{{p1Url}}/put",
+              "host": [
+                "{{p1Url}}"
+              ],
+              "path": [
+                "put"
+              ]
+            },
+            "description": "Writes key 1 -> 101 through P1. With key % 3 routing, key 1 belongs to P1."
+          },
+          "response": []
+        },
+        {
+          "name": "PUT key 2 via P2",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": 2,\n  \"value\": 102\n}"
+            },
+            "url": {
+              "raw": "{{p2Url}}/put",
+              "host": [
+                "{{p2Url}}"
+              ],
+              "path": [
+                "put"
+              ]
+            },
+            "description": "Writes key 2 -> 102 through P2. With key % 3 routing, key 2 belongs to P2."
+          },
+          "response": []
+        },
+        {
+          "name": "RANGE 0..10 via P0",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{p0Url}}/range?start=0&end=10",
+              "host": [
+                "{{p0Url}}"
+              ],
+              "path": [
+                "range"
+              ],
+              "query": [
+                {
+                  "key": "start",
+                  "value": "0"
+                },
+                {
+                  "key": "end",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Queries range [0,10] through P0 in a 3-partition cluster."
+          },
+          "response": []
+        },
+        {
+          "name": "RANGE 0..10 via P1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{p1Url}}/range?start=0&end=10",
+              "host": [
+                "{{p1Url}}"
+              ],
+              "path": [
+                "range"
+              ],
+              "query": [
+                {
+                  "key": "start",
+                  "value": "0"
+                },
+                {
+                  "key": "end",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Queries range [0,10] through P1 in a 3-partition cluster. Expected result should match P0 and P2."
+          },
+          "response": []
+        },
+        {
+          "name": "RANGE 0..10 via P2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{p2Url}}/range?start=0&end=10",
+              "host": [
+                "{{p2Url}}"
+              ],
+              "path": [
+                "range"
+              ],
+              "query": [
+                {
+                  "key": "start",
+                  "value": "0"
+                },
+                {
+                  "key": "end",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Queries range [0,10] through P2 in a 3-partition cluster. Expected result should match P0 and P1."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Protocol notes",
+      "item": [
+        {
+          "name": "Original mode smoke note",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{p0Url}}/range?start=0&end=2",
+              "host": [
+                "{{p0Url}}"
+              ],
+              "path": [
+                "range"
+              ],
+              "query": [
+                {
+                  "key": "start",
+                  "value": "0"
+                },
+                {
+                  "key": "end",
+                  "value": "2"
+                }
+              ]
+            },
+            "description": "Run the cluster with PROTOCOL_MODE=original, then use this request as a quick overlapping-range smoke check."
+          },
+          "response": []
+        },
+        {
+          "name": "Strengthened mode smoke note",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{p0Url}}/range?start=0&end=2",
+              "host": [
+                "{{p0Url}}"
+              ],
+              "path": [
+                "range"
+              ],
+              "query": [
+                {
+                  "key": "start",
+                  "value": "0"
+                },
+                {
+                  "key": "end",
+                  "value": "2"
+                }
+              ]
+            },
+            "description": "Run the cluster with PROTOCOL_MODE=strengthened, then use this request as the same overlapping-range smoke check with ACK-gated delivery enabled."
+          },
+          "response": []
+        }
+      ]
     }
   ]
 }
