@@ -198,11 +198,43 @@ Benchmarks compare original and strengthened modes across:
 - 3 destinations where N permits it;
 - all N destinations.
 
+Artificial-latency benchmarks isolate protocol sensitivity to controlled message delay. They use a benchmark-only in-memory transport wrapper and do not affect correctness tests or production transports. Run a practical count-1 pass with:
+
+```bash
+go test -bench='ArtificialLatency|AckLatency' -benchmem -run=^$ -count=1 ./...
+```
+
+For more stable numbers:
+
+```bash
+go test -bench='ArtificialLatency|AckLatency' -benchmem -run=^$ -count=5 ./... > bench-results/latency-count5.txt
+```
+
+The artificial-latency matrix covers N=3, destination counts 1/2/3, original vs strengthened mode, and fixed per-message delays of 0ms, 1ms, 5ms, and 10ms. The ACK-specific matrix covers strengthened mode with N=3, destination count 3, and ACK delays of 0ms, 1ms, 5ms, and 10ms.
+
 Go's benchmark output reports latency as `ns/op` and allocation overhead as `B/op` and `allocs/op`. Use `-benchtime` to lengthen runs:
 
 ```bash
 go test -bench=. -benchmem -benchtime=5s ./...
 ```
+
+Convert Go benchmark output to plot-ready CSV:
+
+```bash
+python3 scripts/bench_to_csv.py bench-results/latency-count5.txt > bench-results/latency-count5.csv
+```
+
+Generate PNG plots:
+
+```bash
+python3 scripts/plot_benchmarks.py bench-results/latency-count5.csv
+```
+
+Plots are written to `bench-results/plots/`:
+
+- `latency_vs_delay.png`
+- `overhead_by_dst.png`
+- `ack_delay_overhead.png`
 
 ## Limitations
 

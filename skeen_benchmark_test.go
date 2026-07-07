@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"testing"
+	"time"
 )
 
 func BenchmarkSkeenDestinationOverhead(b *testing.B) {
@@ -27,6 +28,28 @@ func BenchmarkStrengthenedSinglePartitionPut(b *testing.B) {
 	benchmarkSinglePartitionPut(b, ModeStrengthened, 2)
 }
 
+func BenchmarkSkeenArtificialLatency(b *testing.B) {
+	for _, mode := range []ProtocolMode{ModeOriginal, ModeStrengthened} {
+		for _, destinationCount := range []int{1, 2, 3} {
+			for _, delay := range []time.Duration{0, time.Millisecond, 5 * time.Millisecond, 10 * time.Millisecond} {
+				name := fmt.Sprintf("N=3/mode=%s/dst=%d/delay=%s", mode, destinationCount, delay)
+				b.Run(name, func(b *testing.B) {
+					benchmarkRangeWithLatency(b, mode, 3, destinationCount, delay, 0)
+				})
+			}
+		}
+	}
+}
+
+func BenchmarkSkeenAckLatency(b *testing.B) {
+	for _, ackDelay := range []time.Duration{0, time.Millisecond, 5 * time.Millisecond, 10 * time.Millisecond} {
+		name := fmt.Sprintf("N=3/mode=%s/dst=3/ackDelay=%s", ModeStrengthened, ackDelay)
+		b.Run(name, func(b *testing.B) {
+			benchmarkRangeWithLatency(b, ModeStrengthened, 3, 3, 0, ackDelay)
+		})
+	}
+}
+
 func benchmarkRangeDestinationCount(b *testing.B, mode ProtocolMode, partitionCount, destinationCount int) {
 	SetProtocolLogging(false)
 	nodes, _ := benchmarkCluster(mode, partitionCount)
@@ -39,6 +62,31 @@ func benchmarkRangeDestinationCount(b *testing.B, mode ProtocolMode, partitionCo
 	for i := 0; i < b.N; i++ {
 		if _, err := p0.Submit(ctx, Request{
 			ID:    fmt.Sprintf("range-%s-n%d-d%d-%d", mode, partitionCount, destinationCount, i),
+			Type:  OpRange,
+			Dst:   dst,
+			Range: &RangePayload{Start: 0, End: partitionCount - 1},
+		}); err != nil {
+			b.Fatal(err)
+		}
+	}
+}
+
+func benchmarkRangeWithLatency(b *testing.B, mode ProtocolMode, partitionCount, destinationCount int, fixedDelay, ackDelay time.Duration) {
+	SetProtocolLogging(false)
+	typeDelay := map[ProtocolMessageType]time.Duration{}
+	if ackDelay > 0 {
+		typeDelay[MessageACK] = ackDelay
+	}
+	nodes, _ := newLatencyCluster(mode, partitionCount, fixedDelay, typeDelay)
+	p0 := nodes[0]
+	ctx := context.Background()
+	dst := firstDestinations(destinationCount)
+
+	b.ReportAllocs()
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		if _, err := p0.Submit(ctx, Request{
+			ID:    fmt.Sprintf("latency-range-%s-n%d-d%d-delay%d-ack%d-%d", mode, partitionCount, destinationCount, fixedDelay.Milliseconds(), ackDelay.Milliseconds(), i),
 			Type:  OpRange,
 			Dst:   dst,
 			Range: &RangePayload{Start: 0, End: partitionCount - 1},
