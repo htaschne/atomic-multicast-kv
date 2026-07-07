@@ -1,0 +1,30 @@
+services:
+  partition0:
+    build: .
+    environment:
+      PARTITION_ID: "0"
+      PARTITION_COUNT: "3"
+      PROTOCOL_MODE: "${PROTOCOL_MODE:-strengthened}"
+      PEERS: "0=http://partition0:4000,1=http://partition1:4001,2=http://partition2:4002"
+    ports:
+      - "4000:4000"
+
+  partition1:
+    build: .
+    environment:
+      PARTITION_ID: "1"
+      PARTITION_COUNT: "3"
+      PROTOCOL_MODE: "${PROTOCOL_MODE:-strengthened}"
+      PEERS: "0=http://partition0:4000,1=http://partition1:4001,2=http://partition2:4002"
+    ports:
+      - "4001:4001"
+
+  partition2:
+    build: .
+    environment:
+      PARTITION_ID: "2"
+      PARTITION_COUNT: "3"
+      PROTOCOL_MODE: "${PROTOCOL_MODE:-strengthened}"
+      PEERS: "0=http://partition0:4000,1=http://partition1:4001,2=http://partition2:4002"
+    ports:
+      - "4002:4002"

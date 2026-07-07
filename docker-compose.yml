@@ -3,6 +3,7 @@ services:
     build: .
     environment:
       PARTITION_ID: "0"
+      PARTITION_COUNT: "2"
       PROTOCOL_MODE: "${PROTOCOL_MODE:-strengthened}"
       PEERS: "0=http://partition0:4000,1=http://partition1:4001"
     ports:
@@ -12,6 +13,7 @@ services:
     build: .
     environment:
       PARTITION_ID: "1"
+      PARTITION_COUNT: "2"
       PROTOCOL_MODE: "${PROTOCOL_MODE:-strengthened}"
       PEERS: "0=http://partition0:4000,1=http://partition1:4001"
     ports:
