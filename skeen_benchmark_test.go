@@ -8,40 +8,59 @@ import (
 	"testing"
 )
 
+func BenchmarkSkeenDestinationOverhead(b *testing.B) {
+	for _, partitionCount := range []int{2, 3, 5} {
+		for _, mode := range []ProtocolMode{ModeOriginal, ModeStrengthened} {
+			for _, destinationCount := range destinationCounts(partitionCount) {
+				name := fmt.Sprintf("N=%d/mode=%s/dst=%d", partitionCount, mode, destinationCount)
+				b.Run(name, func(b *testing.B) {
+					benchmarkRangeDestinationCount(b, mode, partitionCount, destinationCount)
+				})
+			}
+		}
+	}
+}
+
 func BenchmarkOriginalSinglePartitionPut(b *testing.B) {
-	benchmarkSinglePartitionPut(b, ModeOriginal)
+	benchmarkSinglePartitionPut(b, ModeOriginal, 2)
 }
 
 func BenchmarkStrengthenedSinglePartitionPut(b *testing.B) {
-	benchmarkSinglePartitionPut(b, ModeStrengthened)
+	benchmarkSinglePartitionPut(b, ModeStrengthened, 2)
 }
 
-func BenchmarkOriginalSinglePartitionRange(b *testing.B) {
-	benchmarkSinglePartitionRange(b, ModeOriginal)
-}
-
-func BenchmarkStrengthenedSinglePartitionRange(b *testing.B) {
-	benchmarkSinglePartitionRange(b, ModeStrengthened)
-}
-
-func BenchmarkOriginalCrossPartitionRange(b *testing.B) {
-	benchmarkCrossPartitionRange(b, ModeOriginal)
-}
-
-func BenchmarkStrengthenedCrossPartitionRange(b *testing.B) {
-	benchmarkCrossPartitionRange(b, ModeStrengthened)
-}
-
-func benchmarkSinglePartitionPut(b *testing.B, mode ProtocolMode) {
+func benchmarkRangeDestinationCount(b *testing.B, mode ProtocolMode, partitionCount, destinationCount int) {
 	discardLogs(b)
-	p0, _, _ := benchmarkCluster(mode)
+	nodes, _ := benchmarkCluster(mode, partitionCount)
+	p0 := nodes[0]
+	ctx := context.Background()
+	dst := firstDestinations(destinationCount)
+
+	b.ReportAllocs()
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		if _, err := p0.Submit(ctx, Request{
+			ID:    fmt.Sprintf("range-%s-n%d-d%d-%d", mode, partitionCount, destinationCount, i),
+			Type:  OpRange,
+			Dst:   dst,
+			Range: &RangePayload{Start: 0, End: partitionCount - 1},
+		}); err != nil {
+			b.Fatal(err)
+		}
+	}
+}
+
+func benchmarkSinglePartitionPut(b *testing.B, mode ProtocolMode, partitionCount int) {
+	discardLogs(b)
+	nodes, _ := benchmarkCluster(mode, partitionCount)
+	p0 := nodes[0]
 	ctx := context.Background()
 
 	b.ReportAllocs()
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		if _, err := p0.Submit(ctx, Request{
-			ID:   fmt.Sprintf("put-%s-%d", mode, i),
+			ID:   fmt.Sprintf("put-%s-n%d-%d", mode, partitionCount, i),
 			Type: OpPut,
 			Dst:  []PartitionID{0},
 			Put:  &PutPayload{Key: 0, Value: i},
@@ -51,75 +70,35 @@ func benchmarkSinglePartitionPut(b *testing.B, mode ProtocolMode) {
 	}
 }
 
-func benchmarkSinglePartitionRange(b *testing.B, mode ProtocolMode) {
-	discardLogs(b)
-	p0, _, _ := benchmarkCluster(mode)
-	ctx := context.Background()
-	if _, err := p0.Submit(ctx, Request{
-		ID:   "seed-put",
-		Type: OpPut,
-		Dst:  []PartitionID{0},
-		Put:  &PutPayload{Key: 0, Value: 42},
-	}); err != nil {
-		b.Fatal(err)
-	}
-
-	b.ReportAllocs()
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		if _, err := p0.Submit(ctx, Request{
-			ID:    fmt.Sprintf("range-%s-%d", mode, i),
-			Type:  OpRange,
-			Dst:   []PartitionID{0},
-			Range: &RangePayload{Start: 0, End: 0},
-		}); err != nil {
-			b.Fatal(err)
-		}
-	}
+func benchmarkCluster(mode ProtocolMode, partitionCount int) (map[PartitionID]*Skeen, *InMemoryTransport) {
+	return newInMemoryCluster(mode, partitionCount, nil)
 }
 
-func benchmarkCrossPartitionRange(b *testing.B, mode ProtocolMode) {
-	discardLogs(b)
-	p0, _, _ := benchmarkCluster(mode)
-	ctx := context.Background()
-	if _, err := p0.Submit(ctx, Request{
-		ID:   "seed-even",
-		Type: OpPut,
-		Dst:  []PartitionID{0},
-		Put:  &PutPayload{Key: 0, Value: 42},
-	}); err != nil {
-		b.Fatal(err)
-	}
-	if _, err := p0.Submit(ctx, Request{
-		ID:   "seed-odd",
-		Type: OpPut,
-		Dst:  []PartitionID{1},
-		Put:  &PutPayload{Key: 1, Value: 99},
-	}); err != nil {
-		b.Fatal(err)
-	}
-
-	b.ReportAllocs()
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		if _, err := p0.Submit(ctx, Request{
-			ID:    fmt.Sprintf("cross-range-%s-%d", mode, i),
-			Type:  OpRange,
-			Dst:   []PartitionID{0, 1},
-			Range: &RangePayload{Start: 0, End: 1},
-		}); err != nil {
-			b.Fatal(err)
+func destinationCounts(partitionCount int) []int {
+	counts := []int{1}
+	for _, count := range []int{2, 3, partitionCount} {
+		if count <= partitionCount && !containsInt(counts, count) {
+			counts = append(counts, count)
 		}
 	}
+	return counts
 }
 
-func benchmarkCluster(mode ProtocolMode) (*Skeen, *Skeen, *InMemoryTransport) {
-	transport := NewInMemoryTransport()
-	p0 := NewSkeen(0, WithMode(mode))
-	p1 := NewSkeen(1, WithMode(mode))
-	transport.Register(p0)
-	transport.Register(p1)
-	return p0, p1, transport
+func firstDestinations(count int) []PartitionID {
+	dst := make([]PartitionID, 0, count)
+	for i := 0; i < count; i++ {
+		dst = append(dst, PartitionID(i))
+	}
+	return dst
+}
+
+func containsInt(values []int, target int) bool {
+	for _, value := range values {
+		if value == target {
+			return true
+		}
+	}
+	return false
 }
 
 func discardLogs(b *testing.B) {
