@@ -3,8 +3,17 @@ import csv
 import os
 import statistics
 import sys
+import tempfile
 from collections import defaultdict
 
+os.environ.setdefault(
+    "MPLCONFIGDIR", os.path.join(tempfile.gettempdir(), "atomic-multicast-kv-matplotlib")
+)
+os.makedirs(os.environ["MPLCONFIGDIR"], exist_ok=True)
+
+import matplotlib
+
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 
