@@ -1,2 +1,12 @@
 notes.txt
 .DS_Store
+# Python virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Generated benchmark artifacts
+bench-results/*.csv
+bench-results/plots/
