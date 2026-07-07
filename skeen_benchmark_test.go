@@ -3,8 +3,6 @@ package main
 import (
 	"context"
 	"fmt"
-	"io"
-	"log"
 	"testing"
 )
 
@@ -30,7 +28,7 @@ func BenchmarkStrengthenedSinglePartitionPut(b *testing.B) {
 }
 
 func benchmarkRangeDestinationCount(b *testing.B, mode ProtocolMode, partitionCount, destinationCount int) {
-	discardLogs(b)
+	SetProtocolLogging(false)
 	nodes, _ := benchmarkCluster(mode, partitionCount)
 	p0 := nodes[0]
 	ctx := context.Background()
@@ -51,7 +49,7 @@ func benchmarkRangeDestinationCount(b *testing.B, mode ProtocolMode, partitionCo
 }
 
 func benchmarkSinglePartitionPut(b *testing.B, mode ProtocolMode, partitionCount int) {
-	discardLogs(b)
+	SetProtocolLogging(false)
 	nodes, _ := benchmarkCluster(mode, partitionCount)
 	p0 := nodes[0]
 	ctx := context.Background()
@@ -99,12 +97,4 @@ func containsInt(values []int, target int) bool {
 		}
 	}
 	return false
-}
-
-func discardLogs(b *testing.B) {
-	original := log.Writer()
-	log.SetOutput(io.Discard)
-	b.Cleanup(func() {
-		log.SetOutput(original)
-	})
 }

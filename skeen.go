@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"fmt"
-	"log"
 	"sort"
 	"sync"
 	"sync/atomic"
@@ -221,7 +220,7 @@ func (s *Skeen) SetTransport(transport Transport) {
 }
 
 func (s *Skeen) Submit(ctx context.Context, req Request) (map[int]int, error) {
-	log.Printf("[P%d] SUBMIT id=%s type=%s dst=%v", s.id, req.ID, req.Type, req.Dst)
+	protocolLogf("[P%d] SUBMIT id=%s type=%s dst=%v", s.id, req.ID, req.Type, req.Dst)
 	if err := req.Validate(); err != nil {
 		return nil, err
 	}
@@ -553,7 +552,7 @@ func (s *Skeen) canDeliverLocked(candidate *requestState) bool {
 }
 
 func (s *Skeen) executeDelivery(delivery pendingDelivery) {
-	log.Printf("[P%d] DELIVER id=%s type=%s", s.id, delivery.req.ID, delivery.req.Type)
+	protocolLogf("[P%d] DELIVER id=%s type=%s", s.id, delivery.req.ID, delivery.req.Type)
 	var result map[int]int
 
 	switch delivery.req.Type {

@@ -45,9 +45,9 @@ func putHandler(w http.ResponseWriter, r *http.Request) {
 	ctx, cancel := context.WithTimeout(r.Context(), 30*time.Second)
 	defer cancel()
 
-	log.Printf("[P%d] put request id=%s key=%d value=%d dst=%v", *id, req.ID, reqBody.Key, reqBody.Value, req.Dst)
+	protocolLogf("[P%d] put request id=%s key=%d value=%d dst=%v", *id, req.ID, reqBody.Key, reqBody.Value, req.Dst)
 	if _, err := skeenSvc.Submit(ctx, req); err != nil {
-		log.Printf("[P%d] error processing put request id=%s: %v", *id, req.ID, err)
+		protocolLogf("[P%d] error processing put request id=%s: %v", *id, req.ID, err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -95,10 +95,10 @@ func rangeHandler(w http.ResponseWriter, r *http.Request) {
 	ctx, cancel := context.WithTimeout(r.Context(), 30*time.Second)
 	defer cancel()
 
-	log.Printf("[P%d] range request id=%s dst=%v start=%d end=%d", *id, req.ID, req.Dst, start, end)
+	protocolLogf("[P%d] range request id=%s dst=%v start=%d end=%d", *id, req.ID, req.Dst, start, end)
 	result, err := skeenSvc.Submit(ctx, req)
 	if err != nil {
-		log.Printf("[P%d] error processing range request id=%s: %v", *id, req.ID, err)
+		protocolLogf("[P%d] error processing range request id=%s: %v", *id, req.ID, err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -168,7 +168,7 @@ func main() {
 	)
 
 	port := 4000 + int(cfg.LocalPartition)
-	log.Printf("[P%d] starting server on port %d mode=%s partitions=%d peers=%s", cfg.LocalPartition, port, cfg.Mode, cfg.PartitionCount, *peersArg)
+	protocolLogf("[P%d] starting server on port %d mode=%s partitions=%d peers=%s", cfg.LocalPartition, port, cfg.Mode, cfg.PartitionCount, *peersArg)
 
 	http.HandleFunc("/put", putHandler)
 	http.HandleFunc("/range", rangeHandler)
