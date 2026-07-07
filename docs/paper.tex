@@ -1,0 +1,70 @@
+\documentclass[conference]{IEEEtran}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{cite}
+\usepackage{microtype}
+
+\title{Implementing and Evaluating Atomic Multicast with Skeen's Protocol}
+\author{
+\IEEEauthorblockN{Agatha Schneider}
+\IEEEauthorblockA{
+Pontifícia Universidade Católica do Rio Grande do Sul (PUCRS)\\
+Porto Alegre, Brazil\\
+htaschneider@icloud.com
+}
+}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Atomic multicast is a fundamental communication primitive for distributed systems that require consistent ordering across overlapping groups of participants. This paper presents the implementation and evaluation of a distributed key-value store based on Skeen's atomic multicast protocol together with an ACK-gated delivery variant proposed in the literature. In addition to describing the implementation, we validate the protocol using deterministic correctness tests and evaluate its performance through reproducible benchmarks under both ideal and artificially delayed network conditions. Our results quantify the cost of the additional synchronization step while illustrating the stronger ordering guarantees it provides.
+\end{abstract}
+
+\section{Introduction}
+
+Distributed applications frequently need to coordinate operations that span only a subset of the system while still preserving a consistent execution order. Atomic multicast addresses this problem by guaranteeing that processes participating in the same multicast group observe messages in the same order.
+
+Skeen's protocol is a classic solution to this problem and remains an important reference in the study of distributed systems. While the original protocol provides efficient ordering, later work identifies executions in which stronger guarantees require an additional acknowledgement phase before delivery.
+
+In this work, we present a practical implementation of both the original protocol and its ACK-gated variant as a configurable distributed key-value store. Rather than focusing exclusively on the algorithm itself, we emphasize reproducibility: the project includes deterministic protocol validation, configurable multi-partition execution, automated benchmarking, and performance visualization.
+
+The contributions of this paper are:
+
+\begin{itemize}
+    \item A complete implementation of Skeen's atomic multicast protocol.
+    \item An implementation of the strengthened ACK-gated delivery variant.
+    \item A deterministic testing framework capable of reproducing the ordering scenario discussed in the literature.
+    \item A reproducible benchmarking pipeline evaluating protocol overhead under varying cluster sizes and controlled network latency.
+\end{itemize}
+
+\section{Background}
+
+% TODO
+
+\section{Implementation}
+
+% TODO
+
+\section{Experimental Evaluation}
+
+% TODO
+
+\section{Discussion}
+
+% TODO
+
+\section{Conclusion}
+
+% TODO
+
+\bibliographystyle{plain}
+
+\end{document}
