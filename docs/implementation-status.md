@@ -2,14 +2,15 @@
 
 ## Project overview
 
-The project now implements a testable two-partition atomic multicast key-value store in Go.
+The project implements a configurable N-partition atomic multicast key-value store in Go.
 
-- `skeen.go` contains the core protocol model: requests, timestamps, protocol messages, per-request state, original Skeen delivery, and strengthened ACK-gated delivery.
+- `config.go` defines `ClusterConfig`: local partition id, partition count, peer addresses, and protocol mode.
+- `routing.go` routes keys with `key % partitionCount` and computes destination sets for ranges.
+- `skeen.go` contains the protocol model: requests, timestamps, protocol messages, per-request state, original Skeen delivery, and strengthened ACK-gated delivery.
 - `transport.go` contains `InMemoryTransport` for tests/benchmarks and `HTTPTransport` for local partition processes.
-- `partition.go` exposes the public `/put` and `/range` endpoints plus the internal `/internal/protocol` endpoint.
-- `routing.go` maps even keys to partition `0` and odd keys to partition `1`.
-- `kvstore.go` provides a per-partition in-memory store.
-- `docker-compose.yml` runs partition `0` on port `4000` and partition `1` on port `4001`.
+- `partition.go` exposes `/put`, `/range`, and `/internal/protocol`.
+- `docker-compose.yml` runs the default 2-partition cluster.
+- `docker-compose.3.yml` runs a 3-partition cluster.
 
 The current implementation models one process per partition. It does not implement replicated groups within a partition, crash recovery, retries, or membership changes.
 
@@ -28,6 +29,8 @@ Implemented in `Skeen.Submit`, `Skeen.ReceiveProtocol`, and the protocol helpers
 - Clock advancement: learning a final timestamp advances the local logical clock to at least the final clock.
 - Hold-back queue semantics: `tryDeliverLocked` delivers finalized requests in final timestamp order only when every pending local request is known to have a larger final timestamp or larger local timestamp.
 - Integrity: request state has a `delivered` flag and a completion channel, so each partition executes a request at most once.
+
+All proposal, final timestamp, ACK, and delivery checks are driven by `req.Dst`; no protocol rule assumes exactly two partitions.
 
 ### Strengthened ACK-gated variant
 
@@ -49,6 +52,7 @@ In strengthened mode:
 - `RANGE` is multicast to every partition containing keys in the requested interval.
 - `Submit` waits for every destination's `START` response.
 - `RANGE` results from destination partitions are merged before returning to the client.
+- Tests construct arbitrary destination subsets directly to exercise protocol behavior beyond router-generated ranges.
 
 ## Missing / incomplete protocol pieces
 
@@ -70,25 +74,26 @@ In strengthened mode:
 
 Current tests include:
 
+- `config_test.go`: cluster config and peer parsing.
 - `request_test.go`: request validation and timestamp ordering.
-- `routing_test.go`: key/range destination routing.
+- `routing_test.go`: default 2-partition routing and configurable 5-partition routing.
 - `kvstore_test.go`: local store `Put`/`Range`.
 - `skeen_test.go`:
   - internal `START` rejection at non-destination partitions;
-  - single-partition `PUT` and cross-partition `RANGE` through in-memory transport;
+  - single-partition `PUT` and cross-partition `RANGE`;
+  - 5-partition all-range execution;
+  - non-overlapping destination sets delivering independently;
+  - overlapping destination sets preserving order at the common destination;
   - original Skeen reproducing the paper's atomic-global-order counterexample shape;
-  - strengthened Skeen delaying delivery until destination ACKs.
+  - strengthened Skeen delaying delivery until destination ACKs;
+  - the same unsafe/delayed scenario with 4 partitions.
 
-Benchmarks in `skeen_benchmark_test.go` cover:
-
-- original vs strengthened single-partition `PUT`;
-- original vs strengthened single-partition `RANGE`;
-- original vs strengthened cross-partition `RANGE`.
+Benchmarks in `skeen_benchmark_test.go` compare original and strengthened modes across N = 2, 3, and 5, with destination counts of 1, 2, 3 where valid, and all N.
 
 ## Recommended next steps, ordered by priority
 
-1. Add HTTP integration tests using `httptest.Server` for two real HTTP transports.
-2. Add timeout/error-path tests for unavailable peers.
-3. Add structured logs or trace hooks for protocol message flow.
-4. Add a small load runner against Docker Compose if benchmark comparisons should include HTTP transport overhead.
+1. Add HTTP integration tests using `httptest.Server` for 3+ real HTTP transports.
+2. Add timeout/error-path tests for unavailable peers and partial peer maps.
+3. Add structured trace hooks for protocol message flow.
+4. Add a Docker-backed load runner if benchmark comparisons should include HTTP transport overhead.
 5. Extend the model to replicated groups per partition if the next goal is fault tolerance rather than protocol-ordering experimentation.
