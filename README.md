@@ -48,7 +48,7 @@ go test -bench=. -benchmem -run=^$ ./...
 
 ## Paper
 
-This repository accompanies the paper "Implementing and Evaluating Atomic Multicast with Skeen's Protocol". The paper PDF is expected at `docs/paper.pdf`.
+This repository accompanies the paper "Implementing and Evaluating Skeen's Atomic Multicast Protocol and the ACK-Gated Extension for Atomic Global Order". The paper PDF is expected at `docs/paper.pdf`.
 
 ## References
 
