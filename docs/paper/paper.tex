@@ -11,6 +11,14 @@
 \usepackage{url}
 \usepackage{hyperref}
 \usetikzlibrary{arrows.meta, positioning, calc}
+
+\graphicspath{{figures/}}
+
+% arXiv source bundle note:
+% Upload docs/paper/paper.tex and the files under docs/paper/figures/.
+% The bibliography is embedded
+% below with thebibliography, so BibTeX and external .bst files are not required.
+
 \title{Implementing and Evaluating Skeen's Atomic Multicast Protocol and an ACK-Gated Extension for Atomic Global Order}
 \author{Agatha Schneider\\
 Pontifícia Universidade Católica do Rio Grande do Sul (PUCRS)\\
@@ -63,16 +71,16 @@ Pacheco et al. propose an ACK-gated extension that strengthens delivery by addin
 
 The key-value store exposes a partitioned storage interface over the multicast abstraction. Requests carry an operation type, request identifier, and explicit destination set. \textsc{Put} operations target exactly one partition, while range operations may target arbitrary destination sets. The routing layer supports configurable $N$-partition clusters, so the same protocol code can be evaluated for $N=2$, $N=3$, and $N=5$ without hard-coded participant assumptions.
 
-
-
-
-
-
-
-
-
-
-
+% arXiv figure placeholder: insert the system architecture diagram here when available.
+% Store the asset as figures/architecture.pdf for vector output or figures/architecture.png for raster output.
+% Use a relative path only, for example:
+% \begin{figure}[t]
+% \centering
+% \includegraphics[width=\linewidth,keepaspectratio]{figures/architecture.pdf}
+% \caption{Distributed key-value store architecture and transport abstraction.}
+% \label{fig:architecture}
+% \end{figure}
+% If using PNG, export with a tight bounding box and enough whitespace inside the image so labels are not clipped.
 
 Each partition owns a Skeen protocol instance, a local key-value store, a logical clock, and a map of request states. A request state records the request payload, the local timestamp proposal, all collected proposals, the final timestamp, ACK state, delivery status, result data, and a completion channel used by synchronous client submission. Protocol mode is selected at construction time: original mode ignores ACK state during delivery, while ACK-gated mode requires every destination ACK before delivery.
 
@@ -80,16 +88,16 @@ Each partition owns a Skeen protocol instance, a local key-value store, a logica
 
 Protocol execution uses four message types: \textsc{Start}, \textsc{Local\_TS}, \textsc{Final\_TS}, and \textsc{ACK}. On \textsc{Start}, a destination validates membership in the destination set, advances its clock, stores a local proposal, and broadcasts that proposal. When proposals from all destinations are present, the maximum timestamp is learned as the final timestamp and broadcast. A final timestamp also advances local clock state if necessary.
 
-
-
-
-
-
-
-
-
-
-
+% arXiv figure placeholder: insert the protocol timeline diagram here when available.
+% Store the asset as figures/protocol-timeline.pdf for vector output or figures/protocol-timeline.png for raster output.
+% Use a relative path only, for example:
+% \begin{figure}[t]
+% \centering
+% \includegraphics[width=\linewidth,keepaspectratio]{figures/protocol-timeline.pdf}
+% \caption{Timeline of original Skeen and ACK-gated message phases.}
+% \label{fig:protocol-timeline}
+% \end{figure}
+% Prefer PDF/SVG-converted-to-PDF for sequence diagrams; if using PNG, crop to the diagram boundary and avoid external bounding-box options.
 
 Delivery is attempted after every protocol message. The node collects finalized, undelivered requests and sorts them by final timestamp. A candidate can be delivered only if it is finalized, not already delivered, and lower than every other pending local or final timestamp known at the node. In ACK-gated mode, the candidate must also have ACKs from all destinations. Delivery executes the key-value operation, records any range result, invokes the delivery hook used by tests, and releases the waiting submitter.
 
@@ -122,45 +130,45 @@ Figure~\ref{fig:counterexample} summarizes the counterexample reproduced by the 
 
 \node[panel, minimum width=8.15cm, minimum height=3.95cm, anchor=north west] (orig) at (0,0) {};
 \node[label, font=\scriptsize\bfseries, anchor=west] at ($(orig.north west)+(0.10,-0.18)$) {A. Original Skeen unsafe execution};
-\foreach \x/\p in {1.15/$P_0$,4.05/$P_1$,6.95/$P_2$} {
+\foreach \x/\p in {2.05/$P_0$,4.75/$P_1$,7.20/$P_2$} {
     \node[label] at ($(orig.north west)+(\x,-0.52)$) {\p};
     \draw[lifeline] ($(orig.north west)+(\x,-0.73)$) -- ($(orig.north west)+(\x,-3.08)$);
 }
-\node[label, anchor=east] at ($(orig.north west)+(0.72,-0.98)$) {\textsc{Start} $m$};
-\draw[msg] ($(orig.north west)+(0.80,-0.98)$) -- ($(orig.north west)+(1.15,-0.98)$);
-\draw[msg] ($(orig.north west)+(0.80,-0.98)$) -- ($(orig.north west)+(4.05,-0.98)$)
+\node[label, anchor=west] at ($(orig.north west)+(0.28,-0.98)$) {START $m$};
+\draw[msg] ($(orig.north west)+(1.55,-0.98)$) -- ($(orig.north west)+(2.05,-0.98)$);
+\draw[msg] ($(orig.north west)+(1.55,-0.98)$) -- ($(orig.north west)+(4.75,-0.98)$)
     node[midway, above, label] {$\{0,1\}$};
-\node[event, anchor=west] (omdel) at ($(orig.north west)+(4.18,-1.48)$) {deliver $m$};
-\node[label, anchor=east] at ($(orig.north west)+(0.72,-1.92)$) {\textsc{Start} $m'$};
-\draw[msg] ($(orig.north west)+(0.80,-1.92)$) -- ($(orig.north west)+(1.15,-1.92)$);
-\draw[msg] ($(orig.north west)+(0.80,-1.92)$) -- ($(orig.north west)+(6.95,-1.92)$)
+\node[event, anchor=west] (omdel) at ($(orig.north west)+(4.88,-1.48)$) {deliver $m$};
+\node[label, anchor=west] at ($(orig.north west)+(0.28,-1.92)$) {START $m'$};
+\draw[msg] ($(orig.north west)+(1.55,-1.92)$) -- ($(orig.north west)+(2.05,-1.92)$);
+\draw[msg] ($(orig.north west)+(1.55,-1.92)$) -- ($(orig.north west)+(7.20,-1.92)$)
     node[midway, above, label] {$\{0,2\}$};
-\node[event, anchor=west] (ompdel) at ($(orig.north west)+(1.28,-2.45)$) {deliver $m'$ before $m$};
-\node[event, minimum width=0.80cm] (om) at ($(orig.north west)+(2.15,-3.34)$) {$m$};
-\node[event, minimum width=0.80cm] (omp) at ($(orig.north west)+(5.05,-3.34)$) {$m'$};
+\node[event, anchor=west] (ompdel) at ($(orig.north west)+(2.18,-2.45)$) {deliver $m'$ before $m$};
+\node[event, minimum width=0.80cm] (om) at ($(orig.north west)+(2.60,-3.34)$) {$m$};
+\node[event, minimum width=0.80cm] (omp) at ($(orig.north west)+(5.25,-3.34)$) {$m'$};
 \draw[dep, bend left=18] (om) to node[above, label] {real-time} (omp);
 \draw[dep, bend left=18] (omp) to node[below, label] {delivery order} (om);
-\node[label, font=\scriptsize\bfseries] at ($(orig.north west)+(6.75,-3.34)$) {cycle};
+\node[label, font=\scriptsize\bfseries] at ($(orig.north west)+(6.90,-3.34)$) {cycle};
 
 \node[panel, minimum width=8.15cm, minimum height=3.95cm, anchor=north west] (ack) at (0,-4.22) {};
 \node[label, font=\scriptsize\bfseries, anchor=west] at ($(ack.north west)+(0.10,-0.18)$) {B. ACK-Gated Skeen};
-\foreach \x/\p in {1.15/$P_0$,4.05/$P_1$,6.95/$P_2$} {
+\foreach \x/\p in {2.05/$P_0$,4.75/$P_1$,7.20/$P_2$} {
     \node[label] at ($(ack.north west)+(\x,-0.52)$) {\p};
     \draw[lifeline] ($(ack.north west)+(\x,-0.73)$) -- ($(ack.north west)+(\x,-3.08)$);
 }
-\node[label, anchor=east] at ($(ack.north west)+(0.72,-0.98)$) {final ts $m$};
-\draw[msg] ($(ack.north west)+(0.80,-0.98)$) -- ($(ack.north west)+(1.15,-0.98)$);
-\draw[msg] ($(ack.north west)+(0.80,-0.98)$) -- ($(ack.north west)+(4.05,-0.98)$)
+\node[label, anchor=west] at ($(ack.north west)+(0.28,-0.98)$) {FINAL\_TS $m$};
+\draw[msg] ($(ack.north west)+(1.55,-0.98)$) -- ($(ack.north west)+(2.05,-0.98)$);
+\draw[msg] ($(ack.north west)+(1.55,-0.98)$) -- ($(ack.north west)+(4.75,-0.98)$)
     node[midway, above, label] {$\{0,1\}$};
-\draw[msg, bend left=10] ($(ack.north west)+(1.15,-1.45)$) to node[above, label] {\textsc{ACK}} ($(ack.north west)+(4.05,-1.45)$);
-\draw[msg, bend left=10] ($(ack.north west)+(4.05,-1.70)$) to ($(ack.north west)+(1.15,-1.70)$);
-\node[event] (barrier) at ($(ack.north west)+(2.60,-2.22)$) {ACK barrier};
-\node[event, anchor=west] at ($(ack.north west)+(3.28,-2.62)$) {deliver $m$};
-\node[label, anchor=west] at ($(ack.north west)+(4.92,-2.62)$) {$m'$ cannot overtake};
-\node[event, minimum width=0.80cm] (am) at ($(ack.north west)+(2.15,-3.34)$) {$m$};
-\node[event, minimum width=0.80cm] (amp) at ($(ack.north west)+(5.05,-3.34)$) {$m'$};
+\draw[msg, bend left=10] ($(ack.north west)+(2.05,-1.45)$) to node[above, label] {ACK} ($(ack.north west)+(4.75,-1.45)$);
+\draw[msg, bend left=10] ($(ack.north west)+(4.75,-1.70)$) to ($(ack.north west)+(2.05,-1.70)$);
+\node[event] (barrier) at ($(ack.north west)+(3.40,-2.22)$) {ACK barrier};
+\node[event, anchor=west] at ($(ack.north west)+(3.98,-2.62)$) {deliver $m$};
+\node[label, anchor=west] at ($(ack.north west)+(5.25,-2.62)$) {no overtake};
+\node[event, minimum width=0.80cm] (am) at ($(ack.north west)+(2.60,-3.34)$) {$m$};
+\node[event, minimum width=0.80cm] (amp) at ($(ack.north west)+(5.25,-3.34)$) {$m'$};
 \draw[dep] (am) -- node[above, label] {before} (amp);
-\node[label, font=\scriptsize\bfseries] at ($(ack.north west)+(6.75,-3.34)$) {no cycle};
+\node[label, font=\scriptsize\bfseries] at ($(ack.north west)+(6.90,-3.34)$) {no cycle};
 \end{tikzpicture}
 \caption{Conceptual sequence diagram for the reproduced unsafe execution. In original Skeen, a real-time edge $m \rightarrow m'$ can coexist with a delivery-order edge $m' \rightarrow m$ at an overlapping destination, forming a cycle. The ACK-gated variant delays delivery until all destinations acknowledge the final timestamp, preventing the premature delivery used by the counterexample.}
 \label{fig:counterexample}
@@ -230,7 +238,7 @@ Figure~\ref{fig:overhead} shows that the ACK gate has almost no effect for singl
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\linewidth,keepaspectratio]{overhead_by_dst.png}
+\includegraphics[width=\linewidth,keepaspectratio]{figures/overhead_by_dst.png}
 \caption{Destination-set overhead for $N=3$ without artificial latency.}
 \label{fig:overhead}
 \end{figure}
@@ -261,7 +269,7 @@ ACK-gated & 10 & $120.357 \pm 0.321$ & $18594.2 \pm 24.0$ & $178.8 \pm 0.4$ \\
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\linewidth,keepaspectratio]{latency_vs_delay.png}
+\includegraphics[width=\linewidth,keepaspectratio]{figures/latency_vs_delay.png}
 \caption{Per-operation latency for $N=3$, dst=3 under artificial protocol-message delay.}
 \label{fig:latency}
 \end{figure}
@@ -278,7 +286,7 @@ with $R^2=0.9998$, close to the expected six-delay slope. This plot is therefore
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\linewidth,keepaspectratio]{ack_delay_overhead.png}
+\includegraphics[width=\linewidth,keepaspectratio]{figures/ack_delay_overhead.png}
 \caption{Per-operation latency for $N=3$, dst=3 when artificial delay is applied only to ACK messages.}
 \label{fig:ackdelay}
 \end{figure}
@@ -297,7 +305,27 @@ The ACK gate strengthens safety by delaying delivery until every destination has
 
 In conclusion, the project demonstrates that deterministic scheduling is a practical way to reproduce subtle distributed coordination bugs. By controlling message release with predicates and checking delivery graphs for cycles, the framework reproduces an unsafe original-Skeen execution without relying on sleeps or probabilistic races. The ACK-gated variant prevents that scheduled execution by requiring all destinations to acknowledge final timestamps before delivery. Benchmarks show that this safety improvement carries measurable overhead in local execution and substantial latency sensitivity when ACK messages are delayed, making the trade-off explicit for designers of partitioned state machine replication systems.
 
-\input{paper.bbl}
+\begin{thebibliography}{4}
+
+\bibitem{lamport}
+L.~Lamport, ``Time, clocks, and the ordering of events in a distributed
+system,'' \emph{Commun. ACM}, vol.~21, no.~7, pp. 558--565, 1978.
+
+\bibitem{skeen}
+D.~Skeen, ``A decentralized formalism for agreement protocols,'' in
+\emph{Proc. IEEE Symp. Reliability in Distributed Software and Database
+Systems}, 1981, pp. 123--134.
+
+\bibitem{pacheco}
+N.~Pacheco \emph{et al.}, ``Correcting and enhancing decentralized atomic
+multicast algorithms,'' \emph{IEEE Trans. Parallel Distrib. Syst.}, vol.~34,
+no.~5, pp. 1420--1432, 2023.
+
+\bibitem{hadzilacos}
+V.~Hadzilacos and S.~Toueg, ``Fault-tolerant broadcasts and related
+problems,'' in \emph{Distributed Systems}, 2nd~ed., S.~Mullender, Ed.
+ACM Press/Addison-Wesley, 1993, pp. 97--145.
+
+\end{thebibliography}
 
 \end{document}
-\typeout{get arXiv to do 4 passes: Label(s) may have changed. Rerun}

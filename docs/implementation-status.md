@@ -9,8 +9,8 @@ The project implements a configurable N-partition atomic multicast key-value sto
 - `skeen.go` contains the protocol model: requests, timestamps, protocol messages, per-request state, original Skeen delivery, and strengthened ACK-gated delivery.
 - `transport.go` contains `InMemoryTransport` for tests/benchmarks and `HTTPTransport` for local partition processes.
 - `partition.go` exposes `/put`, `/range`, and `/internal/protocol`.
-- `docker-compose.yml` runs the default 2-partition cluster.
-- `docker-compose.3.yml` runs a 3-partition cluster.
+- `deployments/docker-compose.yml` runs the default 2-partition cluster.
+- `deployments/docker-compose.3.yml` runs a 3-partition cluster.
 
 The current implementation models one process per partition. It does not implement replicated groups within a partition, crash recovery, retries, or membership changes.
 

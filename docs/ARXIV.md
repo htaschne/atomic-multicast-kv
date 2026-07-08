@@ -13,11 +13,11 @@ dist/arxiv/
 dist/arxiv.tar
 ```
 
-The manuscript source in `docs/` is not modified by the script.
+The manuscript source in `docs/paper/` is not modified by the script.
 
 ## What the Script Does
 
-1. Copies `docs/paper.tex` into a temporary directory as `main.tex`.
+1. Copies `docs/paper/paper.tex` into a temporary directory as `main.tex`.
 2. Extracts the embedded `thebibliography` block into `paper.bbl`.
 3. Replaces the bibliography block in `main.tex` with `\input{paper.bbl}`.
 4. Strips LaTeX comments from `.tex` files while preserving escaped percent signs (`\%`).

@@ -2,7 +2,7 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-SRC_DIR="$ROOT_DIR/docs"
+SRC_DIR="$ROOT_DIR/docs/paper"
 SRC_TEX="$SRC_DIR/paper.tex"
 DIST_DIR="$ROOT_DIR/dist/arxiv"
 TAR_FILE="$ROOT_DIR/dist/arxiv.tar"

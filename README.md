@@ -16,12 +16,12 @@ SkeenKV is an experimental distributed key-value store implementing the original
 ## Repository layout
 
 ```text
-docs/
+benchmarks/results/
+deployments/
+docs/paper/
+docs/postman/
 references/
 scripts/
-bench-results/
-Dockerfile
-docker-compose*.yml
 README.md
 *.go
 ```
@@ -43,12 +43,21 @@ go test -bench=. -benchmem -run=^$ ./...
 ### Generate figures
 
 ```bash
-./generate_figures.sh
+scripts/generate_figures.sh
+```
+
+The script reads raw benchmark output from `benchmarks/results/raw/`, writes CSV and plot outputs under `benchmarks/results/csv/`, and refreshes the curated paper figures in `docs/paper/figures/`.
+
+### Docker deployment
+
+```bash
+docker compose -f deployments/docker-compose.yml up --build
+docker compose -f deployments/docker-compose.3.yml up --build
 ```
 
 ## Paper
 
-This repository accompanies the paper "Implementing and Evaluating Skeen's Atomic Multicast Protocol and the ACK-Gated Extension for Atomic Global Order". The paper PDF is expected at `docs/paper.pdf`.
+This repository accompanies the paper "Implementing and Evaluating Skeen's Atomic Multicast Protocol and the ACK-Gated Extension for Atomic Global Order". Paper sources live under `docs/paper/`; generated PDFs and arXiv bundles are not tracked.
 
 ## References
 

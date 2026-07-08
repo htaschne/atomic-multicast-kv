@@ -1,5 +1,12 @@
 notes.txt
 .DS_Store
+
+# Build and release outputs
+dist/
+*.tar
+*.tar.gz
+*.tgz
+
 # Python virtual environment
 .venv/
 
@@ -8,8 +15,18 @@ __pycache__/
 *.py[cod]
 
 # Generated benchmark artifacts
-bench-results/*.csv
-bench-results/plots/
+bench-results/
+benchmarks/results/**
+!benchmarks/results/
+!benchmarks/results/raw/
+!benchmarks/results/raw/inmemory-30runs.txt
+!benchmarks/results/raw/inmemory-count10.txt
+!benchmarks/results/raw/latency-count5.txt
+!benchmarks/results/csv/
+!benchmarks/results/csv/inmemory-count10.csv
+!benchmarks/results/csv/latency-count5.csv
+!benchmarks/results/csv/plots/
+!benchmarks/results/csv/plots/*.png
 
 # LaTeX build artifacts
 *.aux
@@ -32,3 +49,4 @@ bench-results/plots/
 *.pdfsync
 *.dvi
 *.ps
+docs/paper/*.pdf

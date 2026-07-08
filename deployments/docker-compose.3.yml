@@ -1,6 +1,8 @@
 services:
   partition0:
-    build: .
+    build:
+      context: ..
+      dockerfile: deployments/Dockerfile
     environment:
       PARTITION_ID: "0"
       PARTITION_COUNT: "3"
@@ -10,7 +12,9 @@ services:
       - "4000:4000"
 
   partition1:
-    build: .
+    build:
+      context: ..
+      dockerfile: deployments/Dockerfile
     environment:
       PARTITION_ID: "1"
       PARTITION_COUNT: "3"
@@ -20,7 +24,9 @@ services:
       - "4001:4001"
 
   partition2:
-    build: .
+    build:
+      context: ..
+      dockerfile: deployments/Dockerfile
     environment:
       PARTITION_ID: "2"
       PARTITION_COUNT: "3"
