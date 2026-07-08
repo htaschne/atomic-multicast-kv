@@ -1,87 +1,59 @@
-# Atomic Multicast KV
+# SkeenKV
 
-Atomic Multicast KV is a distributed key-value store implementing Skeen's atomic multicast protocol and an ACK-gated delivery variant. The repository includes deterministic correctness tests, in-memory benchmarks, artificial-latency benchmarks, and automated performance visualization.
+SkeenKV is an experimental distributed key-value store implementing the original Skeen atomic multicast protocol and the ACK-gated extension proposed by Pacheco et al. The project accompanies an academic paper and provides deterministic validation and reproducible benchmarks for evaluating the protocol variants.
 
 ## Features
 
-- Original Skeen atomic multicast
+- Original Skeen implementation
 - ACK-gated delivery variant
-- Configurable N-partition routing
-- Deterministic scheduled transport for correctness tests
-- In-memory protocol benchmarks
-- Artificial-latency benchmarks
-- CSV export and plot generation
-- Docker Compose deployment
+- Configurable N-partition clusters
+- Deterministic protocol validation
+- In-memory benchmarks
+- Artificial latency benchmarks
+- Docker deployment
+- Automated CSV and plot generation
 
 ## Repository layout
 
 ```text
-.
-├── bench-results/
-│   ├── csv/
-│   ├── plots/
-│   └── raw/
-├── docs/
-├── references/
-├── scripts/
-├── *.go
-├── docker-compose.yml
-├── docker-compose.3.yml
-└── README.md
+docs/
+references/
+scripts/
+bench-results/
+Dockerfile
+docker-compose*.yml
+README.md
+*.go
 ```
 
-## Running
+## Quick start
+
+### Run tests
 
 ```bash
 go test ./...
 ```
 
-```bash
-go run .
-```
-
-Useful runtime flags:
+### Run benchmarks
 
 ```bash
-go run . -id=0 -partitions=3 -mode=strengthened -peers='0=http://localhost:4000,1=http://localhost:4001,2=http://localhost:4002'
+go test -bench=. -benchmem -run=^$ ./...
 ```
 
-## Benchmarks
-
-Run the in-memory protocol benchmark:
+### Generate figures
 
 ```bash
-go test -bench='DestinationOverhead' -benchmem -run=^$ ./...
+./generate_figures.sh
 ```
 
-Run the artificial-latency benchmark:
+## Paper
 
-```bash
-go test -bench='ArtificialLatency|AckLatency' -benchmem -run=^$ -count=5 ./... > bench-results/raw/latency-count5.txt
-```
+This repository accompanies the paper "Implementing and Evaluating Atomic Multicast with Skeen's Protocol". The paper PDF is expected at `docs/paper.pdf`.
 
-Convert benchmark output to CSV:
+## References
 
-```bash
-python3 scripts/bench_to_csv.py bench-results/raw/latency-count5.txt > bench-results/csv/latency-count5.csv
-```
+The project builds on Skeen's original atomic multicast paper and Pacheco et al.'s ACK-gated extension. Reference material is collected in `references/`.
 
-Generate plots:
+## Repository goals
 
-```bash
-.venv/bin/python scripts/plot_benchmarks.py bench-results/csv/latency-count5.csv
-```
-
-Artificial latency is benchmark-only. It isolates protocol sensitivity to fixed per-message delay and ACK-specific delay without changing production transports or correctness tests.
-
-## Results
-
-![Latency vs delay](bench-results/plots/latency_vs_delay.png)
-
-![Overhead by destination count](bench-results/plots/overhead_by_dst.png)
-
-![ACK delay overhead](bench-results/plots/ack_delay_overhead.png)
-
-## Reference
-
-- [Strengthening Atomic Multicast for Partitioned State Machine Replication](references/non-blocking-skeen-atomic-multicast.pdf)
+SkeenKV prioritizes correctness, reproducibility, and experimental evaluation. It is intended as an academic artifact rather than a production deployment.

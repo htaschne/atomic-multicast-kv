@@ -1,11 +1,20 @@
 #!/bin/bash
 
-python3 scripts/bench_to_csv.py \
-    bench-results/inmemory-count10.txt \
-    > bench-results/inmemory-count10.csv
+set -euo pipefail
 
-python3 scripts/bench_to_csv.py \
-    bench-results/latency-count5.txt \
-    > bench-results/latency-count5.csv
+PYTHON="${PYTHON:-python3}"
+if [ -x ".venv/bin/python" ]; then
+    PYTHON=".venv/bin/python"
+fi
 
-python3 scripts/plot_benchmarks.py bench-results/latency-count5.csv
+mkdir -p bench-results/csv
+
+"$PYTHON" scripts/bench_to_csv.py \
+    bench-results/raw/inmemory-count10.txt \
+    > bench-results/csv/inmemory-count10.csv
+
+"$PYTHON" scripts/bench_to_csv.py \
+    bench-results/raw/latency-count5.txt \
+    > bench-results/csv/latency-count5.csv
+
+"$PYTHON" scripts/plot_benchmarks.py bench-results/csv/latency-count5.csv
