@@ -2,21 +2,25 @@
 
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{booktabs}
-\usepackage{hyperref}
-\usepackage{amsmath}
 \usepackage{cite}
-\usepackage{microtype}
+\usepackage{url}
+\usepackage{hyperref}
 
-\title{Implementing and Evaluating Atomic Multicast with Skeen's Protocol}
-\author{
-\IEEEauthorblockN{Agatha Schneider}
-\IEEEauthorblockA{
+\graphicspath{{figures/}}
+
+% arXiv source bundle note:
+% Upload paper.tex and the files under figures/. The bibliography is embedded
+% below with thebibliography, so BibTeX and external .bst files are not required.
+
+\title{Robust Atomic Multicast: Evaluating ACK-Gated Skeen via Deterministic Protocol Validation}
+\author{Agatha Schneider\\
 Pontifícia Universidade Católica do Rio Grande do Sul (PUCRS)\\
 Porto Alegre, Brazil\\
 htaschneider@icloud.com
-}
 }
 \date{}
 
@@ -25,93 +29,198 @@ htaschneider@icloud.com
 \maketitle
 
 \begin{abstract}
-Atomic multicast is a fundamental communication primitive for distributed systems that require consistent ordering across overlapping groups of participants.
-[cite: 532] This paper presents the implementation and evaluation of a distributed key-value store based on Skeen's atomic multicast protocol together with an ACK-gated delivery variant proposed in the literature.
-[cite: 533] In addition to describing the implementation, we validate the protocol using deterministic correctness tests and evaluate its performance through reproducible benchmarks under both ideal and artificially delayed network conditions.
-[cite: 534] Our results quantify the cost of the additional synchronization step while illustrating the stronger ordering guarantees it provides.
-[cite: 535] \end{abstract}
+Atomic multicast is a central communication abstraction for partitioned state machine replication and distributed key-value stores because it orders operations only at the partitions they access while preserving consistency across overlapping destination sets. Skeen's decentralized atomic multicast protocol provides a compact timestamp-based ordering mechanism, but later work shows that the original protocol admits unsafe executions when overlapping multicasts expose real-time dependencies before all destinations have converged on the same delivery barrier. This paper presents an implementation and evaluation of two protocols in a distributed key-value store: the original Skeen protocol and the ACK-gated extension proposed by Pacheco et al. The system supports generic N-partition routing, configurable membership, arbitrary multicast destination sets, in-memory and HTTP transports, Docker deployment, and structured logging. Our main engineering contribution is a deterministic validation framework that controls message delivery using scheduled transport queues, predicate-based release rules, delivery trace recording, and cycle detection. The framework reproduces the unsafe execution for original Skeen without sleeps or timing races and shows that the ACK-gated variant prevents premature delivery under the same schedule. We also benchmark both protocols for cluster sizes 2, 3, and 5 and destination sets up to the full cluster under injected delays of 0, 1, 5, and 10 ms. The results quantify the cost of the acknowledgement barrier: the strengthened protocol adds modest CPU and allocation overhead in the zero-delay case, but the extra control-message dependency becomes visible under artificial latency.
+\end{abstract}
 
 \section{Introduction}
 
-Distributed applications frequently need to coordinate operations that span only a subset of the system while still preserving a consistent execution order.
-[cite: 536] Atomic multicast addresses this problem by guaranteeing that processes participating in the same multicast group observe messages in the same order.
-[cite: 537] Skeen's protocol is a classic solution to this problem and remains an important reference in the study of distributed systems.
-[cite: 538] While the original protocol provides efficient ordering, later work identifies executions in which stronger guarantees require an additional acknowledgement phase before delivery.
-[cite: 539] In this work, we present a practical implementation of both the original protocol and its ACK-gated variant as a configurable distributed key-value store.
-[cite: 540] Rather than focusing exclusively on the algorithm itself, we emphasize reproducibility: the project includes deterministic protocol validation, configurable multi-partition execution, automated benchmarking, and performance visualization.
-[cite: 541] The contributions of this paper are:
+Distributed key-value stores and partitioned state machine replication systems must often coordinate operations that access only a subset of partitions. A single-key update may involve one partition, whereas a range query or multi-key transaction may span several partitions. Broadcasting every operation to every server is simple but wasteful; routing each operation only to its destination set improves scalability but requires a multicast layer that preserves a consistent order whenever destination sets overlap.
 
+Atomic multicast addresses this requirement by ensuring that processes delivering the same messages deliver them in the same order. Skeen's protocol is a classic decentralized solution based on logical timestamps, local timestamp proposals, a final timestamp decision, and delivery queues ordered by final sequence numbers \cite{skeen}. Its appeal is that it avoids a single sequencer and lets each multicast destination participate in timestamp selection.
+
+However, Pacheco et al. show that global total order alone is not sufficient for partitioned state machine replication when real-time dependencies cross overlapping groups \cite{pacheco}. In particular, the original protocol can deliver a message at one destination, accept a later overlapping multicast, and then allow another destination to observe the later message before the earlier one. The resulting execution may be compatible with each local delivery queue but incompatible with the stronger atomic global order needed to avoid application-level coordination.
+
+This paper evaluates that issue through an independent implementation rather than only a proof sketch. We implement both original Skeen and the ACK-gated strengthened variant in a distributed key-value store, validate the known unsafe execution using a deterministic scheduler, and measure the cost of adding the acknowledgement barrier.
+
+The contributions are:
 \begin{itemize}
-    \item A complete implementation of Skeen's atomic multicast protocol.
-[cite: 542] \item An implementation of the strengthened ACK-gated delivery variant.
-    \item A deterministic testing framework capable of reproducing the ordering scenario discussed in the literature.
-[cite: 543] \item A reproducible benchmarking pipeline evaluating protocol overhead under varying cluster sizes and controlled network latency.
-[cite: 544] \end{itemize}
-
-\subsection{Research Questions}
-
-Rather than proposing a new atomic multicast protocol, this work evaluates the practical implications of the ACK-gated extension proposed in the literature through an independent implementation and experimental analysis. Our evaluation is guided by the following research questions:
-
-\begin{itemize}
-    \item \textbf{RQ1.} Can the unsafe execution described for the original Skeen protocol be reproduced in an independent implementation?
-    \item \textbf{RQ2.} Does the ACK-gated extension eliminate this execution under the same deterministic message schedule?
-    \item \textbf{RQ3.} What performance overhead does the additional acknowledgement phase introduce under different cluster sizes and controlled network latency?
+    \item A configurable distributed key-value store with generic partition routing, static membership configuration, arbitrary multicast destination sets, and selectable original or strengthened Skeen modes.
+    \item A dual transport stack with an in-memory transport for tests and controlled simulation, an HTTP transport for deployment, Docker configuration, and logging abstractions.
+    \item A deterministic validation framework that reproduces the unsafe original-Skeen execution using scheduled message delivery, predicate-based release, delivery recording, and cycle detection.
+    \item A benchmark pipeline that collects Go benchmark output, parses it into CSV matrices, and generates Matplotlib plots for throughput, memory consumption, allocation rate, and latency sensitivity.
 \end{itemize}
 
-\section{Background}
+The evaluation is organized around three research questions. \textbf{RQ1}: Can the unsafe execution described for original Skeen be reproduced in an independent implementation? \textbf{RQ2}: Does the ACK-gated extension eliminate the same execution under an identical deterministic schedule? \textbf{RQ3}: What CPU, memory, allocation, and latency overheads does the acknowledgement barrier introduce?
 
-Atomic multicast is a group communication protocol that encapsulates the complex task of ordering requests across different partitions[cite: 44]. In partitioned distributed systems, this allows requests to be propagated consistently to specific sets of replicas without requiring every server in the system to process every request[cite: 446].
+\section{Background and Related Work}
 
-Skeen's algorithm is a classic approach to achieving this, where processes assign unique timestamps to multicast messages using logical clocks [cite: 234],[cite: 235]. However, the original protocol only guarantees "global total order," which is insufficient for applications requiring linearizability[cite: 174]. It fails to capture real-time dependencies between requests, meaning that partitions would need to implement additional ad hoc coordination to execute multi-partition requests correctly [cite: 174],[cite: 175].
+Atomic multicast provides reliable, consistently ordered delivery to a subset of processes. If two multicast messages are delivered at two common destinations, those destinations must deliver them in the same relative order. This property is especially useful in partitioned storage systems: each operation is multicast only to the partitions whose state it may read or write, but overlapping operations still observe a common serialization order.
 
-To solve this, literature proposes an "atomic global order" property[cite: 186]. This strengthened property accounts for real-time relationships between messages by adding an extra condition: a message can only be delivered once every destination confirms it will not assign a lower timestamp[cite: 258]. This is implemented by adding an acknowledgement (ACK) phase[cite: 260].
+Skeen's protocol assigns total order without a centralized sequencer \cite{skeen}. A client or coordinator sends a \textsc{Start} message to every destination in the multicast set. Each destination increments a logical clock, stores the request in a delivery queue as undeliverable, and returns a proposed timestamp. After proposals have been collected, the maximum proposed timestamp becomes the final timestamp. The final timestamp is multicast to all destinations, and a process may deliver the message when it is stable at the head of its queue. Ties are broken by process identifiers, producing a deterministic ordering relation over timestamp pairs.
 
-\section{Implementation}
+The vulnerability identified by Pacheco et al. is not simply a disagreement about the final timestamp of one message \cite{pacheco}. The problem appears when real-time dependencies interact with overlapping destination sets. Suppose message $m$ is delivered at one destination before a later message $m'$ is multicast, but another destination learns enough timestamps to deliver $m'$ before $m$. The local delivery rules can remain internally consistent while the global execution graph contains a cycle: a real-time edge $m \rightarrow m'$ and a delivery-order edge $m' \rightarrow m$. This violates the stronger ordering needed by partitioned state machine replication to execute delivered operations immediately without additional synchronization.
 
-The system consists of a configurable distributed key-value store composed of independent partition processes communicating through a transport abstraction. Routing is configurable for an arbitrary number of partitions, allowing the same implementation to execute the original and strengthened protocols under different cluster configurations. The transport layer supports both an in-memory implementation for deterministic evaluation and an HTTP-based implementation for distributed deployment.
+The ACK-gated extension strengthens delivery by adding an explicit acknowledgement barrier after the final timestamp is learned. Once a destination learns the final timestamp, it broadcasts an \textsc{ACK} to the other destinations. A message is deliverable only after the process has received acknowledgements from every destination in the multicast set. This barrier prevents a destination from delivering a finalized message while another destination in the same multicast is still able to assign or expose a lower ordering constraint for an overlapping execution.
 
-The implementation also supports deployment using Docker containers for distributed execution. Performance experiments involving controlled network delay use a benchmark-specific latency transport that injects configurable delays into protocol messages, allowing network effects to be evaluated independently from protocol correctness.
+\section{System Architecture and Implementation}
 
-We implemented a distributed key-value store to test both the original and strengthened Skeen's protocols[cite: 540]. To simulate realistic network conditions, the system was deployed within Docker containers, allowing us to algorithmically generate network noise and latency. 
+\subsection{Distributed Key-Value Store}
 
-In the original protocol implementation, when a client multicasts a message, each destination receives it, updates its logical clock, and replies with a local timestamp[cite: 240]. Once the sender collects all local timestamps, it calculates the maximum value to serve as the final timestamp[cite: 241]. Servers then deliver messages sequentially based on these final timestamps[cite: 243].
+The implementation exposes a partitioned key-value store over the multicast abstraction. Requests carry an operation type, request identifier, and explicit destination set. \textsc{Put} operations target exactly one partition, while range operations may target arbitrary destination sets. The routing layer supports configurable $N$-partition clusters, so the same protocol code can be evaluated for $N=2$, $N=3$, and $N=5$ without hard-coded participant assumptions.
 
-In our implementation of the strengthened variant, we extended this flow with the necessary final synchronization step. Once a server decides on the final timestamp for a message, it updates its clock and broadcasts an ACK to every other destination involved in the multicast[cite: 261]. The core difference is that a server is now strictly gated; it can only deliver the message after it has successfully received an ACK from every partition in the destination group[cite: 262].
+% arXiv figure placeholder: insert the system architecture diagram here when available.
+% Store the asset as figures/architecture.pdf for vector output or figures/architecture.png for raster output.
+% Use a relative path only, for example:
+% \begin{figure}[t]
+% \centering
+% \includegraphics[width=\linewidth,keepaspectratio]{figures/architecture.pdf}
+% \caption{Distributed key-value store architecture and transport abstraction.}
+% \label{fig:architecture}
+% \end{figure}
+% If using PNG, export with a tight bounding box and enough whitespace inside the image so labels are not clipped.
 
-\subsection{Deterministic Protocol Validation}
+Each partition owns a Skeen protocol instance, a local key-value store, a logical clock, and a map of request states. A request state records the request payload, the local timestamp proposal, all collected proposals, the final timestamp, ACK state, delivery status, result data, and a completion channel used by synchronous client submission. Protocol mode is selected at construction time: original mode ignores ACK state during delivery, while strengthened mode requires every destination ACK before delivery.
 
-To validate the protocol independently of operating system scheduling and network timing, we developed a deterministic transport used exclusively during testing. Instead of immediately delivering protocol messages, the transport records them and allows tests to explicitly control the order in which they are released. This approach makes it possible to reproduce the execution discussed in the literature, verify the behaviour of both protocol variants under identical message schedules, and ensure that correctness results are fully reproducible.
+\subsection{Protocol Execution}
+
+The implementation uses four protocol message types: \textsc{Start}, \textsc{Local\_TS}, \textsc{Final\_TS}, and \textsc{ACK}. On \textsc{Start}, a destination validates membership in the destination set, advances its clock, stores a local proposal, and broadcasts that proposal. When proposals from all destinations are present, the maximum timestamp is learned as the final timestamp and broadcast. A final timestamp also advances local clock state if necessary.
+
+% arXiv figure placeholder: insert the protocol timeline diagram here when available.
+% Store the asset as figures/protocol-timeline.pdf for vector output or figures/protocol-timeline.png for raster output.
+% Use a relative path only, for example:
+% \begin{figure}[t]
+% \centering
+% \includegraphics[width=\linewidth,keepaspectratio]{figures/protocol-timeline.pdf}
+% \caption{Timeline of original Skeen and ACK-gated message phases.}
+% \label{fig:protocol-timeline}
+% \end{figure}
+% Prefer PDF/SVG-converted-to-PDF for sequence diagrams; if using PNG, crop to the diagram boundary and avoid external bounding-box options.
+
+Delivery is attempted after every protocol message. The node collects finalized, undelivered requests and sorts them by final timestamp. A candidate can be delivered only if it is finalized, not already delivered, and lower than every other pending local or final timestamp known at the node. In strengthened mode, the same candidate must also have ACKs from all destinations. Delivery executes the key-value operation, records any range result, invokes the delivery hook used by tests, and releases the waiting submitter.
+
+\subsection{Dual Transport Stack and Deployment}
+
+The transport interface contains a single protocol send operation. The in-memory transport maps partition identifiers directly to local Skeen instances and is used for unit tests, benchmarks, and deterministic simulation. The HTTP transport serializes protocol messages as JSON and sends them to each peer partition's internal protocol endpoint. This separation lets the protocol be tested without network non-determinism while preserving a deployable HTTP path. The repository also includes Docker Compose configurations for multi-process execution and logging helpers that can be disabled during benchmarks.
+
+\subsection{Deterministic Validation Framework}
+
+Distributed protocol tests frequently rely on sleeps, goroutine scheduling, or best-effort network delays. Those techniques make unsafe traces difficult to reproduce and can confuse protocol bugs with timing accidents. Our validation framework instead introduces a scheduled transport that records outbound protocol messages rather than delivering them immediately. Tests explicitly release queued messages through predicates over message type, request identifier, sender, receiver, and destination set.
+
+The framework also records per-partition delivery traces. These traces are converted into a directed graph: if a partition delivers $a$ before $b$, the graph records $a \rightarrow b$. Tests may add real-time edges from the scenario under study, such as $m \rightarrow m'$ when $m'$ is submitted only after $m$ has already been delivered. A depth-first cycle detector then determines whether the combined delivery and real-time constraints violate atomic global order.
+
+The reproduced unsafe schedule uses three partitions. Message $m$ targets partitions 0 and 1; message $m'$ targets partitions 0 and 2. By controlling initial clocks and releasing selected \textsc{Local\_TS} messages, the original protocol allows partition 1 to deliver $m$, then allows partition 0 to deliver $m'$ before $m$. Adding the real-time edge from the delivery of $m$ to the later multicast of $m'$ creates the expected cycle. Running the same schedule in strengthened mode leaves partition 1 unable to deliver $m$ until the missing destination ACK is released; after the scheduler drains all messages, no cycle is detected.
 
 \section{Experimental Evaluation}
 
-\subsection{Correctness Validation}
+\subsection{Methodology}
 
-The first stage of the evaluation focuses on correctness rather than performance. Using the deterministic transport, we reproduced the ordering scenario discussed in the literature for the original Skeen protocol and compared it against the ACK-gated implementation under the same sequence of protocol events. The original implementation exhibits the expected unsafe execution, whereas the strengthened protocol blocks premature delivery until acknowledgements have been received from every destination, producing an execution consistent with atomic global order.
+The benchmark pipeline begins with Go benchmarks using \texttt{testing.B} and \texttt{ReportAllocs}. Raw benchmark text is converted to CSV by a custom parser that extracts benchmark name, cluster size, protocol mode, destination count, fixed delay, ACK-specific delay, \texttt{ns/op}, \texttt{B/op}, and \texttt{allocs/op}. The plotting stage loads these matrices and generates high-resolution PNG plots with Matplotlib.
 
-\subsection{Baseline Overhead}
-First, we measured the raw protocol overhead in memory, without artificial network delays[cite: 530]. Across a varying number of destination partitions (from 1 to 5), the strengthened protocol consistently showed higher latency[cite: 530]. For instance, a multicast involving 3 destinations took between 484,907 and 489,826 nanoseconds per operation under the original protocol[cite: 530]. In contrast, the strengthened protocol took between 603,094 and 611,192 nanoseconds for the same 3 destinations[cite: 530]. This baseline increase is the direct computational and communication cost of the extra ACK phase.
+Two benchmark families are used. The first evaluates destination-set overhead for $N \in \{2,3,5\}$ and destination counts from one partition to the full cluster. The second fixes $N=3$ and injects artificial latency of 0, 1, 5, and 10 ms into protocol messages. A separate ACK-delay benchmark applies delay only to \textsc{ACK} messages, isolating the cost of the strengthened protocol's additional barrier.
 
-\subsection{Impact of Network Latency}
-Next, we algorithmically injected latency into the Docker network to observe how the protocols behave under less ideal conditions[cite: 531]. Because the strengthened protocol requires an extra round trip for the ACKs, we expected it to be more sensitive to delays. 
+\subsection{Correctness Results}
 
-When injecting a 5ms delay on a 3-destination multicast, the original protocol required approximately 39.3 to 39.4 million nanoseconds per operation[cite: 531]. Under the exact same 5ms delay, the strengthened protocol's completion time jumped to over 61.6 million nanoseconds[cite: 531]. This pattern held true across the board; as latency increased to 10ms, the performance gap widened further, directly reflecting the cost of waiting for global ACKs over a slow network[cite: 531].
+The deterministic validation tests answer RQ1 and RQ2. Original Skeen reproduces the unsafe Pacheco-style trace: one partition delivers $m$, a later overlapping multicast $m'$ is introduced, and another partition delivers $m'$ before $m$. The resulting graph contains a cycle once the real-time edge $m \rightarrow m'$ is included. A control test also verifies that original Skeen does not create a pure delivery-order cycle without the real-time edge, matching the nature of the reported vulnerability.
 
-\section{Discussion}
+The ACK-gated implementation prevents the same trace. Under the identical message schedule, a destination that has learned a final timestamp cannot deliver until every destination in the multicast set has acknowledged that final timestamp. This blocks the premature delivery that creates the original cycle. Once the scheduler drains all messages, delivery proceeds consistently and the cycle detector reports no violation.
 
-Our implementation and subsequent benchmarks clearly illustrate the trade-off between strict ordering guarantees and system performance. The original Skeen's protocol is faster and more resilient to network latency because it requires fewer communication steps[cite: 248]. However, to achieve linearizability—a strict requirement for modern, strongly consistent databases—the original protocol forces the application layer to coordinate during the actual execution of the request [cite: 175],[cite: 182].
+\subsection{Zero-Delay Overhead}
 
-The strengthened variant effectively pushes this coordination down into the multicast layer[cite: 183]. By ensuring atomic global order natively, partitions do not need to pause and signal each other before executing a delivered message[cite: 453]. While this drastically simplifies the application logic, our latency benchmarks prove that this extra communication round makes the system highly vulnerable to network delays[cite: 531].
+Table~\ref{tab:inmemory} summarizes the in-memory destination-overhead benchmark. With full destination sets, strengthened mode increases latency from 0.293 ms to 0.350 ms at $N=2$, from 0.488 ms to 0.608 ms at $N=3$, and from 0.751 ms to 1.193 ms at $N=5$. The cost is also visible in memory and allocation counters because ACK state and ACK messages add per-request bookkeeping.
 
-\subsection{Limitations}
+\begin{table}[t]
+\centering
+\caption{In-memory full-destination overhead. Values are means over the parsed benchmark runs.}
+\label{tab:inmemory}
+\begin{tabular}{lrrrr}
+\toprule
+Mode / $N$ & dst & ms/op & B/op & allocs/op \\
+\midrule
+Original / 2 & 2 & 0.293 & 5039 & 53.1 \\
+Strengthened / 2 & 2 & 0.350 & 7214 & 71.0 \\
+Original / 3 & 3 & 0.488 & 8074 & 72.0 \\
+Strengthened / 3 & 3 & 0.608 & 12292 & 104.1 \\
+Original / 5 & 5 & 0.751 & 16208 & 110.0 \\
+Strengthened / 5 & 5 & 1.193 & 26320 & 176.0 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-The current implementation models one process per partition and assumes static cluster membership. It does not include replicated partition groups, crash recovery, persistent storage, or dynamic reconfiguration. Consequently, the evaluation isolates the behaviour and performance of the multicast protocol itself rather than the operational characteristics of a production-ready distributed database.
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth,keepaspectratio]{figures/overhead_by_dst.png}
+\caption{Destination-set overhead for $N=3$ without artificial latency.}
+\label{fig:overhead}
+\end{figure}
 
-\section{Conclusion}
+Figure~\ref{fig:overhead} shows that the ACK gate has almost no effect for single-destination operations, where the process can acknowledge itself, but the gap grows with destination-set size. This matches the implementation structure: the strengthened protocol only adds meaningful network fan-out when more than one destination participates.
 
-In this paper, we built a fully functional distributed key-value store to evaluate Skeen's original atomic multicast protocol alongside its strengthened, ACK-gated variant [cite: 540],[cite: 542]. Through deterministic correctness tests and reproducible benchmark scenarios, we verified that our implementation exhibits the expected behaviour described in the literature while quantifying the practical cost of the additional acknowledgement phase.
+\subsection{Latency Sensitivity}
 
-Our benchmarks demonstrate that while the ACK phase guarantees linearizable request ordering without application-level coordination, it introduces a measurable performance penalty [cite: 534],[cite: 535]. This overhead is manageable in fast, local networks but degrades performance significantly as network latency increases, highlighting a fundamental trade-off in distributed system design.
+Table~\ref{tab:latency} and Fig.~\ref{fig:latency} evaluate $N=3$, destination count 3, and fixed artificial delay on all protocol messages. At 5 ms injected delay, original Skeen averages 39.436 ms/op while strengthened Skeen averages 61.753 ms/op. At 10 ms, the original protocol averages 76.789 ms/op and the strengthened protocol averages 120.357 ms/op. The additional delay is consistent with the extra ACK dependency: the strengthened protocol is not only performing more local bookkeeping, it must also wait for another control-message phase before delivery can release the client operation.
 
-\bibliographystyle{plain}
+\begin{table}[t]
+\centering
+\caption{$N=3$, dst=3 latency sensitivity under fixed artificial message delay.}
+\label{tab:latency}
+\begin{tabular}{lrrrr}
+\toprule
+Mode & delay (ms) & ms/op & B/op & allocs/op \\
+\midrule
+Original & 0 & 0.706 & 8076 & 71.8 \\
+Strengthened & 0 & 0.615 & 12302 & 104.2 \\
+Original & 1 & 8.085 & 12582 & 126.0 \\
+Strengthened & 1 & 12.670 & 18357 & 176.0 \\
+Original & 5 & 39.436 & 12733 & 127.0 \\
+Strengthened & 5 & 61.753 & 18496 & 177.8 \\
+Original & 10 & 76.789 & 12773 & 128.0 \\
+Strengthened & 10 & 120.357 & 18594 & 178.8 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth,keepaspectratio]{figures/latency_vs_delay.png}
+\caption{$N=3$, dst=3 sensitivity to artificial protocol-message delay.}
+\label{fig:latency}
+\end{figure}
+
+The zero-delay row in the latency benchmark is noisier than the dedicated in-memory benchmark because it is collected through the latency benchmark harness; therefore, Table~\ref{tab:inmemory} is the better baseline for CPU-only protocol overhead. The delayed rows are nevertheless useful because the same harness applies the same delay policy to both modes.
+
+\subsection{ACK-Specific Delay}
+
+Figure~\ref{fig:ackdelay} isolates ACK latency for the strengthened protocol. With no regular-message delay and only ACK messages delayed, the average operation time rises from 0.610 ms at 0 ms ACK delay to 5.673 ms at 1 ms, 29.648 ms at 5 ms, and 58.860 ms at 10 ms. This result confirms that the acknowledgement barrier is on the critical path for multi-destination requests.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth,keepaspectratio]{figures/ack_delay_overhead.png}
+\caption{$N=3$, dst=3 overhead when artificial delay is applied only to ACK messages.}
+\label{fig:ackdelay}
+\end{figure}
+
+\section{Discussion, Limitations, and Conclusion}
+
+The results show a clear safety-performance trade-off. Original Skeen is smaller and faster because delivery depends on timestamp stability alone. The strengthened protocol adds explicit coordination at the multicast layer, which prevents the reproduced unsafe execution and lets the key-value layer execute delivered operations without adding its own cross-partition barrier. In low-latency in-memory settings, this cost is measurable but moderate. Under injected latency, the additional ACK phase becomes the dominant difference.
+
+This design is attractive when the application requires the stronger ordering property described by Pacheco et al. \cite{pacheco}. Without the ACK gate, the storage layer would need to compensate by coordinating during execution, which moves complexity out of the multicast layer and into every replicated operation path. The strengthened protocol centralizes that responsibility in one delivery predicate.
+
+The evaluation has several limitations. The implementation models one process per partition and assumes static membership. It does not implement replicated partition groups, crash recovery, persistent logs, view changes, or dynamic reconfiguration. The deterministic scheduler validates carefully selected traces rather than exhaustively exploring all schedules. The performance study is limited to $N \leq 5$ and artificial delay injection; larger clusters, real network jitter, packet loss, and failure recovery would need separate experiments.
+
+In conclusion, the project demonstrates that deterministic scheduling is a practical way to validate subtle distributed coordination bugs. By controlling message release with predicates and checking delivery graphs for cycles, the framework reproduces an unsafe original-Skeen execution without relying on sleeps or probabilistic races. The ACK-gated variant prevents that execution by requiring all destinations to acknowledge final timestamps before delivery. Benchmarks show that this safety improvement carries moderate overhead in local execution and substantial latency sensitivity when ACK messages are delayed, making the trade-off explicit for designers of partitioned state machine replication systems.
+
+\begin{thebibliography}{1}
+
+\bibitem{skeen}
+D.~Skeen, ``A decentralized formalism for agreement protocols,'' in
+\emph{Proceedings of the IEEE Symposium on Reliability in Distributed Software
+and Database Systems}, 1981, pp. 123--134.
+
+\bibitem{pacheco}
+N.~Pacheco \emph{et al.}, ``Correcting and enhancing decentralized atomic
+multicast algorithms,'' \emph{IEEE Transactions on Parallel and Distributed
+Systems}, vol.~34, no.~5, pp. 1420--1432, 2023.
+
+\end{thebibliography}
 
 \end{document}
